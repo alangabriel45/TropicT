@@ -4014,6 +4014,7 @@ input[type="button"].btn-block {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.10);
 }
 
 .nav-link {
