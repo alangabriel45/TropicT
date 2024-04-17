@@ -1,0 +1,57 @@
+﻿@using TropicTrail.Utils
+@model TropicTrail.Offers
+
+@{
+    ViewBag.Title = "OffersDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-6">
+    <h4><b>@Model.offersName</b></h4>
+    <hr />
+    <dl class="dl-horizontal">       
+
+        <dt>
+            <label>Description</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.offersDesc)
+        </dd>
+
+        <dt>
+            <label>Tour Type</label>
+        </dt>
+
+        <dd>
+            @Model.TourType.tourName
+        </dd>
+
+        <dt>
+            Price
+        </dt>
+
+        <dd>
+            <h3>Php @Model.listPrice.ToString("N2")</h3>
+        </dd>
+
+        <dt>
+            <label>Date Created</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TropicTrail.Models;
 using TropicTrail.Utils;
 
 namespace TropicTrail.Controllers
@@ -14,9 +15,12 @@ namespace TropicTrail.Controllers
         {
             return View();
         }
+
+        #region Offers management
         public ActionResult ManageOffers()
         {
-            return View();
+            IsUserLoggedSession();
+            return View(_offersManager.ListOffers(Username));
         }
         public ActionResult AddOffers()
         {
@@ -43,5 +47,28 @@ namespace TropicTrail.Controllers
             TempData["Message"] = $"Product {offers.offersName} added!";
             return RedirectToAction("Index");
         }
+        public ActionResult OffersDetails(int? id)
+        {
+            ViewBag.TourType = Utilities.SelectListItemTourTypeByUser(Username);
+
+            if (id == null)
+                return RedirectToAction("PageNotFound", "Home");
+
+            var off = _offersManager.GetOffersById(id);
+
+            if (off == null)
+                return RedirectToAction("PageNotFound", "Home");
+
+            return View(off);
+        }
+        public JsonResult OffersDelete(int? id)
+        {
+            var res = new Response();
+            res.code = (Int32)_offersManager.DeleteOffers(id, ref ErrorMessage);
+            res.message = ErrorMessage;
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

@@ -306,6 +306,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Response.cs" />
     <Compile Include="Models\UserLogged.cs" />
     <Compile Include="ModelTropicT.Context.cs">
       <AutoGen>True</AutoGen>
@@ -360,6 +361,7 @@
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Admin\AddOffers.cshtml" />
     <Content Include="Views\Admin\ManageOffers.cshtml" />
+    <Content Include="Views\Admin\OffersDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
