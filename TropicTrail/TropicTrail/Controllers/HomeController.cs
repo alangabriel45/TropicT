@@ -102,7 +102,8 @@ namespace TropicTrail.Controllers
         }
         public ActionResult Offers()
         {
-            return View();
+            var off = _offersManager.ListActiveOffers();
+            return View(off);
         }
         [AllowAnonymous]
         public ActionResult PageNotFound()

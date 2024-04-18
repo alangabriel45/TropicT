@@ -126,6 +126,9 @@
   <ItemGroup>
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\style.min.css" />
+    <Content Include="Content\css\styles.css" />
+    <Content Include="Content\img\islandhopping.jpg" />
+    <Content Include="Content\img\landtour.jpg" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\lib\easing\easing.js" />
     <Content Include="Content\lib\easing\easing.min.js" />
@@ -371,7 +374,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\img\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

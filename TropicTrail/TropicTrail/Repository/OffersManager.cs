@@ -15,6 +15,10 @@ namespace TropicTrail.Repository
             _userMgr = new UserManager();
             _offers = new BaseRepository<Offers>();
         }
+        public List<Offers> ListActiveOffers()
+        {
+            return _offers._table.Where(m => m.status == 1).ToList();
+        }
         public List<Offers> ListOffers(String username)
         {
             var user = _userMgr.GetUserByUsername(username);
