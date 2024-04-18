@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TropicTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Offers">
+    <Key>
+      <PropertyRef Name="offersId" />
+    </Key>
+    <Property Name="offersId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="offersgUId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="offersName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="offersDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tourId" Type="Int32" Nullable="false" />
+    <Property Name="listPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="dateCreated" Type="DateTime" Precision="0" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TourType" Relationship="Self.FK_Offers_TourType" FromRole="Offers" ToRole="TourType" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="roleId" />
+    </Key>
+    <Property Name="roleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserAccount" Relationship="Self.FK_UserAccount_Role" FromRole="Role" ToRole="UserAccount" />
+  </EntityType>
+  <EntityType Name="TourType">
+    <Key>
+      <PropertyRef Name="tourId" />
+    </Key>
+    <Property Name="tourId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tourName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Offers" Relationship="Self.FK_Offers_TourType" FromRole="TourType" ToRole="Offers" />
+  </EntityType>
+  <EntityType Name="UserAccount">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="roleId" Type="Int32" />
+    <Property Name="date_created" Type="DateTime" Precision="3" />
+    <Property Name="date_modified" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_UserAccount_Role" FromRole="UserAccount" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="vw_role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Offers_TourType">
+    <End Role="TourType" Type="Self.TourType" Multiplicity="1" />
+    <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TourType">
+        <PropertyRef Name="tourId" />
+      </Principal>
+      <Dependent Role="Offers">
+        <PropertyRef Name="tourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAccount_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="roleId" />
+      </Principal>
+      <Dependent Role="UserAccount">
+        <PropertyRef Name="roleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TropicTEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Offers" EntityType="Self.Offers" />
+    <EntitySet Name="Role" EntityType="Self.Role" />
+    <EntitySet Name="TourType" EntityType="Self.TourType" />
+    <EntitySet Name="UserAccount" EntityType="Self.UserAccount" />
+    <EntitySet Name="vw_role" EntityType="Self.vw_role" />
+    <AssociationSet Name="FK_Offers_TourType" Association="Self.FK_Offers_TourType">
+      <End Role="TourType" EntitySet="TourType" />
+      <End Role="Offers" EntitySet="Offers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAccount_Role" Association="Self.FK_UserAccount_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserAccount" EntitySet="UserAccount" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

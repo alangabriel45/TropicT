@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TropicTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Offers">
+    <Key>
+      <PropertyRef Name="offersId" />
+    </Key>
+    <Property Name="offersId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="offersgUId" Type="nvarchar" MaxLength="255" />
+    <Property Name="offersName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="offersDesc" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="tourId" Type="int" Nullable="false" />
+    <Property Name="listPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="dateCreated" Type="date" />
+    <Property Name="status" Type="int" Nullable="false" />
+    <Property Name="userId" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="roleId" />
+    </Key>
+    <Property Name="roleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="roleName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TourType">
+    <Key>
+      <PropertyRef Name="tourId" />
+    </Key>
+    <Property Name="tourId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tourName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserAccount">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="nvarchar(max)" />
+    <Property Name="username" Type="nvarchar" MaxLength="100" />
+    <Property Name="password" Type="nvarchar" MaxLength="100" />
+    <Property Name="email" Type="nvarchar" MaxLength="100" />
+    <Property Name="status" Type="int" />
+    <Property Name="roleId" Type="int" />
+    <Property Name="date_created" Type="datetime" />
+    <Property Name="date_modified" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TropicT.dbo.vw_role' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="100" />
+    <Property Name="roleName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Offers_TourType">
+    <End Role="TourType" Type="Self.TourType" Multiplicity="1" />
+    <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TourType">
+        <PropertyRef Name="tourId" />
+      </Principal>
+      <Dependent Role="Offers">
+        <PropertyRef Name="tourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAccount_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="roleId" />
+      </Principal>
+      <Dependent Role="UserAccount">
+        <PropertyRef Name="roleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TropicTModelStoreContainer">
+    <EntitySet Name="Offers" EntityType="Self.Offers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TourType" EntityType="Self.TourType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vw_role" EntityType="Self.vw_role" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vw_role].[id] AS [id], 
+[vw_role].[username] AS [username], 
+[vw_role].[roleName] AS [roleName]
+FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Offers_TourType" Association="Self.FK_Offers_TourType">
+      <End Role="TourType" EntitySet="TourType" />
+      <End Role="Offers" EntitySet="Offers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAccount_Role" Association="Self.FK_UserAccount_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserAccount" EntitySet="UserAccount" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

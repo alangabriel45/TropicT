@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TropicTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TropicTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Offers">
           <Key>
             <PropertyRef Name="offersId" />
@@ -103,39 +103,25 @@ FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
             <End Role="UserAccount" EntitySet="UserAccount" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TropicTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="TropicTEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Offers" EntityType="TropicTModel.Offers" />
-          <EntitySet Name="Role" EntityType="TropicTModel.Role" />
-          <EntitySet Name="TourType" EntityType="TropicTModel.TourType" />
-          <EntitySet Name="UserAccount" EntityType="TropicTModel.UserAccount" />
-          <EntitySet Name="vw_role" EntityType="TropicTModel.vw_role" />
-          <AssociationSet Name="FK_Offers_TourType" Association="TropicTModel.FK_Offers_TourType">
-            <End Role="TourType" EntitySet="TourType" />
-            <End Role="Offers" EntitySet="Offers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserAccount_Role" Association="TropicTModel.FK_UserAccount_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="UserAccount" EntitySet="UserAccount" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Offers">
           <Key>
             <PropertyRef Name="offersId" />
           </Key>
           <Property Name="offersId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="offersgUId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="offersName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="offersDesc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="offersName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="offersDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="tourId" Type="Int32" Nullable="false" />
-          <Property Name="listPrice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="listPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="dateCreated" Type="DateTime" Precision="0" />
           <Property Name="status" Type="Int32" Nullable="false" />
           <Property Name="userId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TourType" Relationship="TropicTModel.FK_Offers_TourType" FromRole="Offers" ToRole="TourType" />
+          <NavigationProperty Name="TourType" Relationship="Self.FK_Offers_TourType" FromRole="Offers" ToRole="TourType" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -143,16 +129,16 @@ FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
           </Key>
           <Property Name="roleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserAccount" Relationship="TropicTModel.FK_UserAccount_Role" FromRole="Role" ToRole="UserAccount" />
+          <NavigationProperty Name="UserAccount" Relationship="Self.FK_UserAccount_Role" FromRole="Role" ToRole="UserAccount" />
         </EntityType>
         <EntityType Name="TourType">
           <Key>
             <PropertyRef Name="tourId" />
           </Key>
           <Property Name="tourId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tourName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="userId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Offers" Relationship="TropicTModel.FK_Offers_TourType" FromRole="TourType" ToRole="Offers" />
+          <Property Name="tourName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Offers" Relationship="Self.FK_Offers_TourType" FromRole="TourType" ToRole="Offers" />
         </EntityType>
         <EntityType Name="UserAccount">
           <Key>
@@ -167,7 +153,7 @@ FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
           <Property Name="roleId" Type="Int32" />
           <Property Name="date_created" Type="DateTime" Precision="3" />
           <Property Name="date_modified" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Role" Relationship="TropicTModel.FK_UserAccount_Role" FromRole="UserAccount" ToRole="Role" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_UserAccount_Role" FromRole="UserAccount" ToRole="Role" />
         </EntityType>
         <EntityType Name="vw_role">
           <Key>
@@ -178,8 +164,8 @@ FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
           <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Offers_TourType">
-          <End Type="TropicTModel.TourType" Role="TourType" Multiplicity="1" />
-          <End Type="TropicTModel.Offers" Role="Offers" Multiplicity="*" />
+          <End Role="TourType" Type="Self.TourType" Multiplicity="1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TourType">
               <PropertyRef Name="tourId" />
@@ -190,8 +176,8 @@ FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserAccount_Role">
-          <End Type="TropicTModel.Role" Role="Role" Multiplicity="0..1" />
-          <End Type="TropicTModel.UserAccount" Role="UserAccount" Multiplicity="*" />
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="roleId" />
@@ -201,7 +187,22 @@ FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <EntityContainer Name="TropicTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Offers" EntityType="Self.Offers" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="TourType" EntityType="Self.TourType" />
+          <EntitySet Name="UserAccount" EntityType="Self.UserAccount" />
+          <EntitySet Name="vw_role" EntityType="Self.vw_role" />
+          <AssociationSet Name="FK_Offers_TourType" Association="Self.FK_Offers_TourType">
+            <End Role="TourType" EntitySet="TourType" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccount_Role" Association="Self.FK_UserAccount_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserAccount" EntitySet="UserAccount" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -210,56 +211,56 @@ FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
           <EntitySetMapping Name="Offers">
             <EntityTypeMapping TypeName="TropicTModel.Offers">
               <MappingFragment StoreEntitySet="Offers">
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
-                <ScalarProperty Name="listPrice" ColumnName="listPrice" />
-                <ScalarProperty Name="tourId" ColumnName="tourId" />
-                <ScalarProperty Name="offersDesc" ColumnName="offersDesc" />
-                <ScalarProperty Name="offersName" ColumnName="offersName" />
-                <ScalarProperty Name="offersgUId" ColumnName="offersgUId" />
                 <ScalarProperty Name="offersId" ColumnName="offersId" />
+                <ScalarProperty Name="offersgUId" ColumnName="offersgUId" />
+                <ScalarProperty Name="offersName" ColumnName="offersName" />
+                <ScalarProperty Name="offersDesc" ColumnName="offersDesc" />
+                <ScalarProperty Name="tourId" ColumnName="tourId" />
+                <ScalarProperty Name="listPrice" ColumnName="listPrice" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
             <EntityTypeMapping TypeName="TropicTModel.Role">
               <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="roleName" ColumnName="roleName" />
                 <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TourType">
             <EntityTypeMapping TypeName="TropicTModel.TourType">
               <MappingFragment StoreEntitySet="TourType">
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="tourName" ColumnName="tourName" />
                 <ScalarProperty Name="tourId" ColumnName="tourId" />
+                <ScalarProperty Name="tourName" ColumnName="tourName" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserAccount">
             <EntityTypeMapping TypeName="TropicTModel.UserAccount">
               <MappingFragment StoreEntitySet="UserAccount">
-                <ScalarProperty Name="date_modified" ColumnName="date_modified" />
-                <ScalarProperty Name="date_created" ColumnName="date_created" />
-                <ScalarProperty Name="roleId" ColumnName="roleId" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="date_created" ColumnName="date_created" />
+                <ScalarProperty Name="date_modified" ColumnName="date_modified" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vw_role">
             <EntityTypeMapping TypeName="TropicTModel.vw_role">
               <MappingFragment StoreEntitySet="vw_role">
-                <ScalarProperty Name="roleName" ColumnName="roleName" />
-                <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
