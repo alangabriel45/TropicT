@@ -1,7 +1,7 @@
 ﻿.*{
     margin: 0;
     padding: 0;
-
+     box-sizing: border-box;
 }
 body{
     background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.15)),url("../img/bg-image2.jpg");
@@ -29,7 +29,7 @@ body{
     color: white;
 }
 .p-subHeader{
-    padding-bottom: 1010px;
+    padding-bottom: 600px;
     padding-left: 110px;
     font-size: 15pt;
     color: white;
@@ -48,15 +48,12 @@ body{
 .page-body{
      background-image: linear-gradient(#07384E,rgba(0,0,0,0.85)),url("../img/bg-image2.jpg");
 }
-.card{
-    width: 300px; 
-    border: 1px solid #ccc;
+.card {
+    background-color: #ccc;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 10px;
+    padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-right: 25px;
-    margin-top: 20px;
-    margin-left: 120px;
     transition: transform 0.3s ease;
 }
 .card:hover {
@@ -70,4 +67,44 @@ body{
 .card-container {
   display: flex; 
   justify-content: space-between; 
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+/* Style the vertical rectangle container */
+.rectangle {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 40px; /* Increase padding for larger size */
+    width: 400px; /* Increase width for larger size */
+    height: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the form */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px; /* Increase padding for larger size */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.form-group input[type="submit"] {
+    background-color: #28a745; /* Green */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-group input[type="submit"]:hover {
+    background-color: #218838; /* Darker green on hover */
 }

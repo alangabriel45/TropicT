@@ -24,61 +24,73 @@
     <link href="~/Content/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="~/Content/css/style.css" rel="stylesheet">
+    <link href="~/Content/css/style.css" rel="stylesheet" />
 </head>
 
 <body>
     <!-- Navbar Start -->
-    <div class="container-fluid bg-light position-relative shadow">
-        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-1 px-lg-1">
-            <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
-                <img src="~/Content/img/Tropic Trail.png" class="logo"/>
-            </a>
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="navbar-nav font-weight-bold mx-auto py-0">
-                    @if (User.IsInRole("Admin"))
+    <header>
+        <!-- Your banner content here -->
+        <div class="container-fluid bg-light position-relative shadow">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-1 px-lg-1">
+                <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
+                    <img src="~/Content/img/Tropic Trail.png" class="logo" style="width: 150px; margin-left: 1%; height: auto;" />
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav font-weight-bold mx-auto py-0">
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a href="~/Admin/Index" class="nav-item nav-link active">Home</a>
+                            <a href="#" class="nav-item nav-link active">Manage Users</a>
+                            <a href="~/Admin/ManageOffers" class="nav-item nav-link">Manage Offers</a>
+                            <a href="#" class="nav-item nav-link">Manage Reservation</a>
+                        }
+                        else
+                        {
+                            <a href="~/Home/Index" class="nav-item nav-link active">Home</a>
+                            <a href="#" class="nav-item nav-link">Hot Deals</a>
+                            <a href="~/Home/Offers" class="nav-item nav-link">Offers</a>
+                            <a href="#" class="nav-item nav-link">About</a>
+                            <a href="#" class="nav-item nav-link">Contact</a>
+                        }
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
                     {
-                        <a href="~/Admin/Index" class="nav-item nav-link active">Home</a>
-                        <a href="#" class="nav-item nav-link active">Manage Users</a>
-                        <a href="~/Admin/ManageOffers" class="nav-item nav-link">Manage Offers</a>
-                        <a href="#" class="nav-item nav-link">Manage Reservation</a>
+                        <a href="~/Home/Book" class="btn btn-primary px-4">Book Now</a>
+                        <a href="~/Home/Logout" class="btn btn-primary px-4">Logout</a>
                     }
                     else
                     {
-                        <a href="~/Home/Index" class="nav-item nav-link active">Home</a>
-                        <a href="#" class="nav-item nav-link">Hot Deals</a>
-                        <a href="~/Home/Offers" class="nav-item nav-link">Offers</a>
-                        <a href="#" class="nav-item nav-link">About</a>
-                        <a href="#" class="nav-item nav-link">Contact</a>
+                        <a href="~/Home/Login" class="btn btn-primary px-4">Login</a>
+                        <a href="~/Home/SignUp" class="btn btn-primary px-4">Sign-Up</a>
                     }
                 </div>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <a href="~/Home/Book" class="btn btn-primary px-4">Book Now</a>
-                    <a href="~/Home/Logout" class="btn btn-primary px-4">Logout</a>
-                }
-                else
-                {
-                    <a href="~/Home/Login" class="btn btn-primary px-4">Login</a>
-                    <a href="~/Home/SignUp" class="btn btn-primary px-4">Sign-Up</a>
-                } 
-                </div>            
-        </nav>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-content" style="height: 100vh;">
+        @RenderBody()
     </div>
     <!-- Navbar End -->
-        @RenderBody()
     <!-- Footer Start -->
-    <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
-        <div class="container-fluid pt-5" style="border-top: 1px solid rgba(23, 162, 184, .2);;">
-            <p class="m-0 text-center text-white">
-                &copy; <a class="text-primary font-weight-bold" href="#">Tropic Trail</a>. All Rights Reserved. Designed by Alan & James.
-                <a class="text-primary font-weight-bold" href="https://www.facebook.com/UrbanYouthCollaborativeSD/photos/a.1881785751912247/5058757654215025/?type=3">Easter Egg Right Here!!</a>
-            </p>
+    <footer class="footer" style="position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;">
+        <!-- Your footer content here -->
+        <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5 footer">
+            <div class="container-fluid pt-5" style="border-top: 1px solid rgba(23, 162, 184, .2);">
+                <p class="m-0 text-center text-white">
+                    &copy; <a class="text-primary font-weight-bold" href="#">Tropic Trail</a>. All Rights Reserved. Designed by Alan & James.
+                    <a class="text-primary font-weight-bold" href="https://www.facebook.com/UrbanYouthCollaborativeSD/photos/a.1881785751912247/5058757654215025/?type=3">Easter Egg Right Here!!</a>
+                </p>
+            </div>
         </div>
-    </div>
+    </footer>
     <!-- Footer End -->
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
