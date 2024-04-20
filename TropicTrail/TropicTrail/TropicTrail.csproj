@@ -125,10 +125,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\index-css.css" />
-    <Content Include="Content\css\Offers-css.css" />
+    <Content Include="Content\css\Details.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\style.min.css" />
     <Content Include="Content\css\styles.css" />
+    <Content Include="Content\images\beach.jpg" />
+    <Content Include="Content\images\bg-image.jpg" />
+    <Content Include="Content\images\bg-image2.jpg" />
+    <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\images\Logo.png" />
+    <Content Include="Content\images\logo1.png" />
+    <Content Include="Content\images\logo2.png" />
+    <Content Include="Content\images\tour1.jpg" />
+    <Content Include="Content\images\tour2.jpg" />
+    <Content Include="Content\images\Tropic Trail.png" />
+    <Content Include="Content\images\tropicTrial.png" />
     <Content Include="Content\img\islandhopping.jpg" />
     <Content Include="Content\img\landtour.jpg" />
     <Content Include="Content\js\main.js" />
@@ -367,6 +378,7 @@
     <Content Include="TropicTEntities.edmx.diagram">
       <DependentUpon>TropicTEntities.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Home\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -376,7 +388,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

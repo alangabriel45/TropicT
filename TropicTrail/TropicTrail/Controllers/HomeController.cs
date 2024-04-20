@@ -105,6 +105,15 @@ namespace TropicTrail.Controllers
             var off = _offersManager.ListActiveOffers();
             return View(off);
         }
+        public ActionResult Details(int? id)
+        {
+            if (id == null || id == 0)
+                return RedirectToAction("PageNotFound");
+
+            var offersInfo = _offersManager.GetOffersById(id);
+
+            return View(offersInfo);
+        }
         [AllowAnonymous]
         public ActionResult PageNotFound()
         {

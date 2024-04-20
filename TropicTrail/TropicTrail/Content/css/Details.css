@@ -1,0 +1,86 @@
+﻿body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 5px;
+}
+
+p {
+  font-size: 18px;
+}
+
+.island-details {
+  display: flex;
+  align-items: center;
+}
+
+.island-details img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.details {
+  flex: 1;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.location {
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+.description {
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 20px;
+}
+
+.from {
+  font-weight: bold;
+}
+
+.amount {
+  color: #1abc9c;
+  font-size: 28px;
+}
+
+.duration {
+  font-size: 18px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #1abc9c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #16a085;
+}

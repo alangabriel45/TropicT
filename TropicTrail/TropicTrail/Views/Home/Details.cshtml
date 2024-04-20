@@ -1,0 +1,32 @@
+﻿@model TropicTrail.Offers
+@{
+    ViewBag.Title = "Details";
+}
+
+<link href="~/Content/css/Details.css" rel="stylesheet" />
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Island Hopping Adventure</h1>
+            <p>Explore the breathtaking islands</p>
+        </header>
+        <main>
+            <div class="island-details">
+                <img src="~/Content/images/tour1.jpg" />
+                <div class="details">
+                    <h2>@Model.offersName</h2>
+                    <h2>@Model.TourType.tourName</h2>
+                    <p class="description">@Model.offersDesc</p>
+                    <div class="price">
+                        <span class="from">From</span>
+                        <span class="amount">@Model.listPrice</span>
+                    </div>
+                    <button>Book Now</button>
+                </div>
+            </div>
+        </main>
+        <a href="~/Home/Offers" class="btn btn-secondary">Back</a>
+    </div>
+</body>
+
