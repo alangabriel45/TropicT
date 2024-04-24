@@ -114,7 +114,11 @@ namespace TropicTrail.Controllers
 
             return View(offersInfo);
         }
-        [AllowAnonymous]
+        public ActionResult ViewProfile()
+        {
+            return View();
+        }
+        [AllowAnonymous]   
         public ActionResult PageNotFound()
         {
             return Content("Not Found Error 404");

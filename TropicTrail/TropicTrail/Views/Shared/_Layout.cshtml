@@ -40,33 +40,89 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav font-weight-bold mx-auto py-0">
-                        @if (User.IsInRole("Admin"))
+                        @if (User.Identity.IsAuthenticated)
                         {
-                            <a href="~/Admin/Index" class="nav-item nav-link active">Home</a>
-                            <a href="#" class="nav-item nav-link active">Manage Users</a>
-                            <a href="~/Admin/ManageOffers" class="nav-item nav-link">Manage Offers</a>
-                            <a href="#" class="nav-item nav-link">Manage Reservation</a>
+                            if (User.IsInRole("Admin"))
+                            {
+                                <div class="navbar-nav font-weight-bold mx-auto py-0">
+                                    <a href="~/Admin/Index" class="nav-item nav-link active">Home</a>
+                                    <a href="#" class="nav-item nav-link active">Manage Users</a>
+                                    <a href="~/Admin/ManageOffers" class="nav-item nav-link">Manage Offers</a>
+                                    <a href="#" class="nav-item nav-link">Manage Reservation</a>
+                                </div>
+                                <div>
+                                    <img src="~/Content/img/profile.jpg" class="user-pic" onclick="toggleMenu()" />
+
+                                    <div class="sub-menu-wrap" id="subMenu">
+                                        <div class="sub-menu">
+                                            <div class="user-info">
+                                                <img src="~/Content/img/profile.jpg" />
+                                                <h3>Alan Gabriel Dosado</h3>
+                                            </div>
+                                            <hr />
+                                            <a href="" class="sub-menu-link">
+                                                <img src="~/Content/img/profile.jpg" />
+                                                <p>View Profile</p>
+                                                <span>></span>
+                                            </a>
+                                            <a href="~/Home/Logout" class="sub-menu-link">
+                                                <img src="~/Content/img/logout.png" />
+                                                <p>Logout</p>
+                                                <span>></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="navbar-nav font-weight-bold mx-auto py-0">
+                                    <a href="~/Home/Index" class="nav-item nav-link active">Home</a>
+                                    <a href="#" class="nav-item nav-link">Hot Deals</a>
+                                    <a href="~/Home/Offers" class="nav-item nav-link">Offers</a>
+                                    <a href="#" class="nav-item nav-link">About</a>
+                                    <a href="#" class="nav-item nav-link">Contact</a>
+                                    <a href="#" class="nav-item nav-link">Book Now</a>
+                                </div>
+                                <div>
+                                    <img src="~/Content/img/profile.jpg" class="user-pic" onclick="toggleMenu()" />
+
+                                    <div class="sub-menu-wrap" id="subMenu">
+                                        <div class="sub-menu">
+                                            <div class="user-info">
+                                                <img src="~/Content/img/profile.jpg" />
+                                                <h3>Alan Gabriel Dosado</h3>
+                                            </div>
+                                            <hr />
+                                            <a href="" class="sub-menu-link">
+                                                <img src="~/Content/img/profile.jpg"/>
+                                                <p>Edit Profile</p>
+                                                <span>></span>
+                                            </a>
+                                            <a href="~/Home/Logout" class="sub-menu-link">
+                                                <img src="~/Content/img/logout.png" />
+                                                <p>Logout</p>
+                                                <span>></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>    
+                            }
                         }
                         else
                         {
-                            <a href="~/Home/Index" class="nav-item nav-link active">Home</a>
-                            <a href="#" class="nav-item nav-link">Hot Deals</a>
-                            <a href="~/Home/Offers" class="nav-item nav-link">Offers</a>
-                            <a href="#" class="nav-item nav-link">About</a>
-                            <a href="#" class="nav-item nav-link">Contact</a>
+                            <div class="navbar-nav font-weight-bold mx-auto py-0">
+                                <a href="~/Home/Index" class="nav-item nav-link active">Home</a>
+                                <a href="#" class="nav-item nav-link">Hot Deals</a>
+                                <a href="~/Home/Offers" class="nav-item nav-link">Offers</a>
+                                <a href="#" class="nav-item nav-link">About</a>
+                                <a href="#" class="nav-item nav-link">Contact</a>
+                            </div>
+                                <div>
+                                    <a href="~/Home/Login" class="btn btn-primary px-4">Login</a>
+                                    <a href="~/Home/SignUp" class="btn btn-primary px-4">Sign-Up</a>
+                                </div>
                         }
-                    </div>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <a href="~/Home/Book" class="btn btn-primary px-4">Book Now</a>
-                        <a href="~/Home/Logout" class="btn btn-primary px-4">Logout</a>
-                    }
-                    else
-                    {
-                        <a href="~/Home/Login" class="btn btn-primary px-4">Login</a>
-                        <a href="~/Home/SignUp" class="btn btn-primary px-4">Sign-Up</a>
-                    }
                 </div>
             </nav>
         </div>

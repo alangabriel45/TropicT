@@ -29,7 +29,6 @@ body{
     color: white;
 }
 .p-subHeader{
-    padding-bottom: 600px;
     padding-left: 110px;
     font-size: 15pt;
     color: white;
@@ -39,7 +38,7 @@ body{
     height: 7px;
     position: relative;
     border-radius: 10px;
-    left: -610px;
+    left: -775px;
     top: 220px;
     margin-right: auto;
     margin-left: auto;
