@@ -118,6 +118,19 @@ namespace TropicTrail.Controllers
         {
             return View();
         }
+        public ActionResult ContinueBook()
+        {
+            return View();
+        }
+        public ActionResult BookNow(int? id)
+        {
+            if (id == null || id == 0)
+                return RedirectToAction("PageNotFound");
+
+            var offersInfo = _offersManager.GetOffersById(id);
+
+            return View(offersInfo);
+        }
         [AllowAnonymous]   
         public ActionResult PageNotFound()
         {

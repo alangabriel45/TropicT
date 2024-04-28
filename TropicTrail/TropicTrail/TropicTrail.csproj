@@ -339,6 +339,9 @@
     <Compile Include="Role.cs">
       <DependentUpon>TropicTEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_ViewOffers_Result.cs">
+      <DependentUpon>TropicTEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="TourType.cs">
       <DependentUpon>TropicTEntities.tt</DependentUpon>
     </Compile>
@@ -390,6 +393,8 @@
       <DependentUpon>TropicTEntities.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\BookNow.cshtml" />
+    <Content Include="Views\Home\ContinueBook.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

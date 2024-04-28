@@ -107,3 +107,37 @@ body{
 .form-group input[type="submit"]:hover {
     background-color: #218838; /* Darker green on hover */
 }
+.container-tour {
+  text-align: center;
+  margin-top: 50px;
+}
+
+h1 {
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container a {
+  margin: 0 20px;
+  text-decoration: none;
+}
+
+.button-container img {
+  width: 250px; /* Fixed width for both images */
+  height: 350px; /* Fixed height for both images */
+  object-fit: cover; /* Maintain aspect ratio and cover container */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.button-container img:hover {
+  transform: scale(1.1);
+}

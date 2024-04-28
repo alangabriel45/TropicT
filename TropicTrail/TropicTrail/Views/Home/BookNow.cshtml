@@ -1,0 +1,84 @@
+﻿@model TropicTrail.Offers
+
+@{
+    ViewBag.Title = "BookNow";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content {
+        text-align: center;
+    }
+
+    .booking-form {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        width: 300px; /* Adjust width as needed */
+        margin-left: 20px; /* Add some space between the description and the form */
+    }
+
+        .booking-form input {
+            width: calc(100% - 10px);
+            margin-bottom: 10px;
+        }
+
+        .booking-form button {
+            width: 100%;
+        }
+
+    .image-container img {
+        width: 700px; /* Static width */
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <h3>@Model.offersName</h3>
+            <div class="image-container">
+                <img src="~/Content/img/bg-image2.jpg" />
+            </div>
+            <div>
+                <h3>Description</h3>
+                <p>@Model.offersDesc</p>
+            </div>
+            <div>
+                <ul>
+                    <li>Visit multiple stunning islands in the region</li>
+                    <li>Enjoy snorkeling and diving in crystal-clear waters</li>
+                    <li>Experience local culture and cuisine on each island</li>
+                    <li>Relax on pristine white sandy beaches</li>
+                    <li>Guided tours with knowledgeable local guides</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="booking-form">
+            @using (Html.BeginForm("ContinueBook", "Home", FormMethod.Post))
+            {
+                <h2>Booking Form</h2>
+
+                <div>
+                    <label for="checkInDate">Check-in Date:</label>
+                    <input type="date" id="checkInDate" name="checkInDate" class="form-control" required />
+                </div>
+                <div>
+                    <label for="numGuests">Number of Guests:</label>
+                    <input type="number" id="numGuests" name="numGuests" class="form-control" min="1" required />
+                </div>
+
+                <button type="submit" class="btn btn-primary" >Continue Booking</button>
+            }
+        </div>
+    </div>
+</body>

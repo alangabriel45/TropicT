@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "ContinueBook";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" class="form-control" required />
+</div>
+
+<div>
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" class="form-control" required />
+</div>
+
+<div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" class="form-control" required />
+</div>
+
+<div>
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control" required />
+</div>
+
+<hr />
+
+<h3>Payment</h3>
+<div>
+    <label for="cardNumber">Card Number:</label>
+    <input type="text" id="cardNumber" name="cardNumber" class="form-control" required />
+</div>
+
+<div>
+    <label for="expiryDate">Expiry Date:</label>
+    <input type="text" id="expiryDate" name="expiryDate" class="form-control" placeholder="MM/YYYY" required />
+</div>
+
+<div>
+    <label for="cvv">CVV:</label>
+    <input type="text" id="cvv" name="cvv" class="form-control" required />
+</div>
+
+<button type="submit" class="btn btn-primary">Submit Booking</button>
+

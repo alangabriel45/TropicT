@@ -12,6 +12,9 @@ namespace TropicTrail
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class TropicTEntities : DbContext
     {
@@ -30,5 +33,14 @@ namespace TropicTrail
         public DbSet<TourType> TourType { get; set; }
         public DbSet<UserAccount> UserAccount { get; set; }
         public DbSet<vw_role> vw_role { get; set; }
+    
+        public virtual ObjectResult<sp_ViewOffers_Result> sp_ViewOffers(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ViewOffers_Result>("sp_ViewOffers", idParameter);
+        }
     }
 }
