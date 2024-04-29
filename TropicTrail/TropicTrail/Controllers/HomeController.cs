@@ -136,5 +136,10 @@ namespace TropicTrail.Controllers
         {
             return Content("Not Found Error 404");
         }
+        [AllowAnonymous]
+        public ActionResult AboutUs()
+        {
+            return View();
+        }
     }
 }
