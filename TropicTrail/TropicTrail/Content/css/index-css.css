@@ -26,7 +26,7 @@ body{
     padding-top: 250px;
     padding-left: 100px;
     font-size: 45pt;
-    color: white;
+    color: White;
 }
 .p-subHeader{
     padding-left: 110px;
@@ -51,7 +51,7 @@ body{
     background-color: #ccc;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 20px;
+    padding: 0 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
@@ -148,19 +148,20 @@ h1 {
   position:center;
   height:10%;
 }
+/*About Us CSS*/
 .img-group {
-  width: 90%;
+  width: 100%;
   margin: auto;
-  padding: 50px 0;
   display:flex;
   align-items: center;
-  
+  text-align: center;
+  padding-left: 30px;
 }
 .img-group img{
   height: 230px;
   width: 200px;
-  border-radius: 10px;
-  
+  border-radius: 15%;  
+  margin-left: 20px;
 }
 .img-group ul li{
   list-style: none;
@@ -168,12 +169,13 @@ h1 {
   margin: 0 50px;
   text-align: center;
   padding-top: 10px;
-}.img-group ul li a{
+
+}
+.img-group ul li a{
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
    color: white;
    font-weight: bold;
-   cursor: pointer;
-   
+   cursor: pointer;   
 }
 .summary{
    box-sizing: border-box;
@@ -256,23 +258,113 @@ h1 {
 }
 
 .logo-group{
-  
-    padding: 0px 10px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding-left: 7%;
 }
 .logo-group img{
-    width: 40px;
+    width: 25px;
     height:auto;
     border-radius: 50%;
 }
 .logo-group ul li{
   list-style: none;
-  display: inline-block;
-  margin: 0 40px;
-  text-align: center;
-  padding: 0 15px;
+  padding: 0px 50px;
+  display: inline-flex;
+
 }
 .logo-group ul li p{
-    font-family:Arial;
+    font-size: 10pt;
     text-decoration: underline;
     cursor: pointer;
 }
+
+.btnSubmit{
+    color: #28a745;
+    width: auto;
+    height: 2px;
+}
+.btnSubmit p{
+    color: white;
+    text-align: center;
+}
+
+/*Details CSS*/
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 5px;
+}
+
+p {
+  font-size: 18px;
+}
+
+.island-details {
+  display: flex;
+  align-items: center;
+}
+
+.island-details img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.details {
+  flex: 1;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.location {
+  font-style: italic;
+  margin-bottom: 5px;
+
+}
+
+.description {
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 20px;
+}
+
+.from {
+  font-weight: bold;
+}
+
+.amount {
+  color: #1abc9c;
+  font-size: 28px;
+}
+
+.duration {
+  font-size: 18px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #1abc9c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #16a085;
+}
+
