@@ -18,6 +18,7 @@ namespace TropicTrail
         public string offersgUId { get; set; }
         public string offersName { get; set; }
         public string offersDesc { get; set; }
+        public int maxGuest { get; set; }
         public int tourId { get; set; }
         public decimal listPrice { get; set; }
         public Nullable<System.DateTime> dateCreated { get; set; }

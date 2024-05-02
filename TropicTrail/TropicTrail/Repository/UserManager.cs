@@ -15,9 +15,13 @@ namespace TropicTrail.Repository
         }
 
         #region Get User By ---
-        public UserAccount GetUserById(int Id)
+        public UserAccount GetUserById(String Id)
         {
             return _userAcc.Get(Id);
+        }
+        public List<UserAccount> ListOfUsers()
+        {
+            return _userAcc._table.ToList();
         }
         public UserAccount GetUserByUsername(String username)
         {

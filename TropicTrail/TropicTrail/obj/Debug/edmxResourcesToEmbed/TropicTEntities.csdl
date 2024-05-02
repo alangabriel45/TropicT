@@ -1,9 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="TropicTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="TropicTEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_ViewOffers" ReturnType="Collection(TropicTModel.sp_ViewOffers_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Card" EntityType="TropicTModel.Card" />
     <EntitySet Name="Offers" EntityType="TropicTModel.Offers" />
+    <EntitySet Name="Reservation" EntityType="TropicTModel.Reservation" />
     <EntitySet Name="Role" EntityType="TropicTModel.Role" />
     <EntitySet Name="TourType" EntityType="TropicTModel.TourType" />
+    <EntitySet Name="Transaction" EntityType="TropicTModel.Transaction" />
     <EntitySet Name="UserAccount" EntityType="TropicTModel.UserAccount" />
     <EntitySet Name="vw_role" EntityType="TropicTModel.vw_role" />
     <AssociationSet Name="FK_Offers_TourType" Association="TropicTModel.FK_Offers_TourType">
@@ -14,10 +20,21 @@
       <End Role="Role" EntitySet="Role" />
       <End Role="UserAccount" EntitySet="UserAccount" />
     </AssociationSet>
-    <FunctionImport Name="sp_ViewOffers" ReturnType="Collection(TropicTModel.sp_ViewOffers_Result)">
-      <Parameter Name="id" Mode="In" Type="Int32" />
-    </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="sp_ViewOffers_Result">
+    <Property Type="String" Name="Pax" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="Tour_Type" Nullable="false" MaxLength="255" />
+    <Property Type="Decimal" Name="Price" Nullable="false" Precision="10" Scale="2" />
+  </ComplexType>
+  <EntityType Name="Card">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cardNumber" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="expireDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="balance" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+  </EntityType>
   <EntityType Name="Offers">
     <Key>
       <PropertyRef Name="offersId" />
@@ -26,12 +43,32 @@
     <Property Name="offersgUId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="offersName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="offersDesc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="maxGuest" Type="Int32" Nullable="false" />
     <Property Name="tourId" Type="Int32" Nullable="false" />
     <Property Name="listPrice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
     <Property Name="dateCreated" Type="DateTime" Precision="0" />
     <Property Name="status" Type="Int32" Nullable="false" />
     <Property Name="userId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="TourType" Relationship="TropicTModel.FK_Offers_TourType" FromRole="Offers" ToRole="TourType" />
+  </EntityType>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="offersName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="maxGuest" Type="Int32" Nullable="false" />
+    <Property Name="tourId" Type="Int32" Nullable="false" />
+    <Property Name="checkIn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="lastName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="firstName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="contactNum" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="payment" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="balance" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="status" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -49,6 +86,17 @@
     <Property Name="tourName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="userId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Offers" Relationship="TropicTModel.FK_Offers_TourType" FromRole="TourType" ToRole="Offers" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reservationId" Type="Int32" />
+    <Property Name="transactionDate" Type="DateTime" Precision="3" />
+    <Property Name="amout" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="ratings" Type="Int32" />
+    <Property Name="status" Type="Int32" />
   </EntityType>
   <EntityType Name="UserAccount">
     <Key>
@@ -97,9 +145,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <ComplexType Name="sp_ViewOffers_Result">
-    <Property Type="String" Name="Pax" Nullable="false" MaxLength="255" />
-    <Property Type="String" Name="Tour_Type" Nullable="false" MaxLength="255" />
-    <Property Type="Decimal" Name="Price" Nullable="false" Precision="10" Scale="2" />
-  </ComplexType>
 </Schema>

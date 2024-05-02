@@ -35,7 +35,7 @@ namespace TropicTrail.Controllers
             var offersgUid = $"Offers-{Utilities.gUid}";
 
             offers.status = 1;
-            offers.dateCreated = DateTime.Now;
+            offers.dateCreated = DateTime.Now;  
             offers.offersgUId = offersgUid;
             offers.userId = UserId;
 
@@ -70,5 +70,23 @@ namespace TropicTrail.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        public ActionResult ManageUsers()
+        {
+            return View(_userManager.ListOfUsers());
+        }
+        public ActionResult ManageReservations()
+        {
+            IsUserLoggedSession();
+            return View(_reservationManager.ListReservation());
+        }
+        [HttpPost]
+        public ActionResult ManageReservation(int id)
+        {
+            var reservation = _reservationManager.GetReservationById(id);
+            reservation.status = 1; // Update status to 1 (confirmed)
+            _reservationManager.UpdateReservation(reservation, ref ErrorMessage);
+            return RedirectToAction("ManageReservations");
+        }
     }
 }

@@ -10,7 +10,6 @@
     <meta content="Free HTML Templates" name="description">
 
     <link href="~/Content/css/index-css.css" rel="stylesheet" />
-    <link href="~/Content/css/Details.css" rel="stylesheet" />
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
@@ -48,9 +47,10 @@
                             {
                                 <div class="navbar-nav font-weight-bold mx-auto py-0">
                                     <a href="~/Admin/Index" class="nav-item nav-link active">Home</a>
-                                    <a href="#" class="nav-item nav-link active">Manage Users</a>
+                                    <a href="~/Admin/ManageUsers" class="nav-item nav-link active">Manage Users</a>
                                     <a href="~/Admin/ManageOffers" class="nav-item nav-link">Manage Offers</a>
-                                    <a href="#" class="nav-item nav-link">Manage Reservation</a>
+                                    <a href="~/Admin/ManageReservations" class="nav-item nav-link">Manage Reservation</a>
+                                    <a href="#" class="nav-item nav-link">Transactions</a>
                                 </div>
                                 <div>
                                     <img src="~/Content/img/profile.jpg" class="user-pic" onclick="toggleMenu()" />
@@ -83,8 +83,6 @@
                                     <a href="#" class="nav-item nav-link">Hot Deals</a>
                                     <a href="~/Home/Offers" class="nav-item nav-link">Offers</a>
                                     <a href="~/Home/AboutUs" class="nav-item nav-link">About</a>
-                                    <a href="#" class="nav-item nav-link">Contact</a>
-                                    <a href="~/Home/Book" class="nav-item nav-link">Book Now</a>
                                 </div>
                                 <div>
                                     <img src="~/Content/img/profile.jpg" class="user-pic" onclick="toggleMenu()" />
@@ -99,6 +97,11 @@
                                             <a href="" class="sub-menu-link">
                                                 <img src="~/Content/img/profile.jpg"/>
                                                 <p>Edit Profile</p>
+                                                <span>></span>
+                                            </a>
+                                            <a href="~/Home/YourReservation" class="sub-menu-link">
+                                                <img src="~/Content/img/logout.png" />
+                                                <p>Your Reservation</p>
                                                 <span>></span>
                                             </a>
                                             <a href="~/Home/Logout" class="sub-menu-link">
@@ -118,7 +121,6 @@
                                 <a href="#" class="nav-item nav-link">Hot Deals</a>
                                 <a href="~/Home/Offers" class="nav-item nav-link">Offers</a>
                                 <a href="~/Home/AboutUs" class="nav-item nav-link">About</a>
-                                <a href="#" class="nav-item nav-link">Contact</a>
                             </div>
                                 <div>
                                     <a href="~/Home/Login" class="btn btn-primary px-4">Login</a>
@@ -130,7 +132,7 @@
         </div>
     </header>
 
-    <div class="main-content" style="height: 100vh;">
+    <div class="main-content" style="height: 100%;">
         @RenderBody()
     </div>
     <!-- Navbar End -->

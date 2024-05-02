@@ -74,7 +74,10 @@ namespace TropicTrail.Repository
         {
             return _table.Find(id);
         }
-
+        public T FindCardNumber(String num)
+        {
+            return _table.Find(num);
+        }
         public List<T> GetAll()
         {
             return _table.ToList();

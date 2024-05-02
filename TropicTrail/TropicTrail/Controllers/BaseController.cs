@@ -15,6 +15,9 @@ namespace TropicTrail.Controllers
         public TourTypeManager _tourTypeManager;
         public OffersManager _offersManager;
         public TropicTEntities _db;
+        public CardManager _card;
+        public ReservationManager _reservationManager;
+        public TransactionManager _transactionManager;
 
         public String Username { get { return User.Identity.Name; } }
         public String UserId { get { return _userManager.GetUserByUsername(Username).userId; } }
@@ -26,6 +29,9 @@ namespace TropicTrail.Controllers
             _tourTypeManager = new TourTypeManager();
             _offersManager = new OffersManager();
             _db = new TropicTEntities();
+            _card = new CardManager();
+            _reservationManager = new ReservationManager();
+            _transactionManager = new TransactionManager();
         }
 
 

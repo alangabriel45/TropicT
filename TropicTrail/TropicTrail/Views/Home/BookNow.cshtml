@@ -2,44 +2,9 @@
 
 @{
     ViewBag.Title = "BookNow";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .content {
-        text-align: center;
-    }
-
-    .booking-form {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 20px;
-        width: 300px; /* Adjust width as needed */
-        margin-left: 20px; /* Add some space between the description and the form */
-    }
-
-        .booking-form input {
-            width: calc(100% - 10px);
-            margin-bottom: 10px;
-        }
-
-        .booking-form button {
-            width: 100%;
-        }
-
-    .image-container img {
-        width: 700px; /* Static width */
-        height: auto;
-        display: block;
-        margin: 0 auto;
-    }
-</style>
+<link href="~/Content/css/book-now.css" rel="stylesheet" />
 
 <body>
     <div class="container">
@@ -63,22 +28,26 @@
             </div>
         </div>
 
-        <div class="booking-form">
-            @using (Html.BeginForm("ContinueBook", "Home", FormMethod.Post))
-            {
+        @using (Html.BeginForm("BookNow", "Home", FormMethod.Post))
+                {
+                    Session["OfferId"] = Model.offersId;
+            <div class="booking-form">
                 <h2>Booking Form</h2>
 
                 <div>
                     <label for="checkInDate">Check-in Date:</label>
                     <input type="date" id="checkInDate" name="checkInDate" class="form-control" required />
                 </div>
+
+                <!-- Hidden input for the price -->
+                <input type="hidden" id="price" name="price" value="@Model.listPrice" />
+
                 <div>
                     <label for="numGuests">Number of Guests:</label>
-                    <input type="number" id="numGuests" name="numGuests" class="form-control" min="1" required />
+                    <input type="text" id="numGuests" name="numGuests" class="form-control" value="@Model.maxGuest" required />
                 </div>
 
-                <button type="submit" class="btn btn-primary" >Continue Booking</button>
-            }
-        </div>
-    </div>
+                <button type="submit" class="btn btn-primary">Continue Booking</button>
+            </div>
+        }
 </body>

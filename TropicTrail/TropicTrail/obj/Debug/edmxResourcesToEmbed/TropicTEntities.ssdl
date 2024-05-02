@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="TropicTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Card">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cardNumber" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="expireDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="balance" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
   <EntityType Name="Offers">
     <Key>
       <PropertyRef Name="offersId" />
@@ -8,11 +17,31 @@
     <Property Name="offersgUId" Type="nvarchar" MaxLength="255" />
     <Property Name="offersName" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="offersDesc" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="maxGuest" Type="int" Nullable="false" />
     <Property Name="tourId" Type="int" Nullable="false" />
     <Property Name="listPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
     <Property Name="dateCreated" Type="date" />
     <Property Name="status" Type="int" Nullable="false" />
     <Property Name="userId" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="nvarchar(max)" />
+    <Property Name="offersName" Type="nvarchar" MaxLength="100" />
+    <Property Name="maxGuest" Type="int" Nullable="false" />
+    <Property Name="tourId" Type="int" Nullable="false" />
+    <Property Name="checkIn" Type="datetime" Nullable="false" />
+    <Property Name="price" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="lastName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="firstName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="contactNum" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="payment" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="balance" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -28,6 +57,17 @@
     <Property Name="tourId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tourName" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="reservationId" Type="int" />
+    <Property Name="transactionDate" Type="datetime" />
+    <Property Name="amout" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="ratings" Type="int" />
+    <Property Name="status" Type="int" />
   </EntityType>
   <EntityType Name="UserAccount">
     <Key>
@@ -81,9 +121,12 @@ warning 6002: The table/view 'TropicT.dbo.vw_role' does not have a primary key d
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="TropicTModelStoreContainer">
+    <EntitySet Name="Card" EntityType="Self.Card" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Offers" EntityType="Self.Offers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TourType" EntityType="Self.TourType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="vw_role" EntityType="Self.vw_role" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

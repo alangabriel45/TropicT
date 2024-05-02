@@ -1,0 +1,38 @@
+﻿body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff;
+}
+.container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content {
+        text-align: center;
+    }
+
+    .booking-form {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        width: 300px; /* Adjust width as needed */
+        margin-left: 20px; /* Add some space between the description and the form */
+    }
+
+        .booking-form input {
+            width: calc(100% - 10px);
+            margin-bottom: 10px;
+        }
+
+        .booking-form button {
+            width: 100%;
+        }
+
+    .image-container img {
+        width: 700px; /* Static width */
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }

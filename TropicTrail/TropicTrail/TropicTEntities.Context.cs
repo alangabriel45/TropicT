@@ -28,9 +28,12 @@ namespace TropicTrail
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<Card> Card { get; set; }
         public DbSet<Offers> Offers { get; set; }
+        public DbSet<Reservation> Reservation { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<TourType> TourType { get; set; }
+        public DbSet<Transaction> Transaction { get; set; }
         public DbSet<UserAccount> UserAccount { get; set; }
         public DbSet<vw_role> vw_role { get; set; }
     

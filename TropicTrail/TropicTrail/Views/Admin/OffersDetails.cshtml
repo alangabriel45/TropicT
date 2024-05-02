@@ -3,55 +3,31 @@
 
 @{
     ViewBag.Title = "OffersDetails";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="col-md-6">
-    <h4><b>@Model.offersName</b></h4>
-    <hr />
-    <dl class="dl-horizontal">       
+<link href="~/Content/css/Details.css" rel="stylesheet" />
 
-        <dt>
-            <label>Description</label>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.offersDesc)
-        </dd>
-
-        <dt>
-            <label>Tour Type</label>
-        </dt>
-
-        <dd>
-            @Model.TourType.tourName
-        </dd>
-
-        <dt>
-            Price
-        </dt>
-
-        <dd>
-            <h3>Php @Model.listPrice.ToString("N2")</h3>
-        </dd>
-
-        <dt>
-            <label>Date Created</label>
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dateCreated)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.status)
-        </dd>
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<body>
+    <div class="container">
+        <header>
+            <h1>Island Hopping Adventure</h1>
+            <p>Explore the breathtaking islands</p>
+        </header>
+        <main>
+            <div class="island-details">
+                <img src="~/Content/images/tour1.jpg" />
+                <div class="details">
+                    <h2>@Model.offersName</h2>
+                    <h2>@Model.TourType.tourName</h2>
+                    <p class="description">@Model.offersDesc</p>
+                    <div class="price">
+                        <span class="from">From</span>
+                        <span class="amount">@Model.listPrice</span>
+                    </div>
+                </div>
+            </div>
+            <a href="~/Home/Details" class="btn btn-secondary">Back</a>
+        </main>
+        
+    </div>
+</body>

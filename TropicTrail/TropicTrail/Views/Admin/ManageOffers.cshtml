@@ -2,58 +2,69 @@
 
 @{
     ViewBag.Title = "ManageOffers";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/Content/css/admin.css" rel="stylesheet" />
 
-<p>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Tour Type
-        </th>
-        <th>
-            Price
-        </th>
-        <th>
-            
-            Date Created
-        </th>
-        <th>
-            Status
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Tour Type
+                </th>
+                <th>
+                    Max Guests
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.offersName)
-        </td>
-        <td>
-            @item.TourType.tourName
-        </td>
-        <td>
-            <span class="badge badge-success">Php @item.listPrice.ToString("N2")</span>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateCreated)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.status)
-        </td>
-        <td>
-            <a href="~/Admin/OffersDetails/@item.offersId" class="btn btn-info" target="_blank"><i class="fa fa-info"></i> Details</a> |
+                    Date Created
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
 
-            <button class="btn btn-danger" onclick="onDelete(@item.offersId)"><i class="fa fa-trash"></i> Delete</button>
-        </td>
-    </tr>
-}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.offersName)
+                    </td>
+                    <td>
+                        @item.TourType.tourName
+                    </td>
+                    <td>
+                        @item.maxGuest
+                    </td>
+                    <td>
+                        <span class="badge badge-success">Php @item.listPrice.ToString("N2")</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dateCreated)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+                    <td>
+                        <a href="~/Admin/OffersDetails/@item.offersId" class="btn btn-info" target="_blank"><i class="fa fa-info"></i> Details</a> |
 
-</table>
+                        <button class="btn btn-danger" onclick="onDelete(@item.offersId)"><i class="fa fa-trash"></i> Delete</button>
+                    </td>
+                </tr>
+            }
 
-<a href="~/Admin/AddOffers" class="btn btn-success">Add Offers</a>
+        </table>
+
+        <a href="~/Admin/AddOffers" class="btn btn-success">Add Offers</a>
+    </div>
+</div>

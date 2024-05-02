@@ -118,10 +118,6 @@ namespace TropicTrail.Controllers
         {
             return View();
         }
-        public ActionResult ContinueBook()
-        {
-            return View();
-        }
         public ActionResult BookNow(int? id)
         {
             if (id == null || id == 0)
@@ -130,6 +126,75 @@ namespace TropicTrail.Controllers
             var offersInfo = _offersManager.GetOffersById(id);
 
             return View(offersInfo);
+        }
+        [HttpPost]
+        public ActionResult BookNow(String checkInDate, int numGuests, decimal price)
+        {
+            Session["checkInDate"] = checkInDate;
+            Session["numGuests"] = numGuests;
+            Session["price"] = price;
+            
+            if (Session["checkInDate"] == null || Session["numGuests"] == null || Session["price"] == null)
+            {
+                ModelState.AddModelError("price", "Invalid");
+            }
+            else
+            {
+                return RedirectToAction("ContinueBook");
+            }
+            return View();
+        }
+        public ActionResult ContinueBook()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ContinueBook(Reservation r, String ExpiryDate, String CardNumber)
+        {
+            r.checkIn = DateTime.Parse(Session["checkInDate"].ToString());
+            r.maxGuest = Convert.ToInt32(Session["numGuests"]);
+            r.price = Convert.ToDecimal(Session["price"]);
+            r.status = 0;
+            r.userId = UserId;
+
+            var card = _card.FindCardByCardNumber(CardNumber, ExpiryDate);
+            var enough = _card.EnoughBalance(CardNumber, r.payment);
+            var offersInfo = _offersManager.GetOffersById(Convert.ToInt32(Session["OfferId"]));
+
+            r.offersName = offersInfo.offersName;
+            r.tourId = offersInfo.TourType.tourId;
+            if (card == null)
+            {
+                ModelState.AddModelError("CardNumber", "Invalid Card Number.");
+                return View(r);
+            }
+            if (enough == null)
+            {
+                ModelState.AddModelError("CardNumber", "Insufficient balance.");
+                return View(r);
+            }
+            decimal? halfPrice = r.price / 2;
+            if (r.payment < halfPrice)
+            {
+                ModelState.AddModelError("Payment", "Please pay at least half of the price.");
+                return View(r);
+            }
+
+            decimal? remainingBalance = r.price - r.payment;
+            if (remainingBalance <= 0)
+            {
+                remainingBalance = 0;
+            }
+
+            r.balance = remainingBalance;
+
+            if (_reservationManager.CreateReservation(r, ref ErrorMessage) == ErrorCode.Error)
+            {
+                ModelState.AddModelError(String.Empty, ErrorMessage);
+                return View(r);
+            }
+            TempData["Message"] = $"Product {r.lastName} added!";
+            return RedirectToAction("Index");
         }
         [AllowAnonymous]   
         public ActionResult PageNotFound()
@@ -140,6 +205,30 @@ namespace TropicTrail.Controllers
         public ActionResult AboutUs()
         {
             return View();
+        }
+        public ActionResult YourReservation()
+        {
+            return View(_reservationManager.GetReservationByUserId(UserId));
+        }
+        public ActionResult Finish(int id, int rating)
+        {
+            var reservation = _reservationManager.GetReservationById(id);
+
+            reservation.status = 3;
+            _reservationManager.UpdateReservation(reservation, ref ErrorMessage);
+
+            Transaction transaction = new Transaction
+            {
+                reservationId = id,
+                transactionDate = DateTime.Now,
+                amout = reservation.payment,
+                ratings = rating, 
+                status = 3
+            };
+
+            _transactionManager.CreateTransaction(transaction, ref ErrorMessage);
+
+            return RedirectToAction("Index");
         }
     }
 }
