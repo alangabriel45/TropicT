@@ -88,5 +88,9 @@ namespace TropicTrail.Controllers
             _reservationManager.UpdateReservation(reservation, ref ErrorMessage);
             return RedirectToAction("ManageReservations");
         }
+        public ActionResult Transaction()
+        {
+            return View(_transactionManager.ListOfTransaction());
+        }
     }
 }

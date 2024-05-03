@@ -35,7 +35,9 @@ namespace TropicTrail
         public DbSet<TourType> TourType { get; set; }
         public DbSet<Transaction> Transaction { get; set; }
         public DbSet<UserAccount> UserAccount { get; set; }
+        public DbSet<UserInformation> UserInformation { get; set; }
         public DbSet<vw_role> vw_role { get; set; }
+        public DbSet<vw_Transactions> vw_Transactions { get; set; }
     
         public virtual ObjectResult<sp_ViewOffers_Result> sp_ViewOffers(Nullable<int> id)
         {

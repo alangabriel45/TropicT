@@ -50,7 +50,7 @@
                                     <a href="~/Admin/ManageUsers" class="nav-item nav-link active">Manage Users</a>
                                     <a href="~/Admin/ManageOffers" class="nav-item nav-link">Manage Offers</a>
                                     <a href="~/Admin/ManageReservations" class="nav-item nav-link">Manage Reservation</a>
-                                    <a href="#" class="nav-item nav-link">Transactions</a>
+                                    <a href="~/Admin/Transaction" class="nav-item nav-link">Transactions</a>
                                 </div>
                                 <div>
                                     <img src="~/Content/img/profile.jpg" class="user-pic" onclick="toggleMenu()" />
@@ -59,7 +59,7 @@
                                         <div class="sub-menu">
                                             <div class="user-info">
                                                 <img src="~/Content/img/profile.jpg" />
-                                                <h3>Alan Gabriel Dosado</h3>
+                                                <h3>@User.Identity.Name</h3>
                                             </div>
                                             <hr />
                                             <a href="" class="sub-menu-link">
@@ -91,12 +91,12 @@
                                         <div class="sub-menu">
                                             <div class="user-info">
                                                 <img src="~/Content/img/profile.jpg" />
-                                                <h3>Alan Gabriel Dosado</h3>
+                                                <h3>@User.Identity.Name</h3>
                                             </div>
                                             <hr />
-                                            <a href="" class="sub-menu-link">
+                                            <a href="~/Home/MyProfile" class="sub-menu-link">
                                                 <img src="~/Content/img/profile.jpg"/>
-                                                <p>Edit Profile</p>
+                                                <p>View Profile</p>
                                                 <span>></span>
                                             </a>
                                             <a href="~/Home/YourReservation" class="sub-menu-link">
@@ -146,16 +146,19 @@
         <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5 footer">
             <div class="container-fluid pt-5" style="border-top: 1px solid rgba(23, 162, 184, .2);">
                 <div class="logo-group">
-                    <ul class="logo-list">
-                        <li><div class="gmail-logo">
-                        <img src="~/Content/img/gmail.png" alt="gmail logo" /><p>TropicTrailOfficial@gmail.com</p>
-                    </div>
-                   </li>
+                    <ul class="logo-list-1">
+                        <li>
+                            <div class="gmail-logo">
+                                <img src="~/Content/img/gmail.png" alt="gmail logo" /><p>TropicTrailOfficial@gmail.com</p>
+                            </div>
+                        </li>
                         <li>
                             <div class="facebook-logo">
                                 <img src="~/Content/img/facebook.png" alt="facebook logo" /><p>facebook.com/TropicTrailOfficial</p>
                             </div>
                         </li>
+                    </ul>
+                    <ul class="logo-list-2">
                         <li>
                             <div class="insta-logo">
                                 <img src="~/Content/img/insta.jpg" alt="insta logo" /><p>TropicTrailOfficial</p>

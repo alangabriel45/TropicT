@@ -88,6 +88,7 @@
     <EntitySetMapping Name="UserAccount">
       <EntityTypeMapping TypeName="TropicTModel.UserAccount">
         <MappingFragment StoreEntitySet="UserAccount">
+          <ScalarProperty Name="code" ColumnName="code" />
           <ScalarProperty Name="date_modified" ColumnName="date_modified" />
           <ScalarProperty Name="date_created" ColumnName="date_created" />
           <ScalarProperty Name="roleId" ColumnName="roleId" />
@@ -100,12 +101,42 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="UserInformation">
+      <EntityTypeMapping TypeName="TropicTModel.UserInformation">
+        <MappingFragment StoreEntitySet="UserInformation">
+          <ScalarProperty Name="profilePic" ColumnName="profilePic" />
+          <ScalarProperty Name="zipCode" ColumnName="zipCode" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="street" ColumnName="street" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="fistName" ColumnName="fistName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="vw_role">
       <EntityTypeMapping TypeName="TropicTModel.vw_role">
         <MappingFragment StoreEntitySet="vw_role">
           <ScalarProperty Name="roleName" ColumnName="roleName" />
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Transactions">
+      <EntityTypeMapping TypeName="TropicTModel.vw_Transactions">
+        <MappingFragment StoreEntitySet="vw_Transactions">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Ratings" ColumnName="Ratings" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Transaction_Date" ColumnName="Transaction_Date" />
+          <ScalarProperty Name="Booked_By" ColumnName="Booked_By" />
+          <ScalarProperty Name="Reservation_Id" ColumnName="Reservation_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -36,11 +36,11 @@ namespace TropicTrail.Controllers
             {
                 var user = _userManager.GetUserByUsername(username);
 
-                //if (user.status != (Int32)Status.Active)
-                //{
-                //    TempData["username"] = username;
-                //    return RedirectToAction("Verify");
-                //}
+                if (user.status != (Int32)Status.Active)
+                {
+                    TempData["username"] = username;
+                   return RedirectToAction("Verify");
+                }
                 //
                 FormsAuthentication.SetAuthCookie(username, false);
                 //
@@ -73,9 +73,11 @@ namespace TropicTrail.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult SignUp(UserAccount u, String ConfirmPass)
+        public ActionResult SignUp(UserAccount u, UserInformation ui, String ConfirmPass)
         {
             u.roleId = 1;
+            ui.email = u.email;
+            ui.userId = u.userId;
             if (!u.password.Equals(ConfirmPass))
             {
                 ModelState.AddModelError(String.Empty, "Password not match");
@@ -83,7 +85,7 @@ namespace TropicTrail.Controllers
                 return View(u);
             }
 
-            if (_userManager.SignUp(u, ref ErrorMessage) != ErrorCode.Success)
+            if (_userManager.SignUp(u, ui, ref ErrorMessage) != ErrorCode.Success)
             {
                 ModelState.AddModelError(String.Empty, ErrorMessage);
 
@@ -92,6 +94,36 @@ namespace TropicTrail.Controllers
             }
             TempData["username"] = u.username;
             return RedirectToAction("Index");
+        }
+        [AllowAnonymous]
+        public ActionResult Verify()
+        {
+            if (String.IsNullOrEmpty(TempData["username"] as String))
+                return RedirectToAction("Login");
+
+            return View();
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult Verify(String code, String username)
+        {
+            if (String.IsNullOrEmpty(username))
+                return RedirectToAction("Login");
+
+            TempData["username"] = username;
+
+            var user = _userManager.GetUserByUsername(username);
+
+            if (!user.code.Equals(code))
+            {
+                TempData["error"] = "Incorrect Code";
+                return View();
+            }
+
+            user.status = (Int32)Status.Active;
+            _userManager.UpdateUser(user, ref ErrorMessage);
+
+            return RedirectToAction("Login");
         }
         [AllowAnonymous]
         public ActionResult Logout()
@@ -229,6 +261,32 @@ namespace TropicTrail.Controllers
             _transactionManager.CreateTransaction(transaction, ref ErrorMessage);
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult EditProfile()
+        {
+            IsUserLoggedSession();
+            var user = _userManager.CreateOrRetrieve(User.Identity.Name, ref ErrorMessage);
+
+            return View(user);
+        }
+        [HttpPost]
+        public ActionResult EditProfile(UserInformation userInf)
+        {
+            if (_userManager.UpdateUserInformation(userInf, ref ErrorMessage) == Utils.ErrorCode.Error)
+            {
+                //
+                ModelState.AddModelError(String.Empty, ErrorMessage);
+                //
+                return View(userInf);
+            }
+            TempData["Message"] = $"User Information {ErrorMessage}!";
+            return View(userInf);
+        }
+
+        public ActionResult MyProfile()
+        {
+            return View(_userManager.GetUserInfoByUserId(UserId));
         }
     }
 }

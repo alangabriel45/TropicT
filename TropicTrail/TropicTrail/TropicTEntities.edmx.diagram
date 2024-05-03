@@ -5,14 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0cbd9d1d417f496ea8bdab285c18bd8b" Name="Diagram1">
-        <EntityTypeShape EntityType="TropicTModel.Card" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TropicTModel.Offers" Width="1.5" PointX="3" PointY="5" />
-        <EntityTypeShape EntityType="TropicTModel.Reservation" Width="1.5" PointX="5.75" PointY="3.75" />
-        <EntityTypeShape EntityType="TropicTModel.Role" Width="1.5" PointX="0.75" PointY="1.625" />
-        <EntityTypeShape EntityType="TropicTModel.TourType" Width="1.5" PointX="0.75" PointY="5.625" />
-        <EntityTypeShape EntityType="TropicTModel.Transaction" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TropicTModel.Card" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="TropicTModel.Offers" Width="1.5" PointX="8" PointY="1" />
+        <EntityTypeShape EntityType="TropicTModel.Reservation" Width="1.5" PointX="2.75" PointY="5.75" />
+        <EntityTypeShape EntityType="TropicTModel.Role" Width="1.5" PointX="0.75" PointY="1.75" />
+        <EntityTypeShape EntityType="TropicTModel.TourType" Width="1.5" PointX="5.75" PointY="1.625" />
+        <EntityTypeShape EntityType="TropicTModel.Transaction" Width="1.5" PointX="4.75" PointY="5.75" />
         <EntityTypeShape EntityType="TropicTModel.UserAccount" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="TropicTModel.vw_role" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="TropicTModel.UserInformation" Width="1.5" PointX="6.75" PointY="5.75" />
+        <EntityTypeShape EntityType="TropicTModel.vw_role" Width="1.5" PointX="8.75" PointY="5.75" />
+        <EntityTypeShape EntityType="TropicTModel.vw_Transactions" Width="1.5" PointX="8.75" PointY="8.75" />
         <AssociationConnector Association="TropicTModel.FK_Offers_TourType" />
         <AssociationConnector Association="TropicTModel.FK_UserAccount_Role" />
       </Diagram>

@@ -1,0 +1,77 @@
+﻿@model TropicTrail.UserInformation
+
+@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>MyProfile</h2>
+
+<div>
+    <h4>UserInformation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt hidden>
+            User ID
+        </dt>
+        <dd hidden>
+            @(string.IsNullOrEmpty(Model.userId) ? "N/A" : Model.userId) <!-- Example user ID -->
+        </dd>
+
+        <dt>
+            Last Name
+        </dt>
+        <dd>
+            @(string.IsNullOrEmpty(Model.lastName) ? "N/A" : Model.lastName)
+        </dd>
+
+        <dt>
+            First Name
+        </dt>
+        <dd>
+            @(string.IsNullOrEmpty(Model.fistName) ? "N/A" : Model.fistName)
+        </dd>
+
+        <dt>
+            Phone
+        </dt>
+        <dd>
+           @(string.IsNullOrEmpty(Model.phone) ? "N/A" : Model.phone)
+        </dd>
+
+        <dt>
+            Email
+        </dt>
+        <dd>
+          @(string.IsNullOrEmpty(Model.email) ? "N/A" : Model.email)
+        </dd>
+
+        <dt>
+            Street
+        </dt>
+        <dd>
+           @(string.IsNullOrEmpty(Model.street) ? "N/A" : Model.street)
+        </dd>
+
+        <dt>
+            City
+        </dt>
+        <dd>
+           @(string.IsNullOrEmpty(Model.city) ? "N/A" : Model.city)
+        </dd>
+
+        <dt>
+            State
+        </dt>
+        <dd>
+           @(string.IsNullOrEmpty(Model.state) ? "N/A" : Model.state)
+        </dd>
+
+        <dt>
+            Zip Code
+        </dt>
+        <dd>
+           @(string.IsNullOrEmpty(Model.zipCode) ? "N/A" : Model.zipCode) 
+        </dd>
+    </dl>
+</div>

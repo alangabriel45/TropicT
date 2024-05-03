@@ -87,6 +87,23 @@
           <Property Name="roleId" Type="int" />
           <Property Name="date_created" Type="datetime" />
           <Property Name="date_modified" Type="datetime" />
+          <Property Name="code" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserInformation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="nvarchar(max)" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="fistName" Type="nvarchar" MaxLength="255" />
+          <Property Name="phone" Type="nvarchar" MaxLength="255" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
+          <Property Name="street" Type="nvarchar" MaxLength="255" />
+          <Property Name="city" Type="nvarchar" MaxLength="255" />
+          <Property Name="state" Type="nvarchar" MaxLength="255" />
+          <Property Name="zipCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="profilePic" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TropicT.dbo.vw_role' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -97,6 +114,21 @@ warning 6002: The table/view 'TropicT.dbo.vw_role' does not have a primary key d
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="username" Type="nvarchar" MaxLength="100" />
           <Property Name="roleName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TropicT.dbo.vw_Transactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Transactions">
+          <Key>
+            <PropertyRef Name="Reservation_Id" />
+            <PropertyRef Name="Booked_By" />
+          </Key>
+          <Property Name="Reservation_Id" Type="int" Nullable="false" />
+          <Property Name="Booked_By" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Transaction_Date" Type="datetime" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Payment" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Ratings" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="9" />
         </EntityType>
         <Association Name="FK_Offers_TourType">
           <End Role="TourType" Type="Self.TourType" Multiplicity="1" />
@@ -133,12 +165,24 @@ warning 6002: The table/view 'TropicT.dbo.vw_role' does not have a primary key d
           <EntitySet Name="TourType" EntityType="Self.TourType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInformation" EntityType="Self.UserInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vw_role" EntityType="Self.vw_role" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [vw_role].[id] AS [id], 
 [vw_role].[username] AS [username], 
 [vw_role].[roleName] AS [roleName]
 FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_Transactions" EntityType="Self.vw_Transactions" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vw_Transactions].[Reservation_Id] AS [Reservation_Id], 
+[vw_Transactions].[Booked_By] AS [Booked_By], 
+[vw_Transactions].[Transaction_Date] AS [Transaction_Date], 
+[vw_Transactions].[Price] AS [Price], 
+[vw_Transactions].[Payment] AS [Payment], 
+[vw_Transactions].[Ratings] AS [Ratings], 
+[vw_Transactions].[Status] AS [Status]
+FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Offers_TourType" Association="Self.FK_Offers_TourType">
             <End Role="TourType" EntitySet="TourType" />
@@ -164,7 +208,9 @@ FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
           <EntitySet Name="TourType" EntityType="TropicTModel.TourType" />
           <EntitySet Name="Transaction" EntityType="TropicTModel.Transaction" />
           <EntitySet Name="UserAccount" EntityType="TropicTModel.UserAccount" />
+          <EntitySet Name="UserInformation" EntityType="TropicTModel.UserInformation" />
           <EntitySet Name="vw_role" EntityType="TropicTModel.vw_role" />
+          <EntitySet Name="vw_Transactions" EntityType="TropicTModel.vw_Transactions" />
           <AssociationSet Name="FK_Offers_TourType" Association="TropicTModel.FK_Offers_TourType">
             <End Role="TourType" EntitySet="TourType" />
             <End Role="Offers" EntitySet="Offers" />
@@ -264,7 +310,24 @@ FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
           <Property Name="roleId" Type="Int32" />
           <Property Name="date_created" Type="DateTime" Precision="3" />
           <Property Name="date_modified" Type="DateTime" Precision="3" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Role" Relationship="TropicTModel.FK_UserAccount_Role" FromRole="UserAccount" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="UserInformation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fistName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="zipCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="profilePic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="vw_role">
           <Key>
@@ -273,6 +336,19 @@ FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vw_Transactions">
+          <Key>
+            <PropertyRef Name="Reservation_Id" />
+            <PropertyRef Name="Booked_By" />
+          </Key>
+          <Property Name="Reservation_Id" Type="Int32" Nullable="false" />
+          <Property Name="Booked_By" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Transaction_Date" Type="DateTime" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Payment" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Ratings" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Offers_TourType">
           <End Type="TropicTModel.TourType" Role="TourType" Multiplicity="1" />
@@ -391,6 +467,7 @@ FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
           <EntitySetMapping Name="UserAccount">
             <EntityTypeMapping TypeName="TropicTModel.UserAccount">
               <MappingFragment StoreEntitySet="UserAccount">
+                <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="date_modified" ColumnName="date_modified" />
                 <ScalarProperty Name="date_created" ColumnName="date_created" />
                 <ScalarProperty Name="roleId" ColumnName="roleId" />
@@ -403,12 +480,42 @@ FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserInformation">
+            <EntityTypeMapping TypeName="TropicTModel.UserInformation">
+              <MappingFragment StoreEntitySet="UserInformation">
+                <ScalarProperty Name="profilePic" ColumnName="profilePic" />
+                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="fistName" ColumnName="fistName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="vw_role">
             <EntityTypeMapping TypeName="TropicTModel.vw_role">
               <MappingFragment StoreEntitySet="vw_role">
                 <ScalarProperty Name="roleName" ColumnName="roleName" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Transactions">
+            <EntityTypeMapping TypeName="TropicTModel.vw_Transactions">
+              <MappingFragment StoreEntitySet="vw_Transactions">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Ratings" ColumnName="Ratings" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Transaction_Date" ColumnName="Transaction_Date" />
+                <ScalarProperty Name="Booked_By" ColumnName="Booked_By" />
+                <ScalarProperty Name="Reservation_Id" ColumnName="Reservation_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

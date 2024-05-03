@@ -11,7 +11,9 @@
     <EntitySet Name="TourType" EntityType="TropicTModel.TourType" />
     <EntitySet Name="Transaction" EntityType="TropicTModel.Transaction" />
     <EntitySet Name="UserAccount" EntityType="TropicTModel.UserAccount" />
+    <EntitySet Name="UserInformation" EntityType="TropicTModel.UserInformation" />
     <EntitySet Name="vw_role" EntityType="TropicTModel.vw_role" />
+    <EntitySet Name="vw_Transactions" EntityType="TropicTModel.vw_Transactions" />
     <AssociationSet Name="FK_Offers_TourType" Association="TropicTModel.FK_Offers_TourType">
       <End Role="TourType" EntitySet="TourType" />
       <End Role="Offers" EntitySet="Offers" />
@@ -111,7 +113,24 @@
     <Property Name="roleId" Type="Int32" />
     <Property Name="date_created" Type="DateTime" Precision="3" />
     <Property Name="date_modified" Type="DateTime" Precision="3" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Role" Relationship="TropicTModel.FK_UserAccount_Role" FromRole="UserAccount" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="UserInformation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="lastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="fistName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="street" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="state" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="zipCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="profilePic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="vw_role">
     <Key>
@@ -120,6 +139,19 @@
     <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vw_Transactions">
+    <Key>
+      <PropertyRef Name="Reservation_Id" />
+      <PropertyRef Name="Booked_By" />
+    </Key>
+    <Property Name="Reservation_Id" Type="Int32" Nullable="false" />
+    <Property Name="Booked_By" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Transaction_Date" Type="DateTime" Precision="3" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Payment" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Ratings" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_Offers_TourType">
     <End Type="TropicTModel.TourType" Role="TourType" Multiplicity="1" />
