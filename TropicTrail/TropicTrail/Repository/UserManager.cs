@@ -93,6 +93,26 @@ namespace TropicTrail.Repository
         {
             return _userAcc.Update(ua.id, ua, out errMsg);
         }
+        public ErrorCode UpdateUserStatus(int userId, int newStatus, ref string errMsg)
+        {
+            // First, retrieve the user account by its ID
+            var user = _userAcc.Get(userId);
+
+            if (user != null)
+            {
+                // Update the status field
+                user.status = newStatus;
+
+                // Now, call the Update method to save the changes
+                return _userAcc.Update(userId, user, out errMsg);
+            }
+            else
+            {
+                errMsg = "User not found";
+                return ErrorCode.Error;
+            }
+        }
+
         public UserInformation GetUserInfoByUserId(String userId)
         {
             return _userInf._table.Where(m => m.userId == userId).FirstOrDefault();

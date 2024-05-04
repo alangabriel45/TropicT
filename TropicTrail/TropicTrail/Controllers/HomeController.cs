@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using TropicTrail.Utils;
 using TropicTrail.Models;
 using System.Web.Security;
+using TropicTrail.Repository;
 
 namespace TropicTrail.Controllers
 {
@@ -78,22 +79,94 @@ namespace TropicTrail.Controllers
             u.roleId = 1;
             ui.email = u.email;
             ui.userId = u.userId;
-            if (!u.password.Equals(ConfirmPass))
+            try
             {
-                ModelState.AddModelError(String.Empty, "Password not match");
-                ViewBag.Role = Utilities.ListRole;
-                return View(u);
-            }
+                if (!u.password.Equals(ConfirmPass))
+                {
+                    ModelState.AddModelError(String.Empty, "Password not match");
+                    ViewBag.Role = Utilities.ListRole;
+                    return View(u);
+                }
 
-            if (_userManager.SignUp(u, ui, ref ErrorMessage) != ErrorCode.Success)
+                if (_userManager.SignUp(u, ui, ref ErrorMessage) != ErrorCode.Success)
+                {
+                    ModelState.AddModelError(String.Empty, ErrorMessage);
+
+                    ViewBag.Role = Utilities.ListRole;
+                    return View(u);
+                }
+                TempData["username"] = u.username;
+                Session["users"] = u.username;
+                Session["NewAccountId"] = u.userId;
+
+                Random random = new Random();
+                int randomOTP = random.Next(1000, 10000);
+                Session["randomOTP"] = randomOTP;
+
+                MailManager sendOTP = new MailManager();
+                string subject = "Welcome to our website!";
+                string userEmail = u.email;
+                string body = $@"<html>
+<head>
+    <style>
+        /* Add your custom styles here */
+        body {{
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }}
+        .container {{
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }}
+        h2 {{
+            text-align: center;
+            margin-bottom: 20px;
+        }}
+        p {{
+            font-size: 16px;
+            margin-bottom: 20px;
+        }}
+        .otp-container {{
+            background-color: #f9f9f9;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+            border-radius: 5px;
+        }}
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <h2>Welcome to our website!</h2>
+        <p>Thank you for registering with us. You can now book freely.</p>
+        <div class='otp-container'>
+            <p>Your OTP:</p>
+            <p style='font-size: 30px;'>{randomOTP}</p>
+        </div>
+    </div>
+</body>
+</html>";
+                string errorResponse = "";
+
+                bool isOTPSent = sendOTP.SendEmail(userEmail, subject, body, ref errorResponse);
+                if (isOTPSent)
+                {
+                    return RedirectToAction("Verify");
+                }
+                return View();
+            }
+            catch (Exception ex)
             {
-                ModelState.AddModelError(String.Empty, ErrorMessage);
-
-                ViewBag.Role = Utilities.ListRole;
-                return View(u);
+                TempData["msg"] = $"Error! " + ex.Message;
+                return RedirectToAction("Register");
             }
-            TempData["username"] = u.username;
-            return RedirectToAction("Index");
+            
         }
         [AllowAnonymous]
         public ActionResult Verify()
@@ -105,25 +178,27 @@ namespace TropicTrail.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult Verify(String code, String username)
+        public ActionResult Verify(int otp1, int otp2, int otp3, int otp4)
         {
-            if (String.IsNullOrEmpty(username))
-                return RedirectToAction("Login");
+            var user = _userManager.GetUserByUsername((String)Session["users"]);
 
-            TempData["username"] = username;
+            string enteredOTP = $"{otp1}{otp2}{otp3}{otp4}";
 
-            var user = _userManager.GetUserByUsername(username);
+            string expectedOTP = Session["randomOTP"].ToString();
 
-            if (!user.code.Equals(code))
+            if (enteredOTP == expectedOTP)
             {
-                TempData["error"] = "Incorrect Code";
-                return View();
+                String newAccId = (String)Session["NewAccountID"];
+                TempData["SuccessMessage"] = "Email has been verified!";
+                _userManager.UpdateUserStatus(user.id , (Int32)Status.Active, ref ErrorMessage);
+                return RedirectToAction("Index");
             }
-
-            user.status = (Int32)Status.Active;
-            _userManager.UpdateUser(user, ref ErrorMessage);
-
-            return RedirectToAction("Login");
+            else
+            {
+                TempData["ErrorMessage"] = "Incorrect OTP. Please try again!";
+                return RedirectToAction("Verify");
+            }
+            
         }
         [AllowAnonymous]
         public ActionResult Logout()
