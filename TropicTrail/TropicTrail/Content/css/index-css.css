@@ -64,8 +64,11 @@ body{
         border-radius: 8px;
 }
 .card-container {
-  display: flex; 
-  justify-content: space-between; 
+    display: flex; 
+    justify-content: space-between; 
+    max-height: 550px;
+    overflow-y: auto;
+     margin-top: 20px;
 }
 .container {
     display: flex;
