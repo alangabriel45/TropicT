@@ -5,73 +5,60 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>MyProfile</h2>
+<div class="container" style="background-color: whitesmoke;">
+    <div class="profile-form">
+        <h1>User Information</h1>
+        <hr />      
+        @using (Html.BeginForm("EditProfile", "User", FormMethod.Post))
+         {
+            <div class="row">
+                <div class="col-md-6">
+                    
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.lastName)
+                        @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
 
-<div>
-    <h4>UserInformation</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt hidden>
-            User ID
-        </dt>
-        <dd hidden>
-            @(string.IsNullOrEmpty(Model.userId) ? "N/A" : Model.userId) <!-- Example user ID -->
-        </dd>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.fistName)
+                        @Html.EditorFor(model => model.fistName, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
 
-        <dt>
-            Last Name
-        </dt>
-        <dd>
-            @(string.IsNullOrEmpty(Model.lastName) ? "N/A" : Model.lastName)
-        </dd>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.phone)
+                        @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
 
-        <dt>
-            First Name
-        </dt>
-        <dd>
-            @(string.IsNullOrEmpty(Model.fistName) ? "N/A" : Model.fistName)
-        </dd>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.email)
+                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>               
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.street)
+                        @Html.EditorFor(model => model.street, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
 
-        <dt>
-            Phone
-        </dt>
-        <dd>
-           @(string.IsNullOrEmpty(Model.phone) ? "N/A" : Model.phone)
-        </dd>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.city)
+                        @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
 
-        <dt>
-            Email
-        </dt>
-        <dd>
-          @(string.IsNullOrEmpty(Model.email) ? "N/A" : Model.email)
-        </dd>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.state)
+                        @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
 
-        <dt>
-            Street
-        </dt>
-        <dd>
-           @(string.IsNullOrEmpty(Model.street) ? "N/A" : Model.street)
-        </dd>
-
-        <dt>
-            City
-        </dt>
-        <dd>
-           @(string.IsNullOrEmpty(Model.city) ? "N/A" : Model.city)
-        </dd>
-
-        <dt>
-            State
-        </dt>
-        <dd>
-           @(string.IsNullOrEmpty(Model.state) ? "N/A" : Model.state)
-        </dd>
-
-        <dt>
-            Zip Code
-        </dt>
-        <dd>
-           @(string.IsNullOrEmpty(Model.zipCode) ? "N/A" : Model.zipCode) 
-        </dd>
-    </dl>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.zipCode)
+                        @Html.EditorFor(model => model.zipCode, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>  
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </div>              
+            </div>
+         }
+    </div>
 </div>

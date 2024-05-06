@@ -27,7 +27,7 @@
                 </ul>
             </div>
         </div>
-
+    </div>
         @using (Html.BeginForm("BookNow", "Home", FormMethod.Post))
                 {
                     Session["OfferId"] = Model.offersId;
@@ -49,5 +49,6 @@
 
                 <button type="submit" class="btn btn-primary">Continue Booking</button>
             </div>
+            
         }
 </body>
