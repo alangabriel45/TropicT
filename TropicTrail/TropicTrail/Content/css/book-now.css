@@ -16,9 +16,10 @@
     .booking-form {
         border: 1px solid #ccc;
         border-radius: 5px;
-        padding: 20px;
-        width: 300px; /* Adjust width as needed */
-        margin-left: 20px; /* Add some space between the description and the form */
+        padding: 50px;
+        padding-top: 10px;
+        width: 45%; /* Adjust width as needed */
+        margin-left: 410px; /* Add some space between the description and the form */
     }
 
         .booking-form input {
