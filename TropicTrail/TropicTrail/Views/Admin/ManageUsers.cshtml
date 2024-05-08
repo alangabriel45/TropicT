@@ -2,15 +2,14 @@
 
 @{
     ViewBag.Title = "ManageUsers";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/Content/css/ManageUsers.css" rel="stylesheet" />
 <h2>ManageUsers</h2>
 
-<p>
+<p >
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table" style="background-color: white;">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.userId)
