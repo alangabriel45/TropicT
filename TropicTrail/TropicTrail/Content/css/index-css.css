@@ -64,8 +64,11 @@ body{
         border-radius: 8px;
 }
 .card-container {
-  display: flex; 
-  justify-content: space-between; 
+    display: flex; 
+    justify-content: space-between; 
+    max-height: 550px;
+    overflow-y: auto;
+     margin-top: 20px;
 }
 .container {
     display: flex;
@@ -148,69 +151,6 @@ h1 {
   position:center;
   height:10%;
 }
-/*About Us CSS*/
-.img-group {
-  width: 100%;
-  margin: auto;
-  display:flex;
-  align-items: center;
-  text-align: center;
-  padding-left: 30px;
-}
-.img-group img{
-  height: 230px;
-  width: 200px;
-  border-radius: 15%;  
-  margin-left: 20px;
-}
-.img-group ul li{
-  list-style: none;
-  display: inline-block;
-  margin: 0 50px;
-  text-align: center;
-  padding-top: 10px;
-
-}
-.img-group ul li a{
-   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-   color: white;
-   font-weight: bold;
-   cursor: pointer;   
-}
-.summary{
-   box-sizing: border-box;
-   width: auto;
-   height: 100%;
-}
-.summary .h1-title{
-   font-family: Arial, Helvetica, sans-serif;
-   font-weight: bold;
-   font-size: 60px;
-   color: #05709F;
-   text-align: center;
-}
-.summary .h2-summary{
-   font-family: Arial, Helvetica, sans-serif;
-   font-weight: lighter;
-   font-size: 20px;
-   color: white;
-   text-align: center;
-   text-align:justify;
-   padding: 11px 100px;
-}
-.summary .h3-team{
-   font-family: Arial, Helvetica, sans-serif;
-   font-weight: bold;
-   font-size: 40px;
-   color: white;
-   text-align: center;
-   padding-top: 100px;
-}
-.hr-line{
-   width: 50%;
-   height:4px;
-   background-color: #05709F;
-}
 .pop-up{
    width: 400px;
    background: #fff;
@@ -291,80 +231,3 @@ h1 {
 }
 
 /*Details CSS*/
-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-h1 {
-  font-size: 36px;
-  margin-bottom: 5px;
-}
-
-p {
-  font-size: 18px;
-}
-
-.island-details {
-  display: flex;
-  align-items: center;
-}
-
-.island-details img {
-  width: 300px;
-  height: 200px;
-  object-fit: cover;
-  margin-right: 20px;
-}
-
-.details {
-  flex: 1;
-}
-
-h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.location {
-  font-style: italic;
-  margin-bottom: 5px;
-
-}
-
-.description {
-  margin-bottom: 10px;
-}
-
-.price {
-  font-size: 20px;
-}
-
-.from {
-  font-weight: bold;
-}
-
-.amount {
-  color: #1abc9c;
-  font-size: 28px;
-}
-
-.duration {
-  font-size: 18px;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 18px;
-  background-color: #1abc9c;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #16a085;
-}
-

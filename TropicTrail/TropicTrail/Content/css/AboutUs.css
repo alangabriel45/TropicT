@@ -1,0 +1,89 @@
+﻿/* Reset default browser styles */
+body, html, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set background color and font styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+}
+
+/* Container styles */
+.summary {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styles */
+.h1-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #05709F;
+    margin-bottom: 20px;
+}
+
+/* Subtitle styles */
+.h2-summary {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Team section title styles */
+.h3-team {
+    font-size: 20px;
+    font-weight: bold;
+    color: #05709F;
+    margin-top: 30px;
+}
+
+/* Horizontal line styles */
+.hr-line {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 90%;
+}
+
+/* Image group styles */
+.img-group ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.img-group li {
+    margin: 10px;
+    text-align: center;
+}
+
+/* Image styles */
+.img-group img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Image hover effect */
+.img-group img:hover {
+    transform: scale(1.05);
+}
+
+/* Team member name styles */
+.img-group p {
+    font-size: 16px;
+    color: #333;
+    margin-top: 10px;
+}

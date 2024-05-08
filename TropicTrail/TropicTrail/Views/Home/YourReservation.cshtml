@@ -2,99 +2,99 @@
 
 @{
     ViewBag.Title = "YourReservation";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/css/YourReservation.css" rel="stylesheet" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.offersName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.maxGuest)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tourId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.checkIn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.lastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.firstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.contactNum)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.payment)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.balance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.status)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.offersName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.maxGuest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tourId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.checkIn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.firstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.contactNum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.payment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.balance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.status)
-            </td>
-            <td>
-                <a href="#" class="btn-finish" data-id="@item.id" data-toggle="modal" data-target="#finishModal">Finish</a>
-            </td>
-        </tr>
-    }
-
-</table>
-
+<div class="reservation-container" style="background-color: white;">
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.offersName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.offersName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.tourId)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.checkIn)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.price)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.lastName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.firstName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.contactNum)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.email)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.payment)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.balance)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.status)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.offersName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.maxGuest)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tourId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.checkIn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.lastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.firstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.contactNum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.payment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.balance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+                    <td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 <div id="finishModal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

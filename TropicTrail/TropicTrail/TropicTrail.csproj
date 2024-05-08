@@ -124,19 +124,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\AboutUs.css" />
     <Content Include="Content\css\admin.css" />
     <Content Include="Content\css\book-now.css" />
     <Content Include="Content\css\ContinueBook.css" />
     <Content Include="Content\css\EditProfile.css" />
     <Content Include="Content\css\index-css.css" />
     <Content Include="Content\css\Details.css" />
+    <Content Include="Content\css\ManageReservation.css" />
+    <Content Include="Content\css\ManageUsers.css" />
     <Content Include="Content\css\MyProfile.css" />
     <Content Include="Content\css\PageNotFound.css" />
     <Content Include="Content\css\SignUp.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\style.min.css" />
     <Content Include="Content\css\styles.css" />
+    <Content Include="Content\css\Transactions.css" />
     <Content Include="Content\css\verify.css" />
+    <Content Include="Content\css\YourReservation.css" />
     <Content Include="Content\images\beach.jpg" />
     <Content Include="Content\images\bg-image.jpg" />
     <Content Include="Content\images\bg-image2.jpg" />
