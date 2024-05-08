@@ -2,63 +2,77 @@
 
 @{
     ViewBag.Title = "MyProfile";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container" style="background-color: whitesmoke;">
     <div class="profile-form">
-        <h1>User Information</h1>
-        <hr />      
-        @using (Html.BeginForm("EditProfile", "User", FormMethod.Post))
-         {
-            <div class="row">
-                <div class="col-md-6">
-                    
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.lastName)
-                        @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.fistName)
-                        @Html.EditorFor(model => model.fistName, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
+            .profile-container {
+                max-width: 600px;
+                margin: 20px auto;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+            }
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.phone)
-                        @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
+            .profile-pic {
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                margin: 0 auto 20px;
+                display: block;
+            }
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.email)
-                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>               
+            .profile-details {
+                text-align: left;
+            }
+
+                .profile-details div {
+                    margin-bottom: 10px;
+                }
+
+            .profile-label {
+                font-weight: bold;
+            }
+        </style>
+            <div class="profile-container">
+                <img src="@Url.Content("~/UploadedFiles/" + Model.profilePic)" alt="Profile Picture" class="profile-pic">
+                <div class="profile-details">
+                    <div>
+                        <span class="profile-label">Last Name:</span> @Model.lastName
+                    </div>
+                    <div>
+                        <span class="profile-label">First Name:</span> @Model.fistName
+                    </div>
+                    <div>
+                        <span class="profile-label">Phone:</span> @Model.phone
+                    </div>
+                    <div>
+                        <span class="profile-label">Email:</span> @Model.email
+                    </div>
+                    <div>
+                        <span class="profile-label">Street:</span> @Model.street
+                    </div>
+                    <div>
+                        <span class="profile-label">City:</span> @Model.city
+                    </div>
+                    <div>
+                        <span class="profile-label">State:</span> @Model.state
+                    </div>
+                    <div>
+                        <span class="profile-label">Zip Code:</span> @Model.zipCode
+                    </div>
+                    <div>
+                        <a href="~/Home/EditProfile/@Model.userId" class="btn btn-info"><i class="fa fa-info"></i> Edit Profile</a>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.street)
-                        @Html.EditorFor(model => model.street, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.city)
-                        @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.state)
-                        @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.zipCode)
-                        @Html.EditorFor(model => model.zipCode, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>  
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
-                </div>              
             </div>
-         }
     </div>
 </div>

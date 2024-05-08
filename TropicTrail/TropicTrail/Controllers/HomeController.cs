@@ -7,6 +7,9 @@ using TropicTrail.Utils;
 using TropicTrail.Models;
 using System.Web.Security;
 using TropicTrail.Repository;
+using System.IO;
+using System.Drawing;
+using System.Diagnostics;
 
 namespace TropicTrail.Controllers
 {
@@ -346,17 +349,28 @@ namespace TropicTrail.Controllers
             return View(user);
         }
         [HttpPost]
-        public ActionResult EditProfile(UserInformation userInf)
+        public ActionResult EditProfile(UserInformation userInf, HttpPostedFileBase profilePic)
         {
-            if (_userManager.UpdateUserInformation(userInf, ref ErrorMessage) == Utils.ErrorCode.Error)
+
+            // Save profile picture if provided
+            if (profilePic != null && profilePic.ContentLength > 0)
             {
-                //
-                ModelState.AddModelError(String.Empty, ErrorMessage);
-                //
-                return View(userInf);
+                var inputFileName = Path.GetFileName(profilePic.FileName);
+                var serverSavePath = Path.Combine(Server.MapPath("~/UploadedFiles/"), inputFileName);
+
+                if (!Directory.Exists(Server.MapPath("~/UploadedFiles/")))
+                    Directory.CreateDirectory(Server.MapPath("~/UploadedFiles/"));
+
+                profilePic.SaveAs(serverSavePath);
+
+                userInf.profilePic = inputFileName;
+
+                _db.sp_UpdateUserInformation(UserId, userInf.lastName, userInf.fistName, userInf.phone, userInf.street, userInf.city, userInf.state, userInf.zipCode, userInf.profilePic);
             }
-            TempData["Message"] = $"User Information {ErrorMessage}!";
-            return View(userInf);
+
+                TempData["Message"] = "User Information updated!";
+                return RedirectToAction("MyProfile");
+
         }
 
         public ActionResult MyProfile()

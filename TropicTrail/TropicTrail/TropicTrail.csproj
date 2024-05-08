@@ -429,10 +429,10 @@
     <Content Include="Views\Admin\ManageUsers.cshtml" />
     <Content Include="Views\Admin\ManageReservations.cshtml" />
     <Content Include="Views\Admin\Transaction.cshtml" />
-    <Content Include="Views\Home\EditProfile.cshtml" />
     <Content Include="Views\Home\MyProfile.cshtml" />
     <Content Include="Views\Home\Verify.cshtml" />
     <Content Include="Views\Home\PageNotFound.cshtml" />
+    <Content Include="Views\Home\EditProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
