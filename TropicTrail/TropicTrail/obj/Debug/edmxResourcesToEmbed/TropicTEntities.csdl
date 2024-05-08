@@ -22,6 +22,17 @@
       <End Role="Role" EntitySet="Role" />
       <End Role="UserAccount" EntitySet="UserAccount" />
     </AssociationSet>
+    <FunctionImport Name="sp_UpdateUserInformation">
+      <Parameter Name="userId" Mode="In" Type="String" />
+      <Parameter Name="lName" Mode="In" Type="String" />
+      <Parameter Name="fname" Mode="In" Type="String" />
+      <Parameter Name="phone" Mode="In" Type="String" />
+      <Parameter Name="street" Mode="In" Type="String" />
+      <Parameter Name="city" Mode="In" Type="String" />
+      <Parameter Name="state" Mode="In" Type="String" />
+      <Parameter Name="zipCode" Mode="In" Type="String" />
+      <Parameter Name="profilePic" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_ViewOffers_Result">
     <Property Type="String" Name="Pax" Nullable="false" MaxLength="255" />

@@ -149,6 +149,17 @@ warning 6002: The table/view 'TropicT.dbo.vw_Transactions' does not have a prima
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="sp_UpdateUserInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="lName" Type="nvarchar" Mode="In" />
+    <Parameter Name="fname" Type="nvarchar" Mode="In" />
+    <Parameter Name="phone" Type="nvarchar" Mode="In" />
+    <Parameter Name="street" Type="nvarchar" Mode="In" />
+    <Parameter Name="city" Type="nvarchar" Mode="In" />
+    <Parameter Name="state" Type="nvarchar" Mode="In" />
+    <Parameter Name="zipCode" Type="nvarchar" Mode="In" />
+    <Parameter Name="profilePic" Type="nvarchar(max)" Mode="In" />
+  </Function>
   <Function Name="sp_ViewOffers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>

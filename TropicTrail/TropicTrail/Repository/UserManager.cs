@@ -30,6 +30,10 @@ namespace TropicTrail.Repository
         {
             return _userAcc._table.Where(m => m.username == username).FirstOrDefault();
         }
+        public UserInformation GetInformationByUserId(String userId)
+        {
+            return _userInf._table.Where(m => m.userId == userId).FirstOrDefault();
+        }
         public UserAccount GetUserByEmail(String email)
         {
             return _userAcc._table.Where(m => m.email == email).FirstOrDefault();
@@ -130,10 +134,6 @@ namespace TropicTrail.Repository
             _userInf.Create(UserInfo, out err);
 
             return GetUserInfoByUserId(User.userId);
-        }
-        public ErrorCode UpdateUserInformation(UserInformation ua, ref String errMsg)
-        {
-            return _userInf.Update(ua.id, ua, out errMsg);
         }
     }
 }

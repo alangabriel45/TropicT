@@ -140,5 +140,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_UpdateUserInformation" FunctionName="TropicTModel.Store.sp_UpdateUserInformation" />
   </EntityContainerMapping>
 </Mapping>

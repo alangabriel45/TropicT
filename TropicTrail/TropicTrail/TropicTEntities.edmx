@@ -154,6 +154,17 @@ warning 6002: The table/view 'TropicT.dbo.vw_Transactions' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_UpdateUserInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="lName" Type="nvarchar" Mode="In" />
+          <Parameter Name="fname" Type="nvarchar" Mode="In" />
+          <Parameter Name="phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="street" Type="nvarchar" Mode="In" />
+          <Parameter Name="city" Type="nvarchar" Mode="In" />
+          <Parameter Name="state" Type="nvarchar" Mode="In" />
+          <Parameter Name="zipCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="profilePic" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="sp_ViewOffers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
@@ -219,6 +230,17 @@ FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
             <End Role="Role" EntitySet="Role" />
             <End Role="UserAccount" EntitySet="UserAccount" />
           </AssociationSet>
+          <FunctionImport Name="sp_UpdateUserInformation">
+            <Parameter Name="userId" Mode="In" Type="String" />
+            <Parameter Name="lName" Mode="In" Type="String" />
+            <Parameter Name="fname" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="street" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="state" Mode="In" Type="String" />
+            <Parameter Name="zipCode" Mode="In" Type="String" />
+            <Parameter Name="profilePic" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_ViewOffers_Result">
           <Property Type="String" Name="Pax" Nullable="false" MaxLength="255" />
@@ -519,6 +541,7 @@ FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_UpdateUserInformation" FunctionName="TropicTModel.Store.sp_UpdateUserInformation" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

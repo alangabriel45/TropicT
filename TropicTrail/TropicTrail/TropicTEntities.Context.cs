@@ -47,5 +47,46 @@ namespace TropicTrail
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ViewOffers_Result>("sp_ViewOffers", idParameter);
         }
+    
+        public virtual int sp_UpdateUserInformation(string userId, string lName, string fname, string phone, string street, string city, string state, string zipCode, string profilePic)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(string));
+    
+            var lNameParameter = lName != null ?
+                new ObjectParameter("lName", lName) :
+                new ObjectParameter("lName", typeof(string));
+    
+            var fnameParameter = fname != null ?
+                new ObjectParameter("fname", fname) :
+                new ObjectParameter("fname", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("phone", phone) :
+                new ObjectParameter("phone", typeof(string));
+    
+            var streetParameter = street != null ?
+                new ObjectParameter("street", street) :
+                new ObjectParameter("street", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("city", city) :
+                new ObjectParameter("city", typeof(string));
+    
+            var stateParameter = state != null ?
+                new ObjectParameter("state", state) :
+                new ObjectParameter("state", typeof(string));
+    
+            var zipCodeParameter = zipCode != null ?
+                new ObjectParameter("zipCode", zipCode) :
+                new ObjectParameter("zipCode", typeof(string));
+    
+            var profilePicParameter = profilePic != null ?
+                new ObjectParameter("profilePic", profilePic) :
+                new ObjectParameter("profilePic", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateUserInformation", userIdParameter, lNameParameter, fnameParameter, phoneParameter, streetParameter, cityParameter, stateParameter, zipCodeParameter, profilePicParameter);
+        }
     }
 }
