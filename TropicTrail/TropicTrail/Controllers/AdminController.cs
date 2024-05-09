@@ -8,6 +8,7 @@ using TropicTrail.Utils;
 
 namespace TropicTrail.Controllers
 {
+    [HandleError]
     [Authorize(Roles = "Admin")]
     public class AdminController : BaseController
     {

@@ -158,6 +158,7 @@
     <Content Include="Content\img\beach.jpg" />
     <Content Include="Content\img\bg-image.jpg" />
     <Content Include="Content\img\bg-image2.jpg" />
+    <Content Include="Content\img\Error404.jpg" />
     <Content Include="Content\img\facebook.png" />
     <Content Include="Content\img\favicon.ico" />
     <Content Include="Content\img\gmail.png" />
@@ -448,8 +449,8 @@
     <Content Include="Views\Admin\Transaction.cshtml" />
     <Content Include="Views\Home\MyProfile.cshtml" />
     <Content Include="Views\Home\Verify.cshtml" />
-    <Content Include="Views\Home\PageNotFound.cshtml" />
     <Content Include="Views\Home\EditProfile.cshtml" />
+    <Content Include="Views\Home\PageNotFound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

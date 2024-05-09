@@ -13,6 +13,7 @@ using System.Diagnostics;
 
 namespace TropicTrail.Controllers
 {
+    [HandleError]
     [Authorize(Roles = "Customer")]
     public class HomeController : BaseController
     {
@@ -309,7 +310,7 @@ namespace TropicTrail.Controllers
         [AllowAnonymous]   
         public ActionResult PageNotFound()
         {
-            return Content("Not Found Error 404");
+            return View();
         }
         [AllowAnonymous]
         public ActionResult AboutUs()
