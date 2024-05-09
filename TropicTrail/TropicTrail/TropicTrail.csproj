@@ -140,6 +140,7 @@
     <Content Include="Content\css\style.min.css" />
     <Content Include="Content\css\styles.css" />
     <Content Include="Content\css\Transactions.css" />
+    <Content Include="Content\css\TropicT-PNG.png" />
     <Content Include="Content\css\verify.css" />
     <Content Include="Content\css\YourReservation.css" />
     <Content Include="Content\images\beach.jpg" />
@@ -179,6 +180,7 @@
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\pop.js" />
     <Content Include="Content\js\popup-box.js" />
+    <Content Include="Content\js\sweetAlert.js" />
     <Content Include="Content\lib\easing\easing.js" />
     <Content Include="Content\lib\easing\easing.min.js" />
     <Content Include="Content\lib\flaticon\font\flaticon.css" />

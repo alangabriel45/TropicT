@@ -4,40 +4,58 @@
     ViewBag.HeaderTitle = "Login";
 }
 
-<html lang="en">
-<head>
     <title>Login</title>
     <link href="~/Content/css/index-css.css" rel="stylesheet" />
-</head>
+
 <body>
     @using (Html.BeginForm())
     {
-    <div class="container">
-        <div class="rectangle">
-            <div class="form-group">
-                <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" />
-                <label for="username">Username</label>
-                <input type="text" class="form-control" name="username" required />
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" required />
-            </div>
+        <div class="container">
+            <div class="rectangle">
+                <div class="form-group">
+                    <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" id="username"/>
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="username" required />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" required />
+                </div>
 
-            <div class="form-group">
-                @if (!String.IsNullOrEmpty(ViewBag.Error as String))
+                <div class="form-group">
+                    @if (!String.IsNullOrEmpty(ViewBag.Error as String))
                 {
-                    <div style="color: red;">
-                        @ViewBag.Error
-                    </div>
-                }
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-success" value="Login" />
-                <a href="#">Forgot Password?</a>
+                        <div style="color: red;">
+                            @ViewBag.Error
+                        </div>
+                    }
+                </div>
+                <div class="form-group" onclick="submit(this)">
+                    <input type="submit" class="btn btn-success" value="Login" />
+
+
+                </div>
             </div>
         </div>
-    </div>
+
     }
 </body>
-</html>
+<script>
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+
+    function submit(form) {
+
+        form.preventDefault();
+
+        if (username != "" && password != "") {
+            swal.fire({
+                title: "Success",
+                text: "Login Successfully",
+                icon: "Success",
+                button: false   
+            })
+        }
+    }
+</script>
+<script src="~/Content/js/sweetAlert.js"></script>

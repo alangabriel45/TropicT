@@ -5,7 +5,7 @@
 }
 <link href="~/Content/css/SignUp.css" rel="stylesheet" />
 
-<form method="post" id="signUpForm">
+<form method="post" >
     <div class="col-lg-8">
         <div class="center-form">
             @using (Html.BeginForm())
@@ -50,9 +50,9 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" onclick="sendFor()" if="signUpForm">
                                 <div class="col-md-offset-2 col-md-18">
-                                    <input type="submit" class="btn btn-success" value="Submit" onclick="sendFor()" />
+                                    <input type="submit" class="btn btn-success" value="Submit"  />
                                 </div>
                             </div>
                         </div>

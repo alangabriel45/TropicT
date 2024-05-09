@@ -5,6 +5,9 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: whitesmoke;
+    max-height: 550px;
+    margin-top: 40px;
 }
 
 .form-group {
@@ -18,11 +21,15 @@ h2 {
 
 label {
     font-weight: bold;
+    padding-right: 30px;
+    margin-top: 23px;
+    margin-right: 20px;
 }
 
 .otp-inputs {
     display: flex;
     justify-content: space-between;
+    margin-right: 15px;
 }
 
 .otp-inputs input {
@@ -44,6 +51,7 @@ label {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+
 }
 
 .btn-submit:hover {

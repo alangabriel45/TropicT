@@ -51,6 +51,7 @@ body {
     margin-top: 10px;
     margin-bottom: 20px;
     width: 90%;
+    height: 10px;
 }
 
 /* Image group styles */
@@ -59,11 +60,14 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
 }
 
 .img-group li {
     margin: 10px;
     text-align: center;
+        padding-left: 10px;
+    padding-right: 10px;
 }
 
 /* Image styles */

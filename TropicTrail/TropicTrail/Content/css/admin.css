@@ -12,6 +12,7 @@
     align-items: center;
     height: 100vh; /* Full viewport height */
     position: center;
+     overflow: auto;
 }
 
 .form-horizontal {

@@ -17,3 +17,6 @@
 .form-horizontal {
   flex: 1; /* Allow the form to expand and fill the remaining vertical space */
 }
+.table {
+    overflow: auto;
+}

@@ -3,9 +3,10 @@
 }
 
 <link href="~/Content/css/verify.css" rel="stylesheet" />
-@using (Html.BeginForm())
-{
-    <div class="container">
+
+<div class="container" style="background-color: white;">
+    @using (Html.BeginForm())
+    {
         <div class="form-group">
             <h2>Verify OTP</h2>
         </div>
@@ -21,11 +22,13 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Verify</button>
             </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <a href="~/Home/SignIn">Sign In</a>
+                </div>
+            </div>
         </form>
-    </div>
-}
-<div class="form-group">
-    <div class="col-md-10">
-        <a href="~/Home/SignIn">Sign In</a>
-    </div>
+        }
 </div>
+
+
