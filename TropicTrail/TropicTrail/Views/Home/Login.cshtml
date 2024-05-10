@@ -41,21 +41,17 @@
     }
 </body>
 <script>
-    const username = document.getElementById('username');
-    const password = document.getElementById('password');
-
     function submit(form) {
 
-        form.preventDefault();
-
-        if (username != "" && password != "") {
-            swal.fire({
-                title: "Success",
-                text: "Login Successfully",
-                icon: "Success",
-                button: false   
-            })
-        }
+        swal.fire({
+            title: "Success",
+            text: "",
+            icon: "success"
+        }).then((result) => {
+            if(result.isConfirmed){
+                window.location.href = 'Index';
+            }
+        });
     }
 </script>
 <script src="~/Content/js/sweetAlert.js"></script>

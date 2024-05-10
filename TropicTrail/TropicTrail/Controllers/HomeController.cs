@@ -26,7 +26,8 @@ namespace TropicTrail.Controllers
         public ActionResult Login(String ReturnUrl)
         {
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return View();
 
             ViewBag.Error = String.Empty;
             ViewBag.ReturnUrl = ReturnUrl;
@@ -50,16 +51,20 @@ namespace TropicTrail.Controllers
                 FormsAuthentication.SetAuthCookie(username, false);
                 //
                 if (!String.IsNullOrEmpty(ReturnUrl))
-                    return Redirect(ReturnUrl);
+                    //return Redirect(ReturnUrl);
+                    return View();
 
                 switch (user.Role.roleName)
                 {
                     case Constant.Role_Customer:
                         return RedirectToAction("Index");
+                    //return View();
                     case Constant.Role_Admin:
                         return RedirectToAction("Index", "Admin");
+                    //return View();
                     default:
                         return RedirectToAction("Index");
+                        //return View();
                 }
             }
             ViewBag.Error = ErrorMessage;
