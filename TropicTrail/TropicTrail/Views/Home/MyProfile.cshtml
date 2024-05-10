@@ -1,5 +1,5 @@
-﻿@model TropicTrail.UserInformation
-
+﻿@*@model TropicTrail.UserInformation*@
+@model TropicTrail.Lists
 @{
     ViewBag.Title = "MyProfile";
 }
@@ -43,34 +43,104 @@
             }
         </style>
             <div class="profile-container">
-                <img src="@Url.Content("~/UploadedFiles/" + Model.profilePic)" alt="Profile Picture" class="profile-pic">
+                @if (Model.createRetrieve.profilePic != null)
+                {
+                    <img src="@Url.Content("~/UploadedFiles/" + Model.createRetrieve.profilePic)" alt="Profile Picture" class="profile-pic">
+                }
+                else
+                {
+                    <img src="~/Content/img/profile.jpg" alt="Profile Picture" class="profile-pic">
+                }
                 <div class="profile-details">
                     <div>
-                        <span class="profile-label">Last Name:</span> @Model.lastName
+                        @if (Model.createRetrieve.profilePic != null)
+                        {
+                            <span class="profile-label">Last Name:</span> @Model.createRetrieve.lastName
+                        }
+                        else
+                        {
+                            <span class="profile-label">Last Name:</span> 
+                        }
                     </div>
                     <div>
-                        <span class="profile-label">First Name:</span> @Model.fistName
+                        @if (Model.createRetrieve.fistName != null)
+                        {
+                            <span class="profile-label">First Name:</span> @Model.createRetrieve.fistName
+                        }
+                        else
+                        {
+                            <span class="profile-label">First Name:</span> 
+                        }
+                        
                     </div>
                     <div>
-                        <span class="profile-label">Phone:</span> @Model.phone
+                        @if (Model.createRetrieve.phone != null)
+                        {
+                            <span class="profile-label">Phone:</span> @Model.createRetrieve.phone
+                        }
+                        else
+                        {
+                            <span class="profile-label">Phone:</span> 
+                        }
+                        
                     </div>
                     <div>
-                        <span class="profile-label">Email:</span> @Model.email
+                        @if (Model.createRetrieve.email != null)
+                        {
+                            <span class="profile-label">Email:</span> @Model.createRetrieve.email
+                        }
+                        else
+                        {
+                            <span class="profile-label">Email:</span>
+                        }
+                        
                     </div>
                     <div>
-                        <span class="profile-label">Street:</span> @Model.street
+                        @if (Model.createRetrieve.street != null)
+                        {
+                            <span class="profile-label">Street:</span> @Model.createRetrieve.street
+                        }
+                        else
+                        {
+                            <span class="profile-label">Street:</span>
+                        }
+                        
                     </div>
                     <div>
-                        <span class="profile-label">City:</span> @Model.city
+                        @if (Model.createRetrieve.city != null)
+                        {
+                            <span class="profile-label">City:</span> @Model.createRetrieve.city
+                        }
+                        else
+                        {
+                            <span class="profile-label">City:</span>
+                        }
+                        
                     </div>
                     <div>
-                        <span class="profile-label">State:</span> @Model.state
+                        @if (Model.createRetrieve.state != null)
+                        {
+                            <span class="profile-label">State:</span> @Model.createRetrieve.state
+                        }
+                        else
+                        {
+                            <span class="profile-label">State:</span>
+                        }
+                        
                     </div>
                     <div>
-                        <span class="profile-label">Zip Code:</span> @Model.zipCode
+                        @if (Model.createRetrieve.zipCode != null)
+                        {
+                            <span class="profile-label">Zip Code:</span> @Model.createRetrieve.zipCode
+                        }
+                        else
+                        {
+                            <span class="profile-label">Zip Code:</span>
+                        }
+                        
                     </div>
                     <div>
-                        <a href="~/Home/EditProfile/@Model.userId" class="btn btn-info"><i class="fa fa-info"></i> Edit Profile</a>
+                        <a href="~/Home/EditProfile/@Model.createRetrieve.userId" class="btn btn-info"><i class="fa fa-info"></i> Edit Profile</a>
                     </div>
                 </div>
             </div>

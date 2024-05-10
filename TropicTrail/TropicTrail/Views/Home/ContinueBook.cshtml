@@ -1,5 +1,5 @@
-﻿@model TropicTrail.Reservation
-
+﻿@*@model TropicTrail.Reservation*@
+@model TropicTrail.Lists
 @{
     ViewBag.Title = "ContinueBook";
 }
@@ -16,27 +16,27 @@
                         @Html.AntiForgeryToken()
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.lastName, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.getReserve.lastName, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.getReserve.lastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.getReserve.lastName, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.firstName, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.getReserve.firstName, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.getReserve.firstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.getReserve.firstName, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.contactNum, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.contactNum, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.contactNum, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.getReserve.contactNum, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.getReserve.contactNum, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.getReserve.contactNum, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.getReserve.email, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.getReserve.email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.getReserve.email, "", new { @class = "text-danger" })
                         </div>
 
                         <h4 class="card-title">Card Payment</h4>
@@ -51,9 +51,9 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.payment, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.payment, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.payment, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.getReserve.payment, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.getReserve.payment, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.getReserve.payment, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="form-group active">

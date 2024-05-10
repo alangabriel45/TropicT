@@ -1,34 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="TropicTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityContainer Name="TropicTEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Offers" EntityType="TropicTModel.Offers" />
-    <EntitySet Name="Role" EntityType="TropicTModel.Role" />
-    <EntitySet Name="TourType" EntityType="TropicTModel.TourType" />
-    <EntitySet Name="UserAccount" EntityType="TropicTModel.UserAccount" />
-    <EntitySet Name="vw_role" EntityType="TropicTModel.vw_role" />
-    <AssociationSet Name="FK_Offers_TourType" Association="TropicTModel.FK_Offers_TourType">
-      <End Role="TourType" EntitySet="TourType" />
-      <End Role="Offers" EntitySet="Offers" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserAccount_Role" Association="TropicTModel.FK_UserAccount_Role">
-      <End Role="Role" EntitySet="Role" />
-      <End Role="UserAccount" EntitySet="UserAccount" />
-    </AssociationSet>
-  </EntityContainer>
+  <EntityType Name="Card">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cardNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="expireDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="balance" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
   <EntityType Name="Offers">
     <Key>
       <PropertyRef Name="offersId" />
     </Key>
     <Property Name="offersId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="offersgUId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="offersName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="offersDesc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="offersName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="offersDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="maxGuest" Type="Int32" Nullable="false" />
     <Property Name="tourId" Type="Int32" Nullable="false" />
-    <Property Name="listPrice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="listPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
     <Property Name="dateCreated" Type="DateTime" Precision="0" />
     <Property Name="status" Type="Int32" Nullable="false" />
     <Property Name="userId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="TourType" Relationship="TropicTModel.FK_Offers_TourType" FromRole="Offers" ToRole="TourType" />
+    <NavigationProperty Name="TourType" Relationship="Self.FK_Offers_TourType" FromRole="Offers" ToRole="TourType" />
+  </EntityType>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="offersName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="maxGuest" Type="Int32" Nullable="false" />
+    <Property Name="tourId" Type="Int32" Nullable="false" />
+    <Property Name="checkIn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="lastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="firstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="contactNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="payment" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="balance" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="status" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -36,16 +50,27 @@
     </Key>
     <Property Name="roleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="UserAccount" Relationship="TropicTModel.FK_UserAccount_Role" FromRole="Role" ToRole="UserAccount" />
+    <NavigationProperty Name="UserAccount" Relationship="Self.FK_UserAccount_Role" FromRole="Role" ToRole="UserAccount" />
   </EntityType>
   <EntityType Name="TourType">
     <Key>
       <PropertyRef Name="tourId" />
     </Key>
     <Property Name="tourId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="tourName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="userId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Offers" Relationship="TropicTModel.FK_Offers_TourType" FromRole="TourType" ToRole="Offers" />
+    <Property Name="tourName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Offers" Relationship="Self.FK_Offers_TourType" FromRole="TourType" ToRole="Offers" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reservationId" Type="Int32" />
+    <Property Name="transactionDate" Type="DateTime" Precision="3" />
+    <Property Name="amout" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="ratings" Type="Int32" />
+    <Property Name="status" Type="Int32" />
   </EntityType>
   <EntityType Name="UserAccount">
     <Key>
@@ -60,7 +85,24 @@
     <Property Name="roleId" Type="Int32" />
     <Property Name="date_created" Type="DateTime" Precision="3" />
     <Property Name="date_modified" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Role" Relationship="TropicTModel.FK_UserAccount_Role" FromRole="UserAccount" ToRole="Role" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_UserAccount_Role" FromRole="UserAccount" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="UserInformation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="lastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="fistName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="street" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="state" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="zipCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="profilePic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="vw_role">
     <Key>
@@ -70,9 +112,22 @@
     <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="vw_Transactions">
+    <Key>
+      <PropertyRef Name="Reservation_Id" />
+      <PropertyRef Name="Booked_By" />
+    </Key>
+    <Property Name="Reservation_Id" Type="Int32" Nullable="false" />
+    <Property Name="Booked_By" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Transaction_Date" Type="DateTime" Precision="3" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Payment" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Ratings" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+  </EntityType>
   <Association Name="FK_Offers_TourType">
-    <End Type="TropicTModel.TourType" Role="TourType" Multiplicity="1" />
-    <End Type="TropicTModel.Offers" Role="Offers" Multiplicity="*" />
+    <End Role="TourType" Type="Self.TourType" Multiplicity="1" />
+    <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TourType">
         <PropertyRef Name="tourId" />
@@ -83,8 +138,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_UserAccount_Role">
-    <End Type="TropicTModel.Role" Role="Role" Multiplicity="0..1" />
-    <End Type="TropicTModel.UserAccount" Role="UserAccount" Multiplicity="*" />
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Role">
         <PropertyRef Name="roleId" />
@@ -94,4 +149,43 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityContainer Name="TropicTEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Card" EntityType="Self.Card" />
+    <EntitySet Name="Offers" EntityType="Self.Offers" />
+    <EntitySet Name="Reservation" EntityType="Self.Reservation" />
+    <EntitySet Name="Role" EntityType="Self.Role" />
+    <EntitySet Name="TourType" EntityType="Self.TourType" />
+    <EntitySet Name="Transaction" EntityType="Self.Transaction" />
+    <EntitySet Name="UserAccount" EntityType="Self.UserAccount" />
+    <EntitySet Name="UserInformation" EntityType="Self.UserInformation" />
+    <EntitySet Name="vw_role" EntityType="Self.vw_role" />
+    <EntitySet Name="vw_Transactions" EntityType="Self.vw_Transactions" />
+    <AssociationSet Name="FK_Offers_TourType" Association="Self.FK_Offers_TourType">
+      <End Role="TourType" EntitySet="TourType" />
+      <End Role="Offers" EntitySet="Offers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAccount_Role" Association="Self.FK_UserAccount_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserAccount" EntitySet="UserAccount" />
+    </AssociationSet>
+    <FunctionImport Name="sp_UpdateUserInformation">
+      <Parameter Name="userId" Mode="In" Type="String" />
+      <Parameter Name="lName" Mode="In" Type="String" />
+      <Parameter Name="fName" Mode="In" Type="String" />
+      <Parameter Name="phone" Mode="In" Type="String" />
+      <Parameter Name="street" Mode="In" Type="String" />
+      <Parameter Name="city" Mode="In" Type="String" />
+      <Parameter Name="state" Mode="In" Type="String" />
+      <Parameter Name="zipCode" Mode="In" Type="String" />
+      <Parameter Name="profilePic" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ViewOffers" ReturnType="Collection(TropicTModel.sp_ViewOffers_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_ViewOffers_Result">
+    <Property Type="String" Name="Pax" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="Tour_Type" Nullable="false" MaxLength="255" />
+    <Property Type="Decimal" Name="Price" Nullable="false" Precision="10" Scale="2" />
+  </ComplexType>
 </Schema>

@@ -21,6 +21,7 @@ namespace TropicTrail.Controllers
 
         public String Username { get { return User.Identity.Name; } }
         public String UserId { get { return _userManager.GetUserByUsername(Username).userId; } }
+        public String UserEmail { get { return _userManager.GetUserByUsername(Username).email; } }
 
         public BaseController()
         {

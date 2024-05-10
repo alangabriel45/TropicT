@@ -1,4 +1,5 @@
-﻿@model IEnumerable<TropicTrail.Reservation>
+﻿@*@model IEnumerable<TropicTrail.Reservation>*@
+@model TropicTrail.Lists
 
 @{
     ViewBag.Title = "YourReservation";
@@ -12,45 +13,45 @@
         <thead class="thead-light">
             <tr>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.offersName)
+                    @Html.DisplayNameFor(model => model.getReserve.offersName)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.offersName)
+                    @Html.DisplayNameFor(model => model.getReserve.offersName)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.tourId)
+                    @Html.DisplayNameFor(model => model.getReserve.tourId)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.checkIn)
+                    @Html.DisplayNameFor(model => model.getReserve.checkIn)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.price)
+                    @Html.DisplayNameFor(model => model.getReserve.price)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.lastName)
+                    @Html.DisplayNameFor(model => model.getReserve.lastName)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.firstName)
+                    @Html.DisplayNameFor(model => model.getReserve.firstName)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.contactNum)
+                    @Html.DisplayNameFor(model => model.getReserve.contactNum)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.email)
+                    @Html.DisplayNameFor(model => model.getReserve.email)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.payment)
+                    @Html.DisplayNameFor(model => model.getReserve.payment)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.balance)
+                    @Html.DisplayNameFor(model => model.getReserve.balance)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.status)
+                    @Html.DisplayNameFor(model => model.getReserve.status)
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.reserve)
             {
                 <tr>
                     <td>

@@ -1,4 +1,5 @@
-﻿@model TropicTrail.Offers
+﻿@*@model TropicTrail.Offers*@
+@model TropicTrail.Lists
 
 @{
     ViewBag.Title = "BookNow";
@@ -9,13 +10,13 @@
 <body>
     <div class="container">
         <div class="content">
-            <h3>@Model.offersName</h3>
+            <h3>@Model.getOffers.offersName</h3>
             <div class="image-container">
                 <img src="~/Content/img/bg-image2.jpg" />
             </div>
             <div>
                 <h3>Description</h3>
-                <p>@Model.offersDesc</p>
+                <p>@Model.getOffers.offersDesc</p>
             </div>
             <div>
                 <ul>
@@ -30,7 +31,7 @@
     </div>
         @using (Html.BeginForm("BookNow", "Home", FormMethod.Post))
                 {
-                    Session["OfferId"] = Model.offersId;
+                    Session["OfferId"] = Model.getOffers.offersId;
             <div class="booking-form">
                 <h2>Booking Form</h2>
 
@@ -40,11 +41,11 @@
                 </div>
 
                 <!-- Hidden input for the price -->
-                <input type="hidden" id="price" name="price" value="@Model.listPrice" />
+                <input type="hidden" id="price" name="price" value="@Model.getOffers.listPrice" />
 
                 <div>
                     <label for="numGuests">Number of Guests:</label>
-                    <input type="text" id="numGuests" name="numGuests" class="form-control" value="@Model.maxGuest" required />
+                    <input type="text" id="numGuests" name="numGuests" class="form-control" value="@Model.getOffers.maxGuest" required />
                 </div>
 
                 <button type="submit" class="btn btn-primary">Continue Booking</button>

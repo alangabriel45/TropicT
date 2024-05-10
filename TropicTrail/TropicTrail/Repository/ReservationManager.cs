@@ -33,9 +33,9 @@ namespace TropicTrail.Repository
             return _reservation.Get(id);
         }
 
-        public ErrorCode CreateReservation(Reservation reserve, ref String err)
+        public ErrorCode CreateReservation(TropicTrail.Lists reserve, ref String err)
         {
-            return _reservation.Create(reserve, out err);
+            return _reservation.Create(reserve.getReserve, out err);
         }
         public ErrorCode UpdateReservation(Reservation reserve, ref String err)
         {

@@ -135,5 +135,10 @@ namespace TropicTrail.Repository
 
             return GetUserInfoByUserId(User.userId);
         }
+
+        public List<UserInformation> getAllUserInformation(String userId)
+        {
+            return _userInf._table.Where(m => m.userId == userId).ToList();
+        }
     }
 }

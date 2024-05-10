@@ -1,5 +1,5 @@
-﻿@model IEnumerable<TropicTrail.UserAccount>
-
+﻿@*@model IEnumerable<TropicTrail.UserAccount>*@
+@model TropicTrail.Lists
 @{
     ViewBag.Title = "ManageUsers";
 }
@@ -12,33 +12,33 @@
 <table class="table" style="background-color: white;">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.userId)
+            @Html.DisplayNameFor(model => model.getUsers.userId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.username)
+            @Html.DisplayNameFor(model => model.getUsers.username)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.password)
+            @Html.DisplayNameFor(model => model.getUsers.password)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.email)
+            @Html.DisplayNameFor(model => model.getUsers.email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.status)
+            @Html.DisplayNameFor(model => model.getUsers.status)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.roleId)
+            @Html.DisplayNameFor(model => model.getUsers.roleId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.date_created)
+            @Html.DisplayNameFor(model => model.getUsers.date_created)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.date_modified)
+            @Html.DisplayNameFor(model => model.getUsers.date_modified)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.listOfUsers) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.userId)

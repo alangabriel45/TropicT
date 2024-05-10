@@ -1,4 +1,5 @@
-﻿@model TropicTrail.Offers
+﻿@*@model TropicTrail.Offers*@
+@model TropicTrail.Lists
 @{
     ViewBag.Title = "Details";
 }
@@ -13,14 +14,14 @@
             <div class="island-details">
                 <img src="~/Content/images/tour1.jpg" />
                 <div class="details">
-                    <h2>@Model.offersName</h2>
-                    <h2>@Model.TourType.tourName</h2>
-                    <p class="description">@Model.offersDesc</p>
+                    <h2>@Model.getOffers.offersName</h2>
+                    <h2>@Model.getOffers.TourType.tourName</h2>
+                    <p class="description">@Model.getOffers.offersDesc</p>
                     <div class="price">
                         <span class="from">From</span>
-                        <span class="amount">@Model.listPrice</span>
+                        <span class="amount">@Model.getOffers.listPrice</span>
                     </div>
-                    <a href="~/Home/BookNow/@Model.offersId" class="btn btn-secondary">Book Now</a>
+                    <a href="~/Home/BookNow/@Model.getOffers.offersId" class="btn btn-secondary">Book Now</a>
                 </div>
             </div>
         </div>

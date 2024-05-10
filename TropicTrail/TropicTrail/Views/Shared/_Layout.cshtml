@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model TropicTrail.Lists
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -21,7 +22,7 @@
     <link href="~/Content/lib/flaticon/font/flaticon.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="~/Content/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    @*<link href="~/Content/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">*@
     <link href="~/Content/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
@@ -53,27 +54,33 @@
                                     <a href="~/Admin/Transaction" class="nav-item nav-link">Transactions</a>
                                 </div>
                                 <div>
-                                    <img src="~/Content/img/profile.jpg" class="user-pic" onclick="toggleMenu()" />
-
-                                    <div class="sub-menu-wrap" id="subMenu">
-                                        <div class="sub-menu">
-                                            <div class="user-info">
-                                                <img src="~/Content/img/profile.jpg" />
-                                                <h3>@User.Identity.Name</h3>
-                                            </div>
-                                            <hr />
-                                            <a href="" class="sub-menu-link">
-                                                <img src="~/Content/img/profile.jpg" />
-                                                <p>View Profile</p>
-                                                <span>></span>
-                                            </a>
-                                            <a href="~/Home/Logout" class="sub-menu-link">
-                                                <img src="~/Content/img/logout.png" />
-                                                <p>Logout</p>
-                                                <span>></span>
-                                            </a>
+                                    @foreach (var info in Model.userInfo)
+                                    {
+                                        <div class="profile-pic-container" onclick="toggleMenu()">
+                                            <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" alt="Profile Picture" class="profile-pic" />
                                         </div>
-                                    </div>
+
+                                        <div class="sub-menu-wrap" id="subMenu">
+                                            <div class="sub-menu">
+                                                <div class="user-info">
+                                                    <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" />
+                                                    <h3>@User.Identity.Name</h3>
+                                                </div>
+                                                <hr />
+                                                <a href="~/Home/MyProfile" class="sub-menu-link">
+                                                    <img src="~/Content/img/profile.jpg" />
+                                                    <p>View Profile</p>
+                                                    <span>></span>
+                                                </a>
+                                                <a href="~/Home/Logout" class="sub-menu-link">
+                                                    <img src="~/Content/img/logout.png" />
+                                                    <p>Logout</p>
+                                                    <span>></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    }
+                                    
                                 </div>
                             }
                             else
@@ -83,34 +90,42 @@
                                     
                                     <a href="~/Home/Offers" class="nav-item nav-link">Offers</a>
                                     <a href="~/Home/AboutUs" class="nav-item nav-link">About</a>
+                                    <h1>@ViewBag.usersInfo</h1>
                                 </div>
                                 <div>
-                                    <img src="~/Content/img/profile.jpg" class="user-pic" onclick="toggleMenu()" />
+                                    @foreach (var info in Model.userInfo)
+                                    {
 
-                                    <div class="sub-menu-wrap" id="subMenu">
-                                        <div class="sub-menu">
-                                            <div class="user-info">
-                                                <img src="~/Content/img/profile.jpg" />
-                                                <h3>@User.Identity.Name</h3>
+
+                                        <div class="sub-menu-wrap" id="subMenu">
+                                            <div class="sub-menu">
+                                                <div class="user-info">
+                                                    <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" />                                                
+                                                    <h3>@User.Identity.Name</h3>
+                                                </div>
+                                                <hr />
+                                                <a href="~/Home/MyProfile" class="sub-menu-link">
+                                                    <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" />
+                                                    <p>View Profile</p>
+                                                    <span>></span>
+                                                </a>
+                                                <a href="~/Home/YourReservation" class="sub-menu-link">
+                                                    <img src="~/Content/img/logout.png" />
+                                                    <p>Your Reservation</p>
+                                                    <span>></span>
+                                                </a>
+                                                <a href="~/Home/Logout" class="sub-menu-link">
+                                                    <img src="~/Content/img/logout.png" />
+                                                    <p>Logout</p>
+                                                    <span>></span>
+                                                </a>
                                             </div>
-                                            <hr />
-                                            <a href="~/Home/MyProfile" class="sub-menu-link">
-                                                <img src="~/Content/img/profile.jpg"/>
-                                                <p>View Profile</p>
-                                                <span>></span>
-                                            </a>
-                                            <a href="~/Home/YourReservation" class="sub-menu-link">
-                                                <img src="~/Content/img/logout.png" />
-                                                <p>Your Reservation</p>
-                                                <span>></span>
-                                            </a>
-                                            <a href="~/Home/Logout" class="sub-menu-link">
-                                                <img src="~/Content/img/logout.png" />
-                                                <p>Logout</p>
-                                                <span>></span>
-                                            </a>
                                         </div>
-                                    </div>
+                                        <div class="profile-pic-container" onclick="toggleMenu()">
+                                            <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" alt="Profile Picture" class="profile-pic" />
+                                        </div>
+                                    }
+
                                 </div>    
                             }
                         }
@@ -187,7 +202,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="~/Content/lib/easing/easing.min.js"></script>
-    <script src="~/Content/lib/owlcarousel/owl.carousel.min.js"></script>
+    @*<script src="~/Content/lib/owlcarousel/owl.carousel.min.js"></script>*@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/Content/lib/isotope/isotope.pkgd.min.js"></script>
     <script src="~/Content/lib/lightbox/js/lightbox.min.js"></script>

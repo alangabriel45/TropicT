@@ -1,5 +1,5 @@
-﻿@model IEnumerable<TropicTrail.vw_Transactions>
-
+﻿@*@model IEnumerable<TropicTrail.vw_Transactions>*@
+@model TropicTrail.Lists
 @{
     ViewBag.Title = "Transaction";
 }
@@ -11,30 +11,30 @@
 <table class="table" id="transactionTable">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Reservation_Id)
+            @Html.DisplayNameFor(model => model.getTransact.Reservation_Id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Booked_By)
+            @Html.DisplayNameFor(model => model.getTransact.Booked_By)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Transaction_Date)
+            @Html.DisplayNameFor(model => model.getTransact.Transaction_Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.getTransact.Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Payment)
+            @Html.DisplayNameFor(model => model.getTransact.Payment)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Ratings)
+            @Html.DisplayNameFor(model => model.getTransact.Ratings)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.getTransact.Status)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.listOfTransact) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Reservation_Id)

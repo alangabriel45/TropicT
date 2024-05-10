@@ -14,6 +14,16 @@ namespace TropicTrail.Controllers
     {
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var getUserInfo = _userManager.getAllUserInformation(UserId);
+
+                var indexModel = new Lists()
+                {
+                    userInfo = getUserInfo
+                };
+                return View(indexModel);
+            }
             return View();
         }
 
@@ -21,12 +31,26 @@ namespace TropicTrail.Controllers
         public ActionResult ManageOffers()
         {
             IsUserLoggedSession();
-            return View(_offersManager.ListOffers(Username));
+            var ListActiveOffers = _offersManager.ListOffers(Username);
+            var getUserInfo = _userManager.getAllUserInformation(UserId);
+
+            var listOffers = new Lists()
+            {
+                offers = ListActiveOffers,
+                userInfo = getUserInfo
+            };
+            return View(listOffers);
         }
         public ActionResult AddOffers()
         {
+            var getUserInfo = _userManager.getAllUserInformation(UserId);
+
+            var indexModel = new Lists()
+            {
+                userInfo = getUserInfo
+            };
             ViewBag.TourType = Utilities.SelectListItemTourTypeByUser(Username);
-            return View();
+            return View(indexModel);
         }
         [HttpPost]
         public ActionResult AddOffers(Offers offers)
@@ -52,15 +76,22 @@ namespace TropicTrail.Controllers
         {
             ViewBag.TourType = Utilities.SelectListItemTourTypeByUser(Username);
 
-            if (id == null)
-                return RedirectToAction("PageNotFound", "Home");
-
             var off = _offersManager.GetOffersById(id);
+            var getUserInfo = _userManager.getAllUserInformation(UserId);
+
+            var indexModel = new Lists()
+            {
+                userInfo = getUserInfo,
+                getOffers = off
+            };
+
+            if (id == null)
+                return RedirectToAction("PageNotFound", "Home");           
 
             if (off == null)
                 return RedirectToAction("PageNotFound", "Home");
 
-            return View(off);
+            return View(indexModel);
         }
         public JsonResult OffersDelete(int? id)
         {
@@ -74,12 +105,28 @@ namespace TropicTrail.Controllers
 
         public ActionResult ManageUsers()
         {
-            return View(_userManager.ListOfUsers());
+            var getUserInfo = _userManager.getAllUserInformation(UserId);
+            var listOfUser = _userManager.ListOfUsers();
+
+            var indexModel = new Lists()
+            {
+                userInfo = getUserInfo,
+                listOfUsers = listOfUser
+            };
+            return View(indexModel);
         }
         public ActionResult ManageReservations()
         {
+
+            var getUserInfo = _userManager.getAllUserInformation(UserId);
+            var listOfReserve = _reservationManager.ListReservation();
+            var indexModel = new Lists()
+            {
+                userInfo = getUserInfo,
+                reserve = listOfReserve
+            };
             IsUserLoggedSession();
-            return View(_reservationManager.ListReservation());
+            return View(indexModel);
         }
         [HttpPost]
         public ActionResult ManageReservation(int id)
@@ -91,7 +138,15 @@ namespace TropicTrail.Controllers
         }
         public ActionResult Transaction()
         {
-            return View(_transactionManager.ListOfTransaction());
+            var getUserInfo = _userManager.getAllUserInformation(UserId);
+            var listOfTransac = _transactionManager.ListOfTransaction();
+
+            var indexModel = new Lists()
+            {
+                userInfo = getUserInfo,
+                listOfTransact = listOfTransac
+            };
+            return View(indexModel);
         }
     }
 }
