@@ -50,7 +50,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group" onclick="sendFor()" if="signUpForm">
+                            <div class="form-group" onclick="signUpForm()" >
                                 <div class="col-md-offset-2 col-md-18">
                                     <input type="submit" class="btn btn-success" value="Submit"  />
                                 </div>
@@ -64,18 +64,16 @@
 
 </form>
 <script>
-    function sendFor() {
-        e.preventDefault();
-
+    function signUpForm() {
         swal.fire({
-            title: 'Success!',
-            icon: success,
-        }).then(result => {
+            title: 'Success',
+            text: 'Account Successfully Created',
+            icon: 'Success'
+        }).then((result) => {
             if (result.isConfirmed) {
-                const form = document.getElementById('signUpForm');
-                form.submit();
+                window.location.href = 'Verify';
             }
-        })
+        });
     }
 </script>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>

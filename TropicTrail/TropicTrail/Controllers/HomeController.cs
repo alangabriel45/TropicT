@@ -14,30 +14,20 @@ using System.Diagnostics;
 namespace TropicTrail.Controllers
 {
     [HandleError]
-    [Authorize(Roles = "Customer, Admin")]
+    [Authorize(Roles = "Customer")]
     public class HomeController : BaseController
     {
         [AllowAnonymous]
         public ActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                var getUserInfo = _userManager.getAllUserInformation(UserId);
-
-                var indexModel = new Lists()
-                {
-                    userInfo = getUserInfo
-                };
-                return View(indexModel);
-            }
             return View();
-            
         }
         [AllowAnonymous]
         public ActionResult Login(String ReturnUrl)
         {
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return View();
 
             ViewBag.Error = String.Empty;
             ViewBag.ReturnUrl = ReturnUrl;
@@ -51,27 +41,30 @@ namespace TropicTrail.Controllers
             if (_userManager.SignIn(username, password, ref ErrorMessage) == ErrorCode.Success)
             {
                 var user = _userManager.GetUserByUsername(username);
-          
+
                 if (user.status != (Int32)Status.Active)
                 {
                     TempData["username"] = username;
                    return RedirectToAction("Verify");
                 }
-    
                 //
                 FormsAuthentication.SetAuthCookie(username, false);
-                //   
+                //
                 if (!String.IsNullOrEmpty(ReturnUrl))
-                    return Redirect(ReturnUrl);
-         
+                    //return Redirect(ReturnUrl);
+                    return View();
+
                 switch (user.Role.roleName)
                 {
                     case Constant.Role_Customer:
                         return RedirectToAction("Index");
+                    //return View();
                     case Constant.Role_Admin:
                         return RedirectToAction("Index", "Admin");
+                    //return View();
                     default:
                         return RedirectToAction("Index");
+                        //return View();
                 }
             }
             ViewBag.Error = ErrorMessage;
@@ -225,33 +218,17 @@ namespace TropicTrail.Controllers
         }
         public ActionResult Offers()
         {
-
-            var activeOffer = _offersManager.ListActiveOffers();
-            var getUserInfo = _userManager.getAllUserInformation(UserId);
-            var listOffer = new Lists()
-            {
-                offers = activeOffer,
-                userInfo = getUserInfo
-            };
             var off = _offersManager.ListActiveOffers();
-            return View(listOffer);
+            return View(off);
         }
         public ActionResult Details(int? id)
         {
             if (id == null || id == 0)
                 return RedirectToAction("PageNotFound");
 
-            var getUserInfo = _userManager.getAllUserInformation(UserId);
             var offersInfo = _offersManager.GetOffersById(id);
 
-            var indexModel = new Lists()
-            {
-                userInfo = getUserInfo,
-                getOffers = offersInfo
-            };
-            
-
-            return View(indexModel);
+            return View(offersInfo);
         }
         public ActionResult ViewProfile()
         {
@@ -263,15 +240,8 @@ namespace TropicTrail.Controllers
                 return RedirectToAction("PageNotFound");
 
             var offersInfo = _offersManager.GetOffersById(id);
-            var getUserInfo = _userManager.getAllUserInformation(UserId);
 
-            var indexModel = new Lists()
-            {
-                userInfo = getUserInfo,
-                getOffers = offersInfo
-            };
-
-            return View(indexModel);
+            return View(offersInfo);
         }
         [HttpPost]
         public ActionResult BookNow(String checkInDate, int numGuests, decimal price)
@@ -292,69 +262,54 @@ namespace TropicTrail.Controllers
         }
         public ActionResult ContinueBook()
         {
-            var getUserInfo = _userManager.getAllUserInformation(UserId);
-
-            var indexModel = new Lists()
-            {
-                userInfo = getUserInfo
-            };
-            return View(indexModel);
+            return View();
         }
         [HttpPost]
-        public ActionResult ContinueBook(TropicTrail.Lists r, String ExpiryDate, String CardNumber)
+        public ActionResult ContinueBook(Reservation r, String ExpiryDate, String CardNumber)
         {
-            r.getReserve.checkIn = DateTime.Parse(Session["checkInDate"].ToString());
-            r.getReserve.maxGuest = Convert.ToInt32(Session["numGuests"]);
-            r.getReserve.price = Convert.ToDecimal(Session["price"]);
-            r.getReserve.status = 0;
-            r.getReserve.userId = UserId;
+            r.checkIn = DateTime.Parse(Session["checkInDate"].ToString());
+            r.maxGuest = Convert.ToInt32(Session["numGuests"]);
+            r.price = Convert.ToDecimal(Session["price"]);
+            r.status = 0;
+            r.userId = UserId;
 
             var card = _card.FindCardByCardNumber(CardNumber, ExpiryDate);
-            var enough = _card.EnoughBalance(CardNumber, r.getReserve.payment);
+            var enough = _card.EnoughBalance(CardNumber, r.payment);
             var offersInfo = _offersManager.GetOffersById(Convert.ToInt32(Session["OfferId"]));
 
-            r.getReserve.offersName = offersInfo.offersName;
-            r.getReserve.tourId = offersInfo.TourType.tourId;
-
-            var getUserInfo = _userManager.getAllUserInformation(UserId);          
-
-            var indexModel = new Lists()
-            {
-                userInfo = getUserInfo,
-                getReserve = r.getReserve
-            };
-
+            r.offersName = offersInfo.offersName;
+            r.tourId = offersInfo.TourType.tourId;
             if (card == null)
             {
                 ModelState.AddModelError("CardNumber", "Invalid Card Number.");
-                return View(indexModel);
+                return View(r);
             }
             if (enough == null)
             {
                 ModelState.AddModelError("CardNumber", "Insufficient balance.");
-                return View(indexModel);
+                return View(r);
             }
-            decimal? halfPrice = r.getReserve.price / 2;
-            if (r.getReserve.payment < halfPrice)
+            decimal? halfPrice = r.price / 2;
+            if (r.payment < halfPrice)
             {
                 ModelState.AddModelError("Payment", "Please pay at least half of the price.");
-                return View(indexModel);
+                return View(r);
             }
 
-            decimal? remainingBalance = r.getReserve.price - r.getReserve.payment;
+            decimal? remainingBalance = r.price - r.payment;
             if (remainingBalance <= 0)
             {
                 remainingBalance = 0;
             }
 
-            r.getReserve.balance = remainingBalance;
+            r.balance = remainingBalance;
 
             if (_reservationManager.CreateReservation(r, ref ErrorMessage) == ErrorCode.Error)
             {
                 ModelState.AddModelError(String.Empty, ErrorMessage);
-                return View(indexModel);
+                return View(r);
             }
-            TempData["Message"] = $"Product {r.getReserve.lastName} added!";
+            TempData["Message"] = $"Product {r.lastName} added!";
             return RedirectToAction("Index");
         }
         [AllowAnonymous]   
@@ -365,29 +320,11 @@ namespace TropicTrail.Controllers
         [AllowAnonymous]
         public ActionResult AboutUs()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                var getUserInfo = _userManager.getAllUserInformation(UserId);
-
-                var indexModel = new Lists()
-                {
-                    userInfo = getUserInfo
-                };
-                return View(indexModel);
-            }
-                return View();
+            return View();
         }
         public ActionResult YourReservation()
         {
-            var getUserInfo = _userManager.getAllUserInformation(UserId);
-            var yourReserve = _reservationManager.GetReservationByUserId(UserId);
-            var indexModel = new Lists()
-            {
-                userInfo = getUserInfo,
-                reserve = yourReserve
-            };
-
-            return View(indexModel);
+            return View(_reservationManager.GetReservationByUserId(UserId));
         }
         public ActionResult Finish(int id, int rating)
         {
@@ -414,18 +351,11 @@ namespace TropicTrail.Controllers
         {
             IsUserLoggedSession();
             var user = _userManager.CreateOrRetrieve(User.Identity.Name, ref ErrorMessage);
-            var getUserInfo = _userManager.getAllUserInformation(UserId);
 
-            var indexModel = new Lists()
-            {
-                userInfo = getUserInfo,
-                createRetrieve = user
-            };
-
-            return View(indexModel);
+            return View(user);
         }
         [HttpPost]
-        public ActionResult EditProfile(TropicTrail.Lists userInf, HttpPostedFileBase profilePic)
+        public ActionResult EditProfile(UserInformation userInf, HttpPostedFileBase profilePic)
         {
 
             // Save profile picture if provided
@@ -439,26 +369,19 @@ namespace TropicTrail.Controllers
 
                 profilePic.SaveAs(serverSavePath);
 
-                userInf.createRetrieve.profilePic = inputFileName;
+                userInf.profilePic = inputFileName;
 
-                _db.sp_UpdateUserInformation(UserId, userInf.createRetrieve.lastName, userInf.createRetrieve.fistName, userInf.createRetrieve.phone, userInf.createRetrieve.street, userInf.createRetrieve.city, userInf.createRetrieve.state, userInf.createRetrieve.zipCode, userInf.createRetrieve.profilePic);
+                _db.sp_UpdateUserInformation(UserId, userInf.lastName, userInf.fistName, userInf.phone, userInf.street, userInf.city, userInf.state, userInf.zipCode, userInf.profilePic);
             }
 
                 TempData["Message"] = "User Information updated!";
                 return RedirectToAction("MyProfile");
 
         }
+
         public ActionResult MyProfile()
         {
-            var user = _userManager.GetUserInfoByUserId(UserId);
-            var getUserInfo = _userManager.getAllUserInformation(UserId);
-
-            var indexModel = new Lists()
-            {
-                createRetrieve = user,
-                userInfo = getUserInfo
-            };
-            return View(indexModel);
+            return View(_userManager.GetUserInfoByUserId(UserId));
         }
     }
 }
