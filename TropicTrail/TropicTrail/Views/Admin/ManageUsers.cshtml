@@ -11,62 +11,70 @@
 </p>
 <table class="table" style="background-color: white;">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.getUsers.userId)
+        <th>        
+            User ID
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.getUsers.username)
+            Username
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.getUsers.password)
+            Password
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.getUsers.email)
+            Email
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.getUsers.status)
+            Status
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.getUsers.roleId)
+            Role
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.getUsers.date_created)
+            Date Create
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.getUsers.date_modified)
+            Date Modified
         </th>
-        <th></th>
+        <th>
+            Action
+        </th>
     </tr>
-
-@foreach (var item in Model.listOfUsers) {
+@foreach (var item in Model.listUsers) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.userId)
+            @Html.DisplayFor(modelItem => item.User_ID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.username)
+            @Html.DisplayFor(modelItem => item.Username)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.password)
+            @{
+                var pass = "";
+                for (var i = 0; i < item.Password.Length; i++)
+                {
+                    pass += "*";
+                }
+                }
+            @Html.DisplayFor(modelItem => pass)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.email)
+            @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.status)
+            @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.roleId)
+            @Html.DisplayFor(modelItem => item.Role)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.date_created)
+            @Html.DisplayFor(modelItem => item.Date_Created)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.date_modified)
+            @Html.DisplayFor(modelItem => item.Date_Modified)
         </td>
         <td>
-            @Html.ActionLink("Edit", "EditUser", new { userid = item.userId }) |
-            @Html.ActionLink("Delete", "DeleteUsers", new { userId=item.userId, id=item.id })
+            @Html.ActionLink("Edit", "EditUser", new { userid = item.User_ID }) |
+            @Html.ActionLink("Delete", "DeleteUsers", new { userId=item.User_ID, id=item.ID })
         </td>
     </tr>
 }

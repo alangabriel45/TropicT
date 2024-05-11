@@ -31,12 +31,12 @@ namespace TropicTrail.Controllers
         public ActionResult ManageOffers()
         {
             IsUserLoggedSession();
-            var ListActiveOffers = _offersManager.ListOffers(Username);
+            var listofOffers = _offersManager.ListOfOffer();
             var getUserInfo = _userManager.getAllUserInformation(UserId);
 
             var listOffers = new Lists()
             {
-                offers = ListActiveOffers,
+                listOffers = listofOffers,
                 userInfo = getUserInfo
             };
             return View(listOffers);
@@ -118,7 +118,7 @@ namespace TropicTrail.Controllers
             var indexModel = new Lists()
             {
                 userInfo = getUserInfo,
-                listOfUsers = listOfUser
+                listUsers = listOfUser
             };
             return View(indexModel);
         }
@@ -146,11 +146,11 @@ namespace TropicTrail.Controllers
         {
 
             var getUserInfo = _userManager.getAllUserInformation(UserId);
-            var listOfReserve = _reservationManager.ListReservation();
+            var listOfReserve = _reservationManager.ListOfReservation();
             var indexModel = new Lists()
             {
                 userInfo = getUserInfo,
-                reserve = listOfReserve
+                manageReserve = listOfReserve
             };
             IsUserLoggedSession();
             return View(indexModel);

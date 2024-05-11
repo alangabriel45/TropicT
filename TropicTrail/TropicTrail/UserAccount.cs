@@ -23,7 +23,6 @@ namespace TropicTrail
         public Nullable<int> roleId { get; set; }
         public Nullable<System.DateTime> date_created { get; set; }
         public Nullable<System.DateTime> date_modified { get; set; }
-        public string code { get; set; }
     
         public virtual Role Role { get; set; }
     }

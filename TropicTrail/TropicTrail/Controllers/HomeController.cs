@@ -264,6 +264,7 @@ namespace TropicTrail.Controllers
         {
             if (id == null || id == 0)
                 return RedirectToAction("PageNotFound");
+            
 
             var offersInfo = _offersManager.GetOffersById(id);
             var getUserInfo = _userManager.getAllUserInformation(UserId);
@@ -277,21 +278,33 @@ namespace TropicTrail.Controllers
             return View(indexModel);
         }
         [HttpPost]
-        public ActionResult BookNow(String checkInDate, int numGuests, decimal price)
+        public ActionResult BookNow(String checkInDate, int numGuests, decimal price, int? id)
         {
             Session["checkInDate"] = checkInDate;
             Session["numGuests"] = numGuests;
             Session["price"] = price;
-            
+
+            var offersInfo = _offersManager.GetOffersById(id);
+            var getUserInfo = _userManager.getAllUserInformation(UserId);
+            var indexModel = new Lists()
+            {
+                userInfo = getUserInfo,
+                getOffers = offersInfo,
+            };
             if (Session["checkInDate"] == null || Session["numGuests"] == null || Session["price"] == null)
             {
                 ModelState.AddModelError("price", "Invalid");
             }
             else
             {
+                if (offersInfo.maxGuest != numGuests)
+                {
+                    TempData["NotEqual"] = "Dont Change The Number Of Guests";
+                    return View(indexModel);
+                }
                 return RedirectToAction("ContinueBook");
             }
-            return View();
+            return View(indexModel);
         }
         public ActionResult ContinueBook()
         {

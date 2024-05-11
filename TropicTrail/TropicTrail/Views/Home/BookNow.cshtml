@@ -45,7 +45,13 @@
 
                 <div>
                     <label for="numGuests">Number of Guests:</label>
-                    <input type="text" id="numGuests" name="numGuests" class="form-control" value="@Model.getOffers.maxGuest" required />
+                    <input type="text" readonly="readonly" id="numGuests" name="numGuests" class="form-control" value="@Model.getOffers.maxGuest" required />
+                    @if (TempData["NotEqual"] != null)
+                    {
+                        <div class="text-danger">
+                            @TempData["NotEqual"]
+                        </div>
+                    }
                 </div>
 
                 <button type="submit" class="btn btn-primary">Continue Booking</button>

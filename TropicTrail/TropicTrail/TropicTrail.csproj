@@ -424,10 +424,19 @@
     </Compile>
     <Compile Include="Utils\MyRole.cs" />
     <Compile Include="Utils\Utilities.cs" />
+    <Compile Include="vw_manageOffers.cs">
+      <DependentUpon>ModelTropicT.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_manageReservations.cs">
+      <DependentUpon>ModelTropicT.tt</DependentUpon>
+    </Compile>
     <Compile Include="vw_role.cs">
       <DependentUpon>ModelTropicT.tt</DependentUpon>
     </Compile>
     <Compile Include="vw_Transactions.cs">
+      <DependentUpon>ModelTropicT.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_UserAcc.cs">
       <DependentUpon>ModelTropicT.tt</DependentUpon>
     </Compile>
   </ItemGroup>

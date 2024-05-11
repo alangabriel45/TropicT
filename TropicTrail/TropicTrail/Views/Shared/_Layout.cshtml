@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <title>Tropic Trail - Plan your trip with Tropic Trail</title>
-    <link href="~/Content/img/favicon.ico" rel="icon" />
+    <link href="~/Content/img/favicon.ico" rel="icon"  style="border-radius:50%;"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -57,27 +57,55 @@
                                 <div>
                                     @foreach (var info in Model.userInfo)
                                     {
-                                        <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" class="user-pic" onclick="toggleMenu()" />
+                                        if (info.profilePic != null)
+                                        {
+                                            <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" class="user-pic" onclick="toggleMenu()" />
 
-                                        <div class="sub-menu-wrap" id="subMenu">
-                                            <div class="sub-menu">
-                                                <div class="user-info">
-                                                    <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" />
-                                                    <h3>@User.Identity.Name</h3>
+                                            <div class="sub-menu-wrap" id="subMenu">
+                                                <div class="sub-menu">
+                                                    <div class="user-info">
+                                                        <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" />
+                                                        <h3>@User.Identity.Name</h3>
+                                                    </div>
+                                                    <hr />
+                                                    <a href="~/Home/MyProfile" class="sub-menu-link">
+                                                        <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" />
+                                                        <p>View Profile</p>
+                                                        <span>></span>
+                                                    </a>
+                                                    <a href="~/Home/Logout" class="sub-menu-link">
+                                                        <img src="~/Content/img/logout.png" />
+                                                        <p>Logout</p>
+                                                        <span>></span>
+                                                    </a>
                                                 </div>
-                                                <hr />
-                                                <a href="~/Home/MyProfile" class="sub-menu-link">
-                                                    <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" />
-                                                    <p>View Profile</p>
-                                                    <span>></span>
-                                                </a>
-                                                <a href="~/Home/Logout" class="sub-menu-link">
-                                                    <img src="~/Content/img/logout.png" />
-                                                    <p>Logout</p>
-                                                    <span>></span>
-                                                </a>
                                             </div>
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <img src="@Url.Content("~/Content/img/profile.jpg")" class="user-pic" onclick="toggleMenu()" />
+
+                                            <div class="sub-menu-wrap" id="subMenu">
+                                                <div class="sub-menu">
+                                                    <div class="user-info">
+                                                        <img src="@Url.Content("~/Content/img/profile.jpg")" />
+                                                        <h3>@User.Identity.Name</h3>
+                                                    </div>
+                                                    <hr />
+                                                    <a href="~/Home/MyProfile" class="sub-menu-link">
+                                                        <img src="@Url.Content("~/Content/img/profile.jpg")" />
+                                                        <p>View Profile</p>
+                                                        <span>></span>
+                                                    </a>
+                                                    <a href="~/Home/Logout" class="sub-menu-link">
+                                                        <img src="~/Content/img/logout.png" />
+                                                        <p>Logout</p>
+                                                        <span>></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        }
+
                                     }
                                 </div>
                         }
@@ -92,32 +120,65 @@
                                 <div>
                                     @foreach (var info in Model.userInfo)
                                     {
-                                        <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" class="user-pic" onclick="toggleMenu()" />
+                                        if (info.profilePic != null)
+                                        {
+                                            <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" class="user-pic" onclick="toggleMenu()" />
 
-                                        <div class="sub-menu-wrap" id="subMenu">
-                                            <div class="sub-menu">
-                                                <div class="user-info">
-                                                    <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" />
-                                                    <h3>@User.Identity.Name</h3>
+                                            <div class="sub-menu-wrap" id="subMenu">
+                                                <div class="sub-menu">
+                                                    <div class="user-info">
+                                                        <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" />
+                                                        <h3>@User.Identity.Name</h3>
+                                                    </div>
+                                                    <hr />
+                                                    <a href="~/Home/MyProfile" class="sub-menu-link">
+                                                        <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" />
+                                                        <p>View Profile</p>
+                                                        <span>></span>
+                                                    </a>
+                                                    <a href="~/Home/YourReservation" class="sub-menu-link">
+                                                        <img src="~/Content/img/logout.png" />
+                                                        <p>Your Reservation</p>
+                                                        <span>></span>
+                                                    </a>
+                                                    <a href="~/Home/Logout" class="sub-menu-link">
+                                                        <img src="~/Content/img/logout.png" />
+                                                        <p>Logout</p>
+                                                        <span>></span>
+                                                    </a>
                                                 </div>
-                                                <hr />
-                                                <a href="~/Home/MyProfile" class="sub-menu-link">
-                                                    <img src="@Url.Content("~/UploadedFiles/" + info.profilePic)" />
-                                                    <p>View Profile</p>
-                                                    <span>></span>
-                                                </a>
-                                                <a href="~/Home/YourReservation" class="sub-menu-link">
-                                                    <img src="~/Content/img/logout.png" />
-                                                    <p>Your Reservation</p>
-                                                    <span>></span>
-                                                </a>
-                                                <a href="~/Home/Logout" class="sub-menu-link">
-                                                    <img src="~/Content/img/logout.png" />
-                                                    <p>Logout</p>
-                                                    <span>></span>
-                                                </a>
                                             </div>
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <img src="@Url.Content("~/Content/img/profile.jpg")" class="user-pic" onclick="toggleMenu()" />
+
+                                            <div class="sub-menu-wrap" id="subMenu">
+                                                <div class="sub-menu">
+                                                    <div class="user-info">
+                                                        <img src="@Url.Content("~/Content/img/profile.jpg")" />
+                                                        <h3>@User.Identity.Name</h3>
+                                                    </div>
+                                                    <hr />
+                                                    <a href="~/Home/MyProfile" class="sub-menu-link">
+                                                        <img src="@Url.Content("~/Content/img/profile.jpg")" />
+                                                        <p>View Profile</p>
+                                                        <span>></span>
+                                                    </a>
+                                                    <a href="~/Home/YourReservation" class="sub-menu-link">
+                                                        <img src="~/Content/img/logout.png" />
+                                                        <p>Your Reservation</p>
+                                                        <span>></span>
+                                                    </a>
+                                                    <a href="~/Home/Logout" class="sub-menu-link">
+                                                        <img src="~/Content/img/logout.png" />
+                                                        <p>Logout</p>
+                                                        <span>></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        }
+
                                     }   
                                 </div>
                         }
@@ -145,7 +206,7 @@
     </div>
     <!-- Navbar End -->
     <!-- Footer Start -->
-    <footer class="footer" style="position: static;
+    <footer class="footer" style="position: static; margin-top: 25%;
   bottom: 0;
   left: 0;
   width: 100%;">

@@ -20,5 +20,8 @@ namespace TropicTrail
         public List<vw_Transactions> listOfTransact { get; set; }
         public vw_Transactions getTransact { get; set; }
         public ErrorCode errors { get; set; }
+        public List<vw_UserAcc> listUsers { get; set; }
+        public List<vw_manageOffers> listOffers { get; set; }
+        public List<vw_manageReservations> manageReserve { get; set; }
     }
 }

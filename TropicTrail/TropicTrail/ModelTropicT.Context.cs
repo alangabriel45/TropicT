@@ -36,8 +36,11 @@ namespace TropicTrail
         public DbSet<Transaction> Transaction { get; set; }
         public DbSet<UserAccount> UserAccount { get; set; }
         public DbSet<UserInformation> UserInformation { get; set; }
+        public DbSet<vw_manageOffers> vw_manageOffers { get; set; }
+        public DbSet<vw_manageReservations> vw_manageReservations { get; set; }
         public DbSet<vw_role> vw_role { get; set; }
         public DbSet<vw_Transactions> vw_Transactions { get; set; }
+        public DbSet<vw_UserAcc> vw_UserAcc { get; set; }
     
         public virtual int sp_UpdateUserInformation(string userId, string lName, string fName, string phone, string street, string city, string state, string zipCode, string profilePic)
         {

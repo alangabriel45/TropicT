@@ -10,10 +10,12 @@ namespace TropicTrail.Repository
     {
         UserManager _userMgr;
         BaseRepository<Offers> _offers;
+        BaseRepository<vw_manageOffers> _listOffers;
         public OffersManager()
         {
             _userMgr = new UserManager();
             _offers = new BaseRepository<Offers>();
+            _listOffers = new BaseRepository<vw_manageOffers>();
         }
         public List<Offers> ListActiveOffers()
         {
@@ -28,6 +30,10 @@ namespace TropicTrail.Repository
         public Offers GetOffersById(int? id)
         {
             return _offers.Get(id);
+        }
+        public List<vw_manageOffers> ListOfOffer()
+        {
+            return _listOffers.GetAll();
         }
 
         public Offers GetOffersBygUId(String gUid)

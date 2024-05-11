@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TropicTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TropicTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Card">
           <Key>
             <PropertyRef Name="id" />
@@ -87,7 +87,6 @@
           <Property Name="roleId" Type="int" />
           <Property Name="date_created" Type="datetime" />
           <Property Name="date_modified" Type="datetime" />
-          <Property Name="code" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserInformation">
           <Key>
@@ -104,6 +103,53 @@
           <Property Name="state" Type="nvarchar" MaxLength="255" />
           <Property Name="zipCode" Type="nvarchar" MaxLength="255" />
           <Property Name="profilePic" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TropicT.dbo.vw_manageOffers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_manageOffers">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Tour Type" />
+            <PropertyRef Name="Maximum Guests" />
+            <PropertyRef Name="Price" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Tour Type" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Maximum Guests" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Date Created" Type="date" />
+          <Property Name="Status" Type="varchar" MaxLength="8" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TropicT.dbo.vw_manageReservations' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_manageReservations">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Maximum Guests" />
+            <PropertyRef Name="Tour Name" />
+            <PropertyRef Name="Check In" />
+            <PropertyRef Name="Last Name" />
+            <PropertyRef Name="First Name" />
+            <PropertyRef Name="Contact #" />
+            <PropertyRef Name="Email Address" />
+            <PropertyRef Name="Payment" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="User ID" Type="nvarchar(max)" />
+          <Property Name="Offers" Type="nvarchar" MaxLength="100" />
+          <Property Name="Maximum Guests" Type="int" Nullable="false" />
+          <Property Name="Tour Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Check In" Type="datetime" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Last Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="First Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Contact #" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email Address" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Payment" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Balance" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Status" Type="varchar" MaxLength="8" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TropicT.dbo.vw_role' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -129,6 +175,22 @@ warning 6002: The table/view 'TropicT.dbo.vw_Transactions' does not have a prima
           <Property Name="Payment" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Ratings" Type="int" />
           <Property Name="Status" Type="varchar" MaxLength="9" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TropicT.dbo.vw_UserAcc' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_UserAcc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="User ID" Type="nvarchar(max)" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
+          <Property Name="Role" Type="varchar" MaxLength="8" />
+          <Property Name="Date Created" Type="datetime" />
+          <Property Name="Date Modified" Type="datetime" />
         </EntityType>
         <Association Name="FK_Offers_TourType">
           <End Role="TourType" Type="Self.TourType" Multiplicity="1" />
@@ -177,6 +239,35 @@ warning 6002: The table/view 'TropicT.dbo.vw_Transactions' does not have a prima
           <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInformation" EntityType="Self.UserInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_manageOffers" EntityType="Self.vw_manageOffers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vw_manageOffers].[ID] AS [ID], 
+[vw_manageOffers].[Name] AS [Name], 
+[vw_manageOffers].[Tour Type] AS [Tour Type], 
+[vw_manageOffers].[Maximum Guests] AS [Maximum Guests], 
+[vw_manageOffers].[Price] AS [Price], 
+[vw_manageOffers].[Date Created] AS [Date Created], 
+[vw_manageOffers].[Status] AS [Status]
+FROM [dbo].[vw_manageOffers] AS [vw_manageOffers]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_manageReservations" EntityType="Self.vw_manageReservations" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vw_manageReservations].[ID] AS [ID], 
+[vw_manageReservations].[User ID] AS [User ID], 
+[vw_manageReservations].[Offers] AS [Offers], 
+[vw_manageReservations].[Maximum Guests] AS [Maximum Guests], 
+[vw_manageReservations].[Tour Name] AS [Tour Name], 
+[vw_manageReservations].[Check In] AS [Check In], 
+[vw_manageReservations].[Price] AS [Price], 
+[vw_manageReservations].[Last Name] AS [Last Name], 
+[vw_manageReservations].[First Name] AS [First Name], 
+[vw_manageReservations].[Contact #] AS [Contact #], 
+[vw_manageReservations].[Email Address] AS [Email Address], 
+[vw_manageReservations].[Payment] AS [Payment], 
+[vw_manageReservations].[Balance] AS [Balance], 
+[vw_manageReservations].[Status] AS [Status]
+FROM [dbo].[vw_manageReservations] AS [vw_manageReservations]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vw_role" EntityType="Self.vw_role" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [vw_role].[id] AS [id], 
@@ -195,6 +286,19 @@ FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
 [vw_Transactions].[Status] AS [Status]
 FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vw_UserAcc" EntityType="Self.vw_UserAcc" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vw_UserAcc].[ID] AS [ID], 
+[vw_UserAcc].[User ID] AS [User ID], 
+[vw_UserAcc].[Username] AS [Username], 
+[vw_UserAcc].[Password] AS [Password], 
+[vw_UserAcc].[Email] AS [Email], 
+[vw_UserAcc].[Status] AS [Status], 
+[vw_UserAcc].[Role] AS [Role], 
+[vw_UserAcc].[Date Created] AS [Date Created], 
+[vw_UserAcc].[Date Modified] AS [Date Modified]
+FROM [dbo].[vw_UserAcc] AS [vw_UserAcc]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Offers_TourType" Association="Self.FK_Offers_TourType">
             <End Role="TourType" EntitySet="TourType" />
             <End Role="Offers" EntitySet="Offers" />
@@ -204,19 +308,60 @@ FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
             <End Role="UserAccount" EntitySet="UserAccount" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TropicTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TropicTEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_UpdateUserInformation">
+            <Parameter Name="userId" Mode="In" Type="String" />
+            <Parameter Name="lName" Mode="In" Type="String" />
+            <Parameter Name="fName" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="street" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="state" Mode="In" Type="String" />
+            <Parameter Name="zipCode" Mode="In" Type="String" />
+            <Parameter Name="profilePic" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ViewOffers" ReturnType="Collection(TropicTModel.sp_ViewOffers_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Card" EntityType="TropicTModel.Card" />
+          <EntitySet Name="Offers" EntityType="TropicTModel.Offers" />
+          <EntitySet Name="Reservation" EntityType="TropicTModel.Reservation" />
+          <EntitySet Name="Role" EntityType="TropicTModel.Role" />
+          <EntitySet Name="TourType" EntityType="TropicTModel.TourType" />
+          <EntitySet Name="Transaction" EntityType="TropicTModel.Transaction" />
+          <EntitySet Name="UserAccount" EntityType="TropicTModel.UserAccount" />
+          <EntitySet Name="UserInformation" EntityType="TropicTModel.UserInformation" />
+          <EntitySet Name="vw_manageOffers" EntityType="TropicTModel.vw_manageOffers" />
+          <EntitySet Name="vw_manageReservations" EntityType="TropicTModel.vw_manageReservations" />
+          <EntitySet Name="vw_role" EntityType="TropicTModel.vw_role" />
+          <EntitySet Name="vw_Transactions" EntityType="TropicTModel.vw_Transactions" />
+          <EntitySet Name="vw_UserAcc" EntityType="TropicTModel.vw_UserAcc" />
+          <AssociationSet Name="FK_Offers_TourType" Association="TropicTModel.FK_Offers_TourType">
+            <End Role="TourType" EntitySet="TourType" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccount_Role" Association="TropicTModel.FK_UserAccount_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserAccount" EntitySet="UserAccount" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="sp_ViewOffers_Result">
+          <Property Type="String" Name="Pax" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Tour_Type" Nullable="false" MaxLength="255" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="10" Scale="2" />
+        </ComplexType>
         <EntityType Name="Card">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cardNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="expireDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="balance" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="cardNumber" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="expireDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="balance" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Offers">
           <Key>
@@ -224,15 +369,15 @@ FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
           </Key>
           <Property Name="offersId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="offersgUId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="offersName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="offersDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="offersName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="offersDesc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="maxGuest" Type="Int32" Nullable="false" />
           <Property Name="tourId" Type="Int32" Nullable="false" />
-          <Property Name="listPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="listPrice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="dateCreated" Type="DateTime" Precision="0" />
           <Property Name="status" Type="Int32" Nullable="false" />
           <Property Name="userId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TourType" Relationship="Self.FK_Offers_TourType" FromRole="Offers" ToRole="TourType" />
+          <NavigationProperty Name="TourType" Relationship="TropicTModel.FK_Offers_TourType" FromRole="Offers" ToRole="TourType" />
         </EntityType>
         <EntityType Name="Reservation">
           <Key>
@@ -245,11 +390,11 @@ FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
           <Property Name="tourId" Type="Int32" Nullable="false" />
           <Property Name="checkIn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="lastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="firstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="contactNum" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="payment" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="contactNum" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="payment" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="balance" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="status" Type="Int32" Nullable="false" />
         </EntityType>
@@ -259,16 +404,16 @@ FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
           </Key>
           <Property Name="roleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserAccount" Relationship="Self.FK_UserAccount_Role" FromRole="Role" ToRole="UserAccount" />
+          <NavigationProperty Name="UserAccount" Relationship="TropicTModel.FK_UserAccount_Role" FromRole="Role" ToRole="UserAccount" />
         </EntityType>
         <EntityType Name="TourType">
           <Key>
             <PropertyRef Name="tourId" />
           </Key>
           <Property Name="tourId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tourName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Offers" Relationship="Self.FK_Offers_TourType" FromRole="TourType" ToRole="Offers" />
+          <Property Name="tourName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="userId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Offers" Relationship="TropicTModel.FK_Offers_TourType" FromRole="TourType" ToRole="Offers" />
         </EntityType>
         <EntityType Name="Transaction">
           <Key>
@@ -294,8 +439,7 @@ FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
           <Property Name="roleId" Type="Int32" />
           <Property Name="date_created" Type="DateTime" Precision="3" />
           <Property Name="date_modified" Type="DateTime" Precision="3" />
-          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_UserAccount_Role" FromRole="UserAccount" ToRole="Role" />
+          <NavigationProperty Name="Role" Relationship="TropicTModel.FK_UserAccount_Role" FromRole="UserAccount" ToRole="Role" />
         </EntityType>
         <EntityType Name="UserInformation">
           <Key>
@@ -313,6 +457,49 @@ FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
           <Property Name="zipCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="profilePic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="vw_manageOffers">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Tour_Type" />
+            <PropertyRef Name="Maximum_Guests" />
+            <PropertyRef Name="Price" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Tour_Type" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Maximum_Guests" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Date_Created" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vw_manageReservations">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Maximum_Guests" />
+            <PropertyRef Name="Tour_Name" />
+            <PropertyRef Name="Check_In" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Contact__" />
+            <PropertyRef Name="Email_Address" />
+            <PropertyRef Name="Payment" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="User_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Offers" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Maximum_Guests" Type="Int32" Nullable="false" />
+          <Property Name="Tour_Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Check_In" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Last_Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="First_Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Contact__" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email_Address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Payment" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Balance" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Status" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="vw_role">
           <Key>
             <PropertyRef Name="id" />
@@ -327,16 +514,30 @@ FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
             <PropertyRef Name="Booked_By" />
           </Key>
           <Property Name="Reservation_Id" Type="Int32" Nullable="false" />
-          <Property Name="Booked_By" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Booked_By" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Transaction_Date" Type="DateTime" Precision="3" />
           <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Payment" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Ratings" Type="Int32" />
           <Property Name="Status" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="vw_UserAcc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="User_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Created" Type="DateTime" Precision="3" />
+          <Property Name="Date_Modified" Type="DateTime" Precision="3" />
+        </EntityType>
         <Association Name="FK_Offers_TourType">
-          <End Role="TourType" Type="Self.TourType" Multiplicity="1" />
-          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <End Type="TropicTModel.TourType" Role="TourType" Multiplicity="1" />
+          <End Type="TropicTModel.Offers" Role="Offers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TourType">
               <PropertyRef Name="tourId" />
@@ -347,8 +548,8 @@ FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserAccount_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
-          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="*" />
+          <End Type="TropicTModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="TropicTModel.UserAccount" Role="UserAccount" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="roleId" />
@@ -358,181 +559,12 @@ FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TropicTEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Card" EntityType="Self.Card" />
-          <EntitySet Name="Offers" EntityType="Self.Offers" />
-          <EntitySet Name="Reservation" EntityType="Self.Reservation" />
-          <EntitySet Name="Role" EntityType="Self.Role" />
-          <EntitySet Name="TourType" EntityType="Self.TourType" />
-          <EntitySet Name="Transaction" EntityType="Self.Transaction" />
-          <EntitySet Name="UserAccount" EntityType="Self.UserAccount" />
-          <EntitySet Name="UserInformation" EntityType="Self.UserInformation" />
-          <EntitySet Name="vw_role" EntityType="Self.vw_role" />
-          <EntitySet Name="vw_Transactions" EntityType="Self.vw_Transactions" />
-          <AssociationSet Name="FK_Offers_TourType" Association="Self.FK_Offers_TourType">
-            <End Role="TourType" EntitySet="TourType" />
-            <End Role="Offers" EntitySet="Offers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserAccount_Role" Association="Self.FK_UserAccount_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="UserAccount" EntitySet="UserAccount" />
-          </AssociationSet>
-          <FunctionImport Name="sp_UpdateUserInformation">
-            <Parameter Name="userId" Mode="In" Type="String" />
-            <Parameter Name="lName" Mode="In" Type="String" />
-            <Parameter Name="fName" Mode="In" Type="String" />
-            <Parameter Name="phone" Mode="In" Type="String" />
-            <Parameter Name="street" Mode="In" Type="String" />
-            <Parameter Name="city" Mode="In" Type="String" />
-            <Parameter Name="state" Mode="In" Type="String" />
-            <Parameter Name="zipCode" Mode="In" Type="String" />
-            <Parameter Name="profilePic" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_ViewOffers" ReturnType="Collection(TropicTModel.sp_ViewOffers_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-        </EntityContainer>
-        <ComplexType Name="sp_ViewOffers_Result">
-          <Property Type="String" Name="Pax" Nullable="false" MaxLength="255" />
-          <Property Type="String" Name="Tour_Type" Nullable="false" MaxLength="255" />
-          <Property Type="Decimal" Name="Price" Nullable="false" Precision="10" Scale="2" />
-        </ComplexType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TropicTModelStoreContainer" CdmEntityContainer="TropicTEntities">
-          <EntitySetMapping Name="Card">
-            <EntityTypeMapping TypeName="TropicTModel.Card">
-              <MappingFragment StoreEntitySet="Card">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="cardNumber" ColumnName="cardNumber" />
-                <ScalarProperty Name="expireDate" ColumnName="expireDate" />
-                <ScalarProperty Name="balance" ColumnName="balance" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Offers">
-            <EntityTypeMapping TypeName="TropicTModel.Offers">
-              <MappingFragment StoreEntitySet="Offers">
-                <ScalarProperty Name="offersId" ColumnName="offersId" />
-                <ScalarProperty Name="offersgUId" ColumnName="offersgUId" />
-                <ScalarProperty Name="offersName" ColumnName="offersName" />
-                <ScalarProperty Name="offersDesc" ColumnName="offersDesc" />
-                <ScalarProperty Name="maxGuest" ColumnName="maxGuest" />
-                <ScalarProperty Name="tourId" ColumnName="tourId" />
-                <ScalarProperty Name="listPrice" ColumnName="listPrice" />
-                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Reservation">
-            <EntityTypeMapping TypeName="TropicTModel.Reservation">
-              <MappingFragment StoreEntitySet="Reservation">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="offersName" ColumnName="offersName" />
-                <ScalarProperty Name="maxGuest" ColumnName="maxGuest" />
-                <ScalarProperty Name="tourId" ColumnName="tourId" />
-                <ScalarProperty Name="checkIn" ColumnName="checkIn" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="contactNum" ColumnName="contactNum" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="payment" ColumnName="payment" />
-                <ScalarProperty Name="balance" ColumnName="balance" />
-                <ScalarProperty Name="status" ColumnName="status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="TropicTModel.Role">
-              <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="roleId" ColumnName="roleId" />
-                <ScalarProperty Name="roleName" ColumnName="roleName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TourType">
-            <EntityTypeMapping TypeName="TropicTModel.TourType">
-              <MappingFragment StoreEntitySet="TourType">
-                <ScalarProperty Name="tourId" ColumnName="tourId" />
-                <ScalarProperty Name="tourName" ColumnName="tourName" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Transaction">
-            <EntityTypeMapping TypeName="TropicTModel.Transaction">
-              <MappingFragment StoreEntitySet="Transaction">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="reservationId" ColumnName="reservationId" />
-                <ScalarProperty Name="transactionDate" ColumnName="transactionDate" />
-                <ScalarProperty Name="amout" ColumnName="amout" />
-                <ScalarProperty Name="ratings" ColumnName="ratings" />
-                <ScalarProperty Name="status" ColumnName="status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserAccount">
-            <EntityTypeMapping TypeName="TropicTModel.UserAccount">
-              <MappingFragment StoreEntitySet="UserAccount">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="roleId" ColumnName="roleId" />
-                <ScalarProperty Name="date_created" ColumnName="date_created" />
-                <ScalarProperty Name="date_modified" ColumnName="date_modified" />
-                <ScalarProperty Name="code" ColumnName="code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserInformation">
-            <EntityTypeMapping TypeName="TropicTModel.UserInformation">
-              <MappingFragment StoreEntitySet="UserInformation">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="fistName" ColumnName="fistName" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="state" ColumnName="state" />
-                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
-                <ScalarProperty Name="profilePic" ColumnName="profilePic" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vw_role">
-            <EntityTypeMapping TypeName="TropicTModel.vw_role">
-              <MappingFragment StoreEntitySet="vw_role">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="roleName" ColumnName="roleName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vw_Transactions">
-            <EntityTypeMapping TypeName="TropicTModel.vw_Transactions">
-              <MappingFragment StoreEntitySet="vw_Transactions">
-                <ScalarProperty Name="Reservation_Id" ColumnName="Reservation_Id" />
-                <ScalarProperty Name="Booked_By" ColumnName="Booked_By" />
-                <ScalarProperty Name="Transaction_Date" ColumnName="Transaction_Date" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Payment" ColumnName="Payment" />
-                <ScalarProperty Name="Ratings" ColumnName="Ratings" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_UpdateUserInformation" FunctionName="TropicTModel.Store.sp_UpdateUserInformation" />
           <FunctionImportMapping FunctionImportName="sp_ViewOffers" FunctionName="TropicTModel.Store.sp_ViewOffers">
             <ResultMapping>
@@ -543,7 +575,184 @@ FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Card">
+            <EntityTypeMapping TypeName="TropicTModel.Card">
+              <MappingFragment StoreEntitySet="Card">
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="expireDate" ColumnName="expireDate" />
+                <ScalarProperty Name="cardNumber" ColumnName="cardNumber" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offers">
+            <EntityTypeMapping TypeName="TropicTModel.Offers">
+              <MappingFragment StoreEntitySet="Offers">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="listPrice" ColumnName="listPrice" />
+                <ScalarProperty Name="tourId" ColumnName="tourId" />
+                <ScalarProperty Name="maxGuest" ColumnName="maxGuest" />
+                <ScalarProperty Name="offersDesc" ColumnName="offersDesc" />
+                <ScalarProperty Name="offersName" ColumnName="offersName" />
+                <ScalarProperty Name="offersgUId" ColumnName="offersgUId" />
+                <ScalarProperty Name="offersId" ColumnName="offersId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservation">
+            <EntityTypeMapping TypeName="TropicTModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="payment" ColumnName="payment" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="contactNum" ColumnName="contactNum" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="checkIn" ColumnName="checkIn" />
+                <ScalarProperty Name="tourId" ColumnName="tourId" />
+                <ScalarProperty Name="maxGuest" ColumnName="maxGuest" />
+                <ScalarProperty Name="offersName" ColumnName="offersName" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="TropicTModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TourType">
+            <EntityTypeMapping TypeName="TropicTModel.TourType">
+              <MappingFragment StoreEntitySet="TourType">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="tourName" ColumnName="tourName" />
+                <ScalarProperty Name="tourId" ColumnName="tourId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transaction">
+            <EntityTypeMapping TypeName="TropicTModel.Transaction">
+              <MappingFragment StoreEntitySet="Transaction">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="ratings" ColumnName="ratings" />
+                <ScalarProperty Name="amout" ColumnName="amout" />
+                <ScalarProperty Name="transactionDate" ColumnName="transactionDate" />
+                <ScalarProperty Name="reservationId" ColumnName="reservationId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAccount">
+            <EntityTypeMapping TypeName="TropicTModel.UserAccount">
+              <MappingFragment StoreEntitySet="UserAccount">
+                <ScalarProperty Name="date_modified" ColumnName="date_modified" />
+                <ScalarProperty Name="date_created" ColumnName="date_created" />
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInformation">
+            <EntityTypeMapping TypeName="TropicTModel.UserInformation">
+              <MappingFragment StoreEntitySet="UserInformation">
+                <ScalarProperty Name="profilePic" ColumnName="profilePic" />
+                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="fistName" ColumnName="fistName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_manageOffers">
+            <EntityTypeMapping TypeName="TropicTModel.vw_manageOffers">
+              <MappingFragment StoreEntitySet="vw_manageOffers">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date Created" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Maximum_Guests" ColumnName="Maximum Guests" />
+                <ScalarProperty Name="Tour_Type" ColumnName="Tour Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_manageReservations">
+            <EntityTypeMapping TypeName="TropicTModel.vw_manageReservations">
+              <MappingFragment StoreEntitySet="vw_manageReservations">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="Email_Address" ColumnName="Email Address" />
+                <ScalarProperty Name="Contact__" ColumnName="Contact #" />
+                <ScalarProperty Name="First_Name" ColumnName="First Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Check_In" ColumnName="Check In" />
+                <ScalarProperty Name="Tour_Name" ColumnName="Tour Name" />
+                <ScalarProperty Name="Maximum_Guests" ColumnName="Maximum Guests" />
+                <ScalarProperty Name="Offers" ColumnName="Offers" />
+                <ScalarProperty Name="User_ID" ColumnName="User ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_role">
+            <EntityTypeMapping TypeName="TropicTModel.vw_role">
+              <MappingFragment StoreEntitySet="vw_role">
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Transactions">
+            <EntityTypeMapping TypeName="TropicTModel.vw_Transactions">
+              <MappingFragment StoreEntitySet="vw_Transactions">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Ratings" ColumnName="Ratings" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Transaction_Date" ColumnName="Transaction_Date" />
+                <ScalarProperty Name="Booked_By" ColumnName="Booked_By" />
+                <ScalarProperty Name="Reservation_Id" ColumnName="Reservation_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_UserAcc">
+            <EntityTypeMapping TypeName="TropicTModel.vw_UserAcc">
+              <MappingFragment StoreEntitySet="vw_UserAcc">
+                <ScalarProperty Name="Date_Modified" ColumnName="Date Modified" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date Created" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="User_ID" ColumnName="User ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

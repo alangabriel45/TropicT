@@ -9,12 +9,14 @@ namespace TropicTrail.Repository
     public class UserManager
     {
         private BaseRepository<UserAccount> _userAcc;
+        private BaseRepository<vw_UserAcc> _listOfAcc;
         private BaseRepository<UserInformation> _userInf;
 
         public UserManager()
         {
             _userAcc = new BaseRepository<UserAccount>();
             _userInf = new BaseRepository<UserInformation>();
+            _listOfAcc = new BaseRepository<vw_UserAcc>();
         }
 
         #region Get User By ---
@@ -22,9 +24,9 @@ namespace TropicTrail.Repository
         {
             return _userAcc.Get(Id);
         }
-        public List<UserAccount> ListOfUsers()
+        public List<vw_UserAcc> ListOfUsers()
         {
-            return _userAcc._table.ToList();
+            return _listOfAcc.GetAll();
         }
         public UserAccount GetUserByUsername(String username)
         {

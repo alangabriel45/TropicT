@@ -10,11 +10,13 @@ namespace TropicTrail.Repository
     {
         UserManager _userMgr;
         BaseRepository<Reservation> _reservation;
+        BaseRepository<vw_manageReservations> _manageReserve;
 
         public ReservationManager()
         {
             _userMgr = new UserManager();
             _reservation = new BaseRepository<Reservation>();
+            _manageReserve = new BaseRepository<vw_manageReservations>();
         }
         public List<Reservation> ListActiveReservation()
         {
@@ -27,6 +29,10 @@ namespace TropicTrail.Repository
         public List<Reservation> ListReservation()
         {
             return _reservation._table.ToList();
+        }
+        public List<vw_manageReservations> ListOfReservation()
+        {
+            return _manageReserve.GetAll();
         }
         public Reservation GetReservationById(int? id)
         {

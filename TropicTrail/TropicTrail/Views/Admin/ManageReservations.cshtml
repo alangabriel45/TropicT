@@ -11,93 +11,93 @@
         <thead class="thread-dark">
             <tr>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.getReserve.userId)
+                    User Id
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.getReserve.offersName)
+                    Offers Name
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.getReserve.maxGuest)
+                    Max Guest
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.getReserve.tourId)
+                    Tour
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.getReserve.checkIn)
+                    Check In
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.getReserve.price)
+                    Price
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.getReserve.lastName)
+                    Last Name
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.getReserve.firstName)
+                    First Name
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.getReserve.contactNum)
+                    Contact Number
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.getReserve.email)
+                    Email
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.getReserve.payment)
+                    Payment
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.getReserve.balance)
+                    Balance
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.getReserve.status)
+                    Status
                 </th>
                 <th></th>
             </tr>
 
-            @foreach (var item in Model.reserve)
+            @foreach (var item in Model.manageReserve)
             {
                 <tr>
                     <td scope="col">
-                        @Html.DisplayFor(modelItem => item.userId)
+                        @Html.DisplayFor(modelItem => item.User_ID)
                     </td>
                     <td scope="col">
-                        @Html.DisplayFor(modelItem => item.offersName)
+                        @Html.DisplayFor(modelItem => item.Offers)
                     </td>
                     <td scope="col">
-                        @Html.DisplayFor(modelItem => item.maxGuest)
+                        @Html.DisplayFor(modelItem => item.Maximum_Guests)
                     </td>
                     <td scope="col">
-                        @Html.DisplayFor(modelItem => item.tourId)
+                        @Html.DisplayFor(modelItem => item.Tour_Name)
                     </td>
                     <td scope="col">
-                        @Html.DisplayFor(modelItem => item.checkIn)
+                        @Html.DisplayFor(modelItem => item.Check_In)
                     </td>
                     <td scope="col">
-                        @Html.DisplayFor(modelItem => item.price)
+                        @Html.DisplayFor(modelItem => item.Price)
                     </td>
                     <td scope="col">
-                        @Html.DisplayFor(modelItem => item.lastName)
+                        @Html.DisplayFor(modelItem => item.Last_Name)
                     </td>
                     <td scope="col">
-                        @Html.DisplayFor(modelItem => item.firstName)
+                        @Html.DisplayFor(modelItem => item.First_Name)
                     </td>
                     <td scope="col">
-                        @Html.DisplayFor(modelItem => item.contactNum)
+                        @Html.DisplayFor(modelItem => item.Contact__)
                     </td>
                     <td scope="col">
-                        @Html.DisplayFor(modelItem => item.email)
+                        @Html.DisplayFor(modelItem => item.Email_Address)
                     </td>
                     <td scope="col">
-                        @Html.DisplayFor(modelItem => item.payment)
+                        @Html.DisplayFor(modelItem => item.Payment)
                     </td>
                     <td scope="col">
-                        @Html.DisplayFor(modelItem => item.balance)
+                        @Html.DisplayFor(modelItem => item.Balance)
                     </td>
                     <td scope="col">
-                        @Html.DisplayFor(modelItem => item.status)
+                        @Html.DisplayFor(modelItem => item.Status)
                     </td>
                     <td>
-                        <a href="#" class="btn-confirm" data-id="@item.id">Confirm</a> |
-                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                        <a href="#" class="btn-confirm" data-id="@item.ID">Confirm</a> |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                     </td>
                 </tr>
             }

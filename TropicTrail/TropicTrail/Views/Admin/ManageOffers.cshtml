@@ -34,31 +34,31 @@
                 </th>
             </tr>
 
-            @foreach (var item in Model.offers)
+            @foreach (var item in Model.listOffers)
             {              
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.offersName)
+                        @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @item.TourType.tourName
+                        @item.Tour_Type
                     </td>
                     <td>
-                        @item.maxGuest
+                        @item.Maximum_Guests
                     </td>
                     <td>
-                        <span class="badge badge-success">Php @item.listPrice.ToString("N2")</span>
+                        <span class="badge badge-success">Php @item.Price.ToString("N2")</span>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.dateCreated)
+                        @Html.DisplayFor(modelItem => item.Date_Created)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.status)
+                        @Html.DisplayFor(modelItem => item.Status)
                     </td>
                     <td>
-                        <a href="~/Admin/OffersDetails/@item.offersId" class="btn btn-info" target="_blank"><i class="fa fa-info"></i> Details</a> |
+                        <a href="~/Admin/OffersDetails/@item.ID" class="btn btn-info" target="_blank"><i class="fa fa-info"></i> Details</a> |
 
-                        <button class="btn btn-danger" onclick="onDelete(@item.offersId)"><i class="fa fa-trash"></i> Delete</button>
+                        <button class="btn btn-danger" onclick="onDelete(@item.ID)"><i class="fa fa-trash"></i> Delete</button>
                     </td>
                 </tr>
             }

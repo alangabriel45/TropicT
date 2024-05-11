@@ -82,7 +82,6 @@
     <Property Name="roleId" Type="int" />
     <Property Name="date_created" Type="datetime" />
     <Property Name="date_modified" Type="datetime" />
-    <Property Name="code" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="UserInformation">
     <Key>
@@ -99,6 +98,53 @@
     <Property Name="state" Type="nvarchar" MaxLength="255" />
     <Property Name="zipCode" Type="nvarchar" MaxLength="255" />
     <Property Name="profilePic" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TropicT.dbo.vw_manageOffers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_manageOffers">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Tour Type" />
+      <PropertyRef Name="Maximum Guests" />
+      <PropertyRef Name="Price" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Tour Type" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Maximum Guests" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Date Created" Type="date" />
+    <Property Name="Status" Type="varchar" MaxLength="8" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TropicT.dbo.vw_manageReservations' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_manageReservations">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Maximum Guests" />
+      <PropertyRef Name="Tour Name" />
+      <PropertyRef Name="Check In" />
+      <PropertyRef Name="Last Name" />
+      <PropertyRef Name="First Name" />
+      <PropertyRef Name="Contact #" />
+      <PropertyRef Name="Email Address" />
+      <PropertyRef Name="Payment" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="User ID" Type="nvarchar(max)" />
+    <Property Name="Offers" Type="nvarchar" MaxLength="100" />
+    <Property Name="Maximum Guests" Type="int" Nullable="false" />
+    <Property Name="Tour Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Check In" Type="datetime" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Last Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="First Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Contact #" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Email Address" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Payment" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Balance" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Status" Type="varchar" MaxLength="8" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'TropicT.dbo.vw_role' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -124,6 +170,22 @@ warning 6002: The table/view 'TropicT.dbo.vw_Transactions' does not have a prima
     <Property Name="Payment" Type="decimal" Precision="10" Scale="2" />
     <Property Name="Ratings" Type="int" />
     <Property Name="Status" Type="varchar" MaxLength="9" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TropicT.dbo.vw_UserAcc' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_UserAcc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="User ID" Type="nvarchar(max)" />
+    <Property Name="Username" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Status" Type="varchar" MaxLength="10" />
+    <Property Name="Role" Type="varchar" MaxLength="8" />
+    <Property Name="Date Created" Type="datetime" />
+    <Property Name="Date Modified" Type="datetime" />
   </EntityType>
   <Association Name="FK_Offers_TourType">
     <End Role="TourType" Type="Self.TourType" Multiplicity="1" />
@@ -172,6 +234,35 @@ warning 6002: The table/view 'TropicT.dbo.vw_Transactions' does not have a prima
     <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserInformation" EntityType="Self.UserInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vw_manageOffers" EntityType="Self.vw_manageOffers" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vw_manageOffers].[ID] AS [ID], 
+[vw_manageOffers].[Name] AS [Name], 
+[vw_manageOffers].[Tour Type] AS [Tour Type], 
+[vw_manageOffers].[Maximum Guests] AS [Maximum Guests], 
+[vw_manageOffers].[Price] AS [Price], 
+[vw_manageOffers].[Date Created] AS [Date Created], 
+[vw_manageOffers].[Status] AS [Status]
+FROM [dbo].[vw_manageOffers] AS [vw_manageOffers]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_manageReservations" EntityType="Self.vw_manageReservations" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vw_manageReservations].[ID] AS [ID], 
+[vw_manageReservations].[User ID] AS [User ID], 
+[vw_manageReservations].[Offers] AS [Offers], 
+[vw_manageReservations].[Maximum Guests] AS [Maximum Guests], 
+[vw_manageReservations].[Tour Name] AS [Tour Name], 
+[vw_manageReservations].[Check In] AS [Check In], 
+[vw_manageReservations].[Price] AS [Price], 
+[vw_manageReservations].[Last Name] AS [Last Name], 
+[vw_manageReservations].[First Name] AS [First Name], 
+[vw_manageReservations].[Contact #] AS [Contact #], 
+[vw_manageReservations].[Email Address] AS [Email Address], 
+[vw_manageReservations].[Payment] AS [Payment], 
+[vw_manageReservations].[Balance] AS [Balance], 
+[vw_manageReservations].[Status] AS [Status]
+FROM [dbo].[vw_manageReservations] AS [vw_manageReservations]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="vw_role" EntityType="Self.vw_role" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
 [vw_role].[id] AS [id], 
@@ -189,6 +280,19 @@ FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
 [vw_Transactions].[Ratings] AS [Ratings], 
 [vw_Transactions].[Status] AS [Status]
 FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_UserAcc" EntityType="Self.vw_UserAcc" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vw_UserAcc].[ID] AS [ID], 
+[vw_UserAcc].[User ID] AS [User ID], 
+[vw_UserAcc].[Username] AS [Username], 
+[vw_UserAcc].[Password] AS [Password], 
+[vw_UserAcc].[Email] AS [Email], 
+[vw_UserAcc].[Status] AS [Status], 
+[vw_UserAcc].[Role] AS [Role], 
+[vw_UserAcc].[Date Created] AS [Date Created], 
+[vw_UserAcc].[Date Modified] AS [Date Modified]
+FROM [dbo].[vw_UserAcc] AS [vw_UserAcc]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Offers_TourType" Association="Self.FK_Offers_TourType">
       <End Role="TourType" EntitySet="TourType" />
