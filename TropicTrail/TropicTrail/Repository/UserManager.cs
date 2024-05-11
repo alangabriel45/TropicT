@@ -121,6 +121,10 @@ namespace TropicTrail.Repository
         {
             return _userInf._table.Where(m => m.userId == userId).FirstOrDefault();
         }
+        public UserAccount GetUserByUserId(String userId)
+        {
+            return _userAcc._table.Where(m => m.userId == userId).FirstOrDefault();
+        }
         public UserInformation CreateOrRetrieve(String username, ref String err)
         {
             var User = GetUserByUsername(username);
@@ -139,6 +143,14 @@ namespace TropicTrail.Repository
         public List<UserInformation> getAllUserInformation(String userId)
         {
             return _userInf._table.Where(m => m.userId == userId).ToList();
+        }
+        public ErrorCode DeleteUsers(int? userId, ref String error)
+        {
+            return _userAcc.Delete(userId, out error);
+        }
+        public ErrorCode DeleteInformation(String userId, ref String error)
+        {
+            return _userInf.Delete(userId, out error);
         }
     }
 }

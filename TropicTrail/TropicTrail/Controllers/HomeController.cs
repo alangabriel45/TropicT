@@ -329,18 +329,18 @@ namespace TropicTrail.Controllers
 
             if (card == null)
             {
-                ModelState.AddModelError("CardNumber", "Invalid Card Number.");
+                TempData["ErrorMessage"] = "Invalid Card Number or Expiry Date!";
                 return View(indexModel);
             }
             if (enough == null)
             {
-                ModelState.AddModelError("CardNumber", "Insufficient balance.");
+                TempData["ErrorMessage"] = "Insufficient balance.";
                 return View(indexModel);
             }
             decimal? halfPrice = r.getReserve.price / 2;
             if (r.getReserve.payment < halfPrice)
             {
-                ModelState.AddModelError("Payment", "Please pay at least half of the price.");
+                TempData["ErrorPayment"] = "Please pay at least half of the price.";
                 return View(indexModel);
             }
 

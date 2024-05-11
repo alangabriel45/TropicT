@@ -53,23 +53,30 @@ namespace TropicTrail.Controllers
             return View(indexModel);
         }
         [HttpPost]
-        public ActionResult AddOffers(Offers offers)
+        public ActionResult AddOffers(TropicTrail.Lists offers)
         {
             ViewBag.TourType = Utilities.SelectListItemTourTypeByUser(Username);
 
             var offersgUid = $"Offers-{Utilities.gUid}";
 
-            offers.status = 1;
-            offers.dateCreated = DateTime.Now;  
-            offers.offersgUId = offersgUid;
-            offers.userId = UserId;
+            offers.getOffers.status = 1;
+            offers.getOffers.dateCreated = DateTime.Now;
+            offers.getOffers.offersgUId = offersgUid;
+            offers.getOffers.userId = UserId;
 
-            if (_offersManager.CreateOffers(offers, ref ErrorMessage) == ErrorCode.Error)
+            var addOffer = _offersManager.CreateOffers(offers.getOffers, ref ErrorMessage);
+            if (addOffer == ErrorCode.Error)
             {
+                var getUserInfo = _userManager.getAllUserInformation(UserId);
+                var index = new Lists()
+                {
+                    userInfo = getUserInfo,
+                    addOffers = addOffer
+                };
                 ModelState.AddModelError(String.Empty, ErrorMessage);
-                return View(offers);
+                return View(index);
             }
-            TempData["Message"] = $"Product {offers.offersName} added!";
+            TempData["Message"] = $"Product {offers.getOffers.offersName} added!";
             return RedirectToAction("Index");
         }
         public ActionResult OffersDetails(int? id)
@@ -114,6 +121,26 @@ namespace TropicTrail.Controllers
                 listOfUsers = listOfUser
             };
             return View(indexModel);
+        }
+        public ActionResult EditUser(TropicTrail.Lists users, String userid)
+        {
+            var usersAcc = _userManager.GetUserByUserId(userid);
+
+            var index = new Lists()
+            {
+                getUsers = usersAcc
+            };
+            return View(index);
+        }
+        public JsonResult DeleteUsers(String userId, int? id)
+        {
+            var res = new Response();
+            res.code = (Int32)_userManager.DeleteUsers(id, ref ErrorMessage);            
+            res.message = ErrorMessage;
+
+            _userManager.DeleteInformation(userId, ref ErrorMessage);
+
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ManageReservations()
         {
