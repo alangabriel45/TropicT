@@ -134,6 +134,7 @@
     <Content Include="Content\css\ManageReservation.css" />
     <Content Include="Content\css\ManageUsers.css" />
     <Content Include="Content\css\MyProfile.css" />
+    <Content Include="Content\css\OfferDetails.css" />
     <Content Include="Content\css\PageNotFound.css" />
     <Content Include="Content\css\SignUp.css" />
     <Content Include="Content\css\style.css" />
@@ -175,6 +176,7 @@
     <Content Include="Content\img\tour1.jpg" />
     <Content Include="Content\img\tour2.jpg" />
     <Content Include="Content\img\Tropic Trail.png" />
+    <Content Include="Content\img\TropicTrailLogo.png" />
     <Content Include="Content\img\tropicTrial.png" />
     <Content Include="Content\img\twitter.jpg" />
     <Content Include="Content\img\twitter.png" />

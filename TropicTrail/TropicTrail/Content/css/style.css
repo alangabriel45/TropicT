@@ -193,7 +193,11 @@ figure {
 
 img {
   vertical-align: middle;
-  border-style: none;
+  height: 50px;
+  width: 100%;
+  border-style: solid;
+  border-color: #00394F;
+
 }
 
 svg {
@@ -9865,10 +9869,13 @@ a.text-dark:hover, a.text-dark:focus {
   list-style-type: none;
 }
 .user-pic {
-    width: 40px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     cursor: pointer;
     margin-right: 40px; /* Adjust this value as needed */
+    border-style: solid;
+    border-color: #00394F;
 }
 .sub-menu-wrap {
     position: absolute;
@@ -9898,8 +9905,11 @@ a.text-dark:hover, a.text-dark:focus {
     }
     .user-info img {
         width: 60px;
+        height: 60px;
         border-radius: 50%;
         margin-right: 10px;
+        border-style: solid;
+        border-color: #00394F;
     }
 .sub-menu hr {
     border: 0;
