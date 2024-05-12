@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TropicTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Card">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cardNumber" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="expireDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="balance" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="255" />
+    <Property Name="Province" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Offers">
+    <Key>
+      <PropertyRef Name="offersId" />
+    </Key>
+    <Property Name="offersId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="offersgUId" Type="nvarchar" MaxLength="255" />
+    <Property Name="offersName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="offersDesc" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="maxGuest" Type="int" Nullable="false" />
+    <Property Name="tourId" Type="int" Nullable="false" />
+    <Property Name="listPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="dateCreated" Type="date" />
+    <Property Name="status" Type="int" Nullable="false" />
+    <Property Name="userId" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="provinceName" Type="nvarchar" MaxLength="255" />
+    <Property Name="userId" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="nvarchar(max)" />
+    <Property Name="offersName" Type="nvarchar" MaxLength="100" />
+    <Property Name="maxGuest" Type="int" Nullable="false" />
+    <Property Name="tourId" Type="int" Nullable="false" />
+    <Property Name="checkIn" Type="datetime" Nullable="false" />
+    <Property Name="price" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="lastName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="firstName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="contactNum" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="payment" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="balance" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="roleId" />
+    </Key>
+    <Property Name="roleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="roleName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Street">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="street" Type="nvarchar" MaxLength="255" />
+    <Property Name="city" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="TourType">
+    <Key>
+      <PropertyRef Name="tourId" />
+    </Key>
+    <Property Name="tourId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tourName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="reservationId" Type="int" />
+    <Property Name="transactionDate" Type="datetime" />
+    <Property Name="amout" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="ratings" Type="int" />
+    <Property Name="status" Type="int" />
+  </EntityType>
+  <EntityType Name="UserAccount">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="nvarchar(max)" />
+    <Property Name="username" Type="nvarchar" MaxLength="100" />
+    <Property Name="password" Type="nvarchar" MaxLength="100" />
+    <Property Name="email" Type="nvarchar" MaxLength="100" />
+    <Property Name="status" Type="int" />
+    <Property Name="roleId" Type="int" />
+    <Property Name="date_created" Type="datetime" />
+    <Property Name="date_modified" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserInformation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="nvarchar(max)" />
+    <Property Name="lastName" Type="nvarchar" MaxLength="255" />
+    <Property Name="fistName" Type="nvarchar" MaxLength="255" />
+    <Property Name="phone" Type="nvarchar" MaxLength="255" />
+    <Property Name="email" Type="nvarchar" MaxLength="255" />
+    <Property Name="street" Type="nvarchar" MaxLength="255" />
+    <Property Name="city" Type="nvarchar" MaxLength="255" />
+    <Property Name="state" Type="nvarchar" MaxLength="255" />
+    <Property Name="zipCode" Type="nvarchar" MaxLength="255" />
+    <Property Name="profilePic" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TropicT.dbo.vw_manageOffers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_manageOffers">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Tour Type" />
+      <PropertyRef Name="Maximum Guests" />
+      <PropertyRef Name="Price" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Tour Type" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Maximum Guests" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Date Created" Type="date" />
+    <Property Name="Status" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TropicT.dbo.vw_manageReservations' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_manageReservations">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Maximum Guests" />
+      <PropertyRef Name="Tour Name" />
+      <PropertyRef Name="Check In" />
+      <PropertyRef Name="Last Name" />
+      <PropertyRef Name="First Name" />
+      <PropertyRef Name="Contact #" />
+      <PropertyRef Name="Email Address" />
+      <PropertyRef Name="Payment" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="User ID" Type="nvarchar(max)" />
+    <Property Name="Offers" Type="nvarchar" MaxLength="100" />
+    <Property Name="Maximum Guests" Type="int" Nullable="false" />
+    <Property Name="Tour Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Check In" Type="datetime" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Last Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="First Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Contact #" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Email Address" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Payment" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Balance" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Status" Type="varchar" MaxLength="8" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TropicT.dbo.vw_role' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="100" />
+    <Property Name="roleName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TropicT.dbo.vw_Transactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_Transactions">
+    <Key>
+      <PropertyRef Name="Reservation_Id" />
+      <PropertyRef Name="Booked_By" />
+    </Key>
+    <Property Name="Reservation_Id" Type="int" Nullable="false" />
+    <Property Name="Booked_By" Type="nvarchar" MaxLength="512" Nullable="false" />
+    <Property Name="Transaction_Date" Type="datetime" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Payment" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Ratings" Type="int" />
+    <Property Name="Status" Type="varchar" MaxLength="9" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TropicT.dbo.vw_UserAcc' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_UserAcc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="User ID" Type="nvarchar(max)" />
+    <Property Name="Username" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Status" Type="varchar" MaxLength="10" />
+    <Property Name="Role" Type="varchar" MaxLength="8" />
+    <Property Name="Date Created" Type="datetime" />
+    <Property Name="Date Modified" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TropicT.dbo.vw_ViewReservation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_ViewReservation">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Max Guest" />
+      <PropertyRef Name="Tour Type" />
+      <PropertyRef Name="Check In" />
+      <PropertyRef Name="Last Name" />
+      <PropertyRef Name="First Name" />
+      <PropertyRef Name="Contact Number" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Payment" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="User ID" Type="nvarchar(max)" />
+    <Property Name="Offers" Type="nvarchar" MaxLength="100" />
+    <Property Name="Max Guest" Type="int" Nullable="false" />
+    <Property Name="Tour Type" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Check In" Type="datetime" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Last Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="First Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Contact Number" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Payment" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Balance" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Status" Type="varchar" MaxLength="9" />
+  </EntityType>
+  <Association Name="FK_Offers_TourType">
+    <End Role="TourType" Type="Self.TourType" Multiplicity="1" />
+    <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TourType">
+        <PropertyRef Name="tourId" />
+      </Principal>
+      <Dependent Role="Offers">
+        <PropertyRef Name="tourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAccount_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="roleId" />
+      </Principal>
+      <Dependent Role="UserAccount">
+        <PropertyRef Name="roleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_Balance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="balance" Type="decimal" Mode="In" />
+    <Parameter Name="cardNum" Type="nvarchar" Mode="In" />
+    <Parameter Name="expireDate" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_City" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="province" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_Street" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="city" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateUserInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="lName" Type="nvarchar" Mode="In" />
+    <Parameter Name="fName" Type="nvarchar" Mode="In" />
+    <Parameter Name="phone" Type="nvarchar" Mode="In" />
+    <Parameter Name="street" Type="nvarchar" Mode="In" />
+    <Parameter Name="city" Type="nvarchar" Mode="In" />
+    <Parameter Name="state" Type="nvarchar" Mode="In" />
+    <Parameter Name="zipCode" Type="nvarchar" Mode="In" />
+    <Parameter Name="profilePic" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_ViewOffers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="TropicTModelStoreContainer">
+    <EntitySet Name="Card" EntityType="Self.Card" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Offers" EntityType="Self.Offers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Street" EntityType="Self.Street" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TourType" EntityType="Self.TourType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInformation" EntityType="Self.UserInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vw_manageOffers" EntityType="Self.vw_manageOffers" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vw_manageOffers].[ID] AS [ID], 
+[vw_manageOffers].[Name] AS [Name], 
+[vw_manageOffers].[Tour Type] AS [Tour Type], 
+[vw_manageOffers].[Maximum Guests] AS [Maximum Guests], 
+[vw_manageOffers].[Price] AS [Price], 
+[vw_manageOffers].[Date Created] AS [Date Created], 
+[vw_manageOffers].[Status] AS [Status]
+FROM [dbo].[vw_manageOffers] AS [vw_manageOffers]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_manageReservations" EntityType="Self.vw_manageReservations" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vw_manageReservations].[ID] AS [ID], 
+[vw_manageReservations].[User ID] AS [User ID], 
+[vw_manageReservations].[Offers] AS [Offers], 
+[vw_manageReservations].[Maximum Guests] AS [Maximum Guests], 
+[vw_manageReservations].[Tour Name] AS [Tour Name], 
+[vw_manageReservations].[Check In] AS [Check In], 
+[vw_manageReservations].[Price] AS [Price], 
+[vw_manageReservations].[Last Name] AS [Last Name], 
+[vw_manageReservations].[First Name] AS [First Name], 
+[vw_manageReservations].[Contact #] AS [Contact #], 
+[vw_manageReservations].[Email Address] AS [Email Address], 
+[vw_manageReservations].[Payment] AS [Payment], 
+[vw_manageReservations].[Balance] AS [Balance], 
+[vw_manageReservations].[Status] AS [Status]
+FROM [dbo].[vw_manageReservations] AS [vw_manageReservations]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_role" EntityType="Self.vw_role" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vw_role].[id] AS [id], 
+[vw_role].[username] AS [username], 
+[vw_role].[roleName] AS [roleName]
+FROM [dbo].[vw_role] AS [vw_role]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_Transactions" EntityType="Self.vw_Transactions" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vw_Transactions].[Reservation_Id] AS [Reservation_Id], 
+[vw_Transactions].[Booked_By] AS [Booked_By], 
+[vw_Transactions].[Transaction_Date] AS [Transaction_Date], 
+[vw_Transactions].[Price] AS [Price], 
+[vw_Transactions].[Payment] AS [Payment], 
+[vw_Transactions].[Ratings] AS [Ratings], 
+[vw_Transactions].[Status] AS [Status]
+FROM [dbo].[vw_Transactions] AS [vw_Transactions]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_UserAcc" EntityType="Self.vw_UserAcc" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vw_UserAcc].[ID] AS [ID], 
+[vw_UserAcc].[User ID] AS [User ID], 
+[vw_UserAcc].[Username] AS [Username], 
+[vw_UserAcc].[Password] AS [Password], 
+[vw_UserAcc].[Email] AS [Email], 
+[vw_UserAcc].[Status] AS [Status], 
+[vw_UserAcc].[Role] AS [Role], 
+[vw_UserAcc].[Date Created] AS [Date Created], 
+[vw_UserAcc].[Date Modified] AS [Date Modified]
+FROM [dbo].[vw_UserAcc] AS [vw_UserAcc]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_ViewReservation" EntityType="Self.vw_ViewReservation" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vw_ViewReservation].[ID] AS [ID], 
+[vw_ViewReservation].[User ID] AS [User ID], 
+[vw_ViewReservation].[Offers] AS [Offers], 
+[vw_ViewReservation].[Max Guest] AS [Max Guest], 
+[vw_ViewReservation].[Tour Type] AS [Tour Type], 
+[vw_ViewReservation].[Check In] AS [Check In], 
+[vw_ViewReservation].[Price] AS [Price], 
+[vw_ViewReservation].[Last Name] AS [Last Name], 
+[vw_ViewReservation].[First Name] AS [First Name], 
+[vw_ViewReservation].[Contact Number] AS [Contact Number], 
+[vw_ViewReservation].[Email] AS [Email], 
+[vw_ViewReservation].[Payment] AS [Payment], 
+[vw_ViewReservation].[Balance] AS [Balance], 
+[vw_ViewReservation].[Status] AS [Status]
+FROM [dbo].[vw_ViewReservation] AS [vw_ViewReservation]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Offers_TourType" Association="Self.FK_Offers_TourType">
+      <End Role="TourType" EntitySet="TourType" />
+      <End Role="Offers" EntitySet="Offers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAccount_Role" Association="Self.FK_UserAccount_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserAccount" EntitySet="UserAccount" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

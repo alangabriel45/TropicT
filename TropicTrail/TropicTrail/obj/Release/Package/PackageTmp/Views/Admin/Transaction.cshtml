@@ -1,0 +1,76 @@
+﻿@*@model IEnumerable<TropicTrail.vw_Transactions>*@
+@model TropicTrail.Lists
+@{
+    ViewBag.Title = "Transaction";
+}
+<link href="~/Content/css/Transactions.css" rel="stylesheet" />
+
+<input type="text" id="searchInput" onkeyup="searchTransactions()" placeholder="Search transactions..." style="margin-top: 20px;">
+<button class="btn btn-info" onclick="openPopup()" style="margin-bottom: 10px;">Open Pop-up</button>
+
+<table class="table" id="transactionTable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.getTransact.Reservation_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.getTransact.Booked_By)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.getTransact.Transaction_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.getTransact.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.getTransact.Payment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.getTransact.Ratings)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.getTransact.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.listOfTransact) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reservation_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Booked_By)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Transaction_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Payment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ratings)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+    </tr>
+}
+
+</table>
+
+<div id="popupSquare" class="popup-square">
+    <span class="close" onclick="closePopup()" style="cursor: pointer;">&times;</span>
+    <h2>Total Summary</h2>
+    <select id="totalDropdown">
+        <option value="totalReservation">Total of Reservations</option>
+        <option value="totalIncome">Total Income</option>
+    </select>
+    <input type="text" id="outputTextBox" />
+    <button class="btn btn-info" onclick="sumReservationsAndPayments()">Sum Reservations and Payments</button>
+</div>
+
+<script src="~/Content/js/pop.js"></script>

@@ -1,0 +1,238 @@
+﻿.*{
+    margin: 0;
+    padding: 0;
+     box-sizing: border-box;
+}
+body{
+    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.15)),url("../img/bg-image2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+.logo {
+    width: 150px;
+    margin-left: 1%;
+    height: auto;
+}
+
+
+.banner{
+    width:  100%;
+    height: 100vh;   
+    background-size: cover;
+    background-position: center;
+}
+.p-Header{
+    padding-top: 250px;
+    padding-left: 100px;
+    font-size: 45pt;
+    color: White;
+}
+.p-subHeader{
+    padding-left: 110px;
+    font-size: 15pt;
+    color: white;
+}
+.h-line{
+    width: 5%;
+    height: 7px;
+    position: relative;
+    border-radius: 10px;
+    left: -775px;
+    top: 220px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: rgb(0, 196, 145)
+}
+.page-body{
+     background-image: linear-gradient(#07384E,rgba(0,0,0,0.85)),url("../img/bg-image2.jpg");
+}
+.card {
+    background-color: #ccc;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.card:hover {
+  transform: scale(1.03); 
+}
+.card img {
+        width: 100%;
+        height: 50%;
+        border-radius: 10px;
+        padding-top: 15px;
+}
+.card-container {
+    display: flex; 
+    justify-content: space-between; 
+    max-height: 550px;
+    overflow-y: auto;
+    margin-top: 20px;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    position: center;
+}
+
+/* Style the vertical rectangle container */
+.rectangle {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 40px; /* Increase padding for larger size */
+    width: 400px; /* Increase width for larger size */
+    height: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the form */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px; /* Increase padding for larger size */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.form-group input[type="submit"] {
+    background-color: #28a745; /* Green */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-group input[type="submit"]:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+.container-tour {
+  text-align: center;
+  margin-top: 50px;
+}
+
+h1 {
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container a {
+  margin: 0 20px;
+  text-decoration: none;
+}
+
+.button-container img {
+  width: 250px; /* Fixed width for both images */
+  height: 350px; /* Fixed height for both images */
+  object-fit: cover; /* Maintain aspect ratio and cover container */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.button-container img:hover {
+  transform: scale(1.1);
+}
+.form-group button {
+  width:100%;
+  border-radius: 5px;
+  position:center;
+  height:10%;
+}
+.pop-up{
+   width: 400px;
+   background: #fff;
+   border-radius: 6px;
+   position:absolute;
+   top: 0%;
+   left:69%;
+   transform: translate(-50%,-50%) scale(0.1);
+   text-align: center;
+   padding: 0 10px 10px;
+   color: #333;
+   visibility: hidden;
+   transition: transform 0.4s, top 0.4s;
+}
+.open-popup{
+   visibility: visible;
+   top: 50%;
+   transform: translate(-50%,-50%) scale(1);
+}
+.pop-up img{
+   width: 100px;
+   margin-top: -50px;
+   border-radius: 50%;
+   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+   background-color: white;
+}
+.pop-up h2{
+   font-size: 38px;
+   font-weight: 500;
+   margin: 30px 0 10px;
+
+}
+.pop-up button{
+   width: 100px;
+   margin-top: 50px;
+   padding: 10px 0;
+   background: #6fd649;
+   color: #fff;
+   border: 0;
+   outline: none;
+   font-size: 18px;
+   border-radius: 4px;
+   cursor: pointer;
+   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo-group{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding-left: 7%;
+}
+.logo-group img{
+    width: 25px;
+    height:auto;
+    border-radius: 50%;
+}
+.logo-group ul li{
+  list-style: none;
+  padding: 0px 50px;
+  display: inline-flex;
+
+}
+.logo-group ul li p{
+    font-size: 10pt;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.btnSubmit{
+    color: #28a745;
+    width: auto;
+    height: 2px;
+}
+.btnSubmit p{
+    color: white;
+    text-align: center;
+}
+
+/*Details CSS*/

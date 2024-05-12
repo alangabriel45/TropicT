@@ -1,0 +1,120 @@
+﻿@*@model IEnumerable<TropicTrail.Reservation>*@
+@model TropicTrail.Lists
+
+@{
+    ViewBag.Title = "YourReservation";
+}
+<link href="~/Content/css/YourReservation.css" rel="stylesheet" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<div class="reservation-container" style="background-color: white;">
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.getReservation.Offers)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.getReservation.Offers)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.getReservation.Tour_Type)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.getReservation.Check_In)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.getReservation.Price)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.getReservation.Last_Name)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.getReservation.First_Name)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.getReservation.Contact_Number)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.getReservation.Email)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.getReservation.Payment)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.getReservation.Balance)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.getReservation.Status)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.yourReservation)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Offers)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Max_Guest)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tour_Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Check_In)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Last_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.First_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contact_Number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Payment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Balance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div id="finishModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Rate the service and confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Your rating form here -->
+                <label for="rating">Rate the service:</label>
+                <input type="number" id="rating" name="rating" min="1" max="5" required />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="confirmFinish">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/js/pop.js"></script>

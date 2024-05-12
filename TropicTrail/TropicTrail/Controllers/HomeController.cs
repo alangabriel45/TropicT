@@ -459,7 +459,7 @@ namespace TropicTrail.Controllers
             {
                 userInfo = getUserInfo,
             };
-            if (userInf.createRetrieve.profilePic == null && profilePic == null)
+            if (getInfo.profilePic == null && profilePic == null)
             {
                 TempData["ErrorProfile"] = "Please Select a profile Pic";
                 return View(indexModel);

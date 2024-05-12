@@ -1,0 +1,61 @@
+﻿@*@model TropicTrail.Offers*@
+@model TropicTrail.Lists
+
+@{
+    ViewBag.Title = "BookNow";
+}
+
+<link href="~/Content/css/book-now.css" rel="stylesheet" />
+
+<body>
+    <div class="container">
+        <div class="content">
+            <h3>@Model.getOffers.offersName</h3>
+            <div class="image-container">
+                <img src="~/Content/img/bg-image2.jpg" />
+            </div>
+            <div>
+                <h3>Description</h3>
+                <p>@Model.getOffers.offersDesc</p>
+            </div>
+            <div>
+                <ul>
+                    <li>Visit multiple stunning islands in the region</li>
+                    <li>Enjoy snorkeling and diving in crystal-clear waters</li>
+                    <li>Experience local culture and cuisine on each island</li>
+                    <li>Relax on pristine white sandy beaches</li>
+                    <li>Guided tours with knowledgeable local guides</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        @using (Html.BeginForm("BookNow", "Home", FormMethod.Post))
+                {
+                    Session["OfferId"] = Model.getOffers.offersId;
+            <div class="booking-form">
+                <h2>Booking Form</h2>
+
+                <div>
+                    <label for="checkInDate">Check-in Date:</label>
+                    <input type="date" id="checkInDate" name="checkInDate" class="form-control" required />
+                </div>
+
+                <!-- Hidden input for the price -->
+                <input type="hidden" id="price" name="price" value="@Model.getOffers.listPrice" />
+
+                <div>
+                    <label for="numGuests">Number of Guests:</label>
+                    <input type="text" readonly="readonly" id="numGuests" name="numGuests" class="form-control" value="@Model.getOffers.maxGuest" required />
+                    @if (TempData["NotEqual"] != null)
+                    {
+                        <div class="text-danger">
+                            @TempData["NotEqual"]
+                        </div>
+                    }
+                </div>
+
+                <button type="submit" class="btn btn-primary">Continue Booking</button>
+            </div>
+            
+        }
+</body>

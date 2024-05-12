@@ -1,0 +1,82 @@
+﻿@*@model IEnumerable<TropicTrail.UserAccount>*@
+@model TropicTrail.Lists
+@{
+    ViewBag.Title = "ManageUsers";
+}
+<link href="~/Content/css/ManageUsers.css" rel="stylesheet" />
+<h2>ManageUsers</h2>
+
+<p >
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" style="background-color: white;">
+    <tr>
+        <th>        
+            User ID
+        </th>
+        <th>
+            Username
+        </th>
+        <th>
+            Password
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Role
+        </th>
+        <th>
+            Date Create
+        </th>
+        <th>
+            Date Modified
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+@foreach (var item in Model.listUsers) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @{
+                var pass = "";
+                for (var i = 0; i < item.Password.Length; i++)
+                {
+                    pass += "*";
+                }
+                }
+            @Html.DisplayFor(modelItem => pass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Role)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_Created)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_Modified)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditUser", new { userid = item.User_ID }) |
+            @Html.ActionLink("Delete", "DeleteUsers", new { userId=item.User_ID, id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

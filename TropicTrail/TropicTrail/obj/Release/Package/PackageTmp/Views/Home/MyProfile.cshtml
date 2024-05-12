@@ -1,0 +1,148 @@
+﻿@*@model TropicTrail.UserInformation*@
+@model TropicTrail.Lists
+@{
+    ViewBag.Title = "MyProfile";
+}
+
+<div class="container" style="background-color: whitesmoke;">
+    <div class="profile-form" style="width: 100%;">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+
+            .profile-container {
+                max-width: 600px;
+                margin: 20px auto;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+            }
+
+            .profile-pic {
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                margin: 0 auto 20px;
+                display: block;
+            }
+
+            .profile-details {
+                text-align: left;
+            }
+
+                .profile-details div {
+                    margin-bottom: 10px;
+                }
+
+            .profile-label {
+                font-weight: bold;
+            }
+        </style>
+        <div class="profile-container">
+            @if (Model.createRetrieve.profilePic != null)
+            {
+                <img src="@Url.Content("~/UploadedFiles/" + Model.createRetrieve.profilePic)" alt="Profile Picture" class="profile-pic">
+            }
+            else
+            {
+                <img src="~/Content/img/profile.jpg" alt="Profile Picture" class="profile-pic">
+            }
+            <div class="profile-details">
+                <div>
+                    @if (Model.createRetrieve.profilePic != null)
+                    {
+                        <span class="profile-label">Last Name:</span> <input type="text" disabled value="@Model.createRetrieve.lastName"  style="text-align: center;"/>
+                    }
+                    else
+                    {
+                        <span class="profile-label">Last Name:</span>
+                    }
+                </div>
+                <div>
+                    @if (Model.createRetrieve.fistName != null)
+                    {
+                        <span class="profile-label">First Name:</span><input type="text" disabled value="@Model.createRetrieve.fistName" style="text-align: center; margin-left: 10px;"/>
+                    }
+                    else
+                    {
+                        <span class="profile-label">First Name:</span>
+                    }
+
+                </div>
+                <div>
+                    @if (Model.createRetrieve.phone != null)
+                    {
+                        <span class="profile-label">Phone:</span><input type="text" disabled value="@Model.createRetrieve.phone" style="text-align: center; margin-left: 10px;"/>
+                    }
+                    else
+                    {
+                        <span class="profile-label">Phone:</span>
+                    }
+
+                </div>
+                <div>
+                    @if (Model.createRetrieve.email != null)
+                    {
+                        <span class="profile-label">Email:</span><input type="text" disabled value="@Model.createRetrieve.email" style="text-align: center; margin-left: 10px;" />
+                    }
+                    else
+                    {
+                        <span class="profile-label">Email:</span>
+                    }
+
+                </div>
+                <div>
+                    @if (Model.createRetrieve.street != null)
+                    {
+                        <span class="profile-label">Street:</span><input type="text" disabled value="@Model.createRetrieve.street" style="text-align: center; margin-left: 10px;"/>
+                    }
+                    else
+                    {
+                        <span class="profile-label">Street:</span>
+                    }
+
+                </div>
+                <div>
+                    @if (Model.createRetrieve.city != null)
+                    {
+                        <span class="profile-label">City:</span><input type="text" disabled value="@Model.createRetrieve.city" style="text-align: center; margin-left: 10px;"/>
+                    }
+                    else
+                    {
+                        <span class="profile-label">City:</span>
+                    }
+
+                </div>
+                <div>
+                    @if (Model.createRetrieve.state != null)
+                    {
+                        <span class="profile-label">State:</span><input type="text" disabled value="@Model.createRetrieve.state" style="text-align: center; margin-left: 10px;"/>
+                    }
+                    else
+                    {
+                        <span class="profile-label">State:</span>
+                    }
+
+                </div>
+                <div>
+                    @if (Model.createRetrieve.zipCode != null)
+                    {
+                        <span class="profile-label">Zip Code:</span><input type="text" disabled value="@Model.createRetrieve.zipCode" style="text-align: center; margin-left: 10px;"/>
+                    }
+                    else
+                    {
+                        <span class="profile-label">Zip Code:</span>
+                    }
+
+                </div>
+                <div>
+                    <a href="~/Home/EditProfile/@Model.createRetrieve.userId" class="btn btn-info"><i class="fa fa-info"></i> Edit Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

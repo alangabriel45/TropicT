@@ -1,0 +1,14 @@
+﻿.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-left: 100px;
+}
+
+.signUp-container {
+    /* Add your existing styles here */
+}
+.rectangle{
+    margin-left: 510px;
+}

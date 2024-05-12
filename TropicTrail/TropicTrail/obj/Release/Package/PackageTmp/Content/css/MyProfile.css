@@ -1,0 +1,33 @@
+﻿.container {
+    max-width: 100px;
+    margin: 0 auto;
+    padding: 0;
+    background-color: whitesmoke;
+}
+
+h2 {
+    text-align: center;
+}
+
+.profile-info {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+dl {
+    margin-bottom: 0;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin-left: 0;
+    margin-bottom: 10px;
+}
+input{
+    text-align: center;
+}
+

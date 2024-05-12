@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Login";
+    ViewBag.HeaderTitle = "Login";
+}
+
+    <title>Login</title>
+    <link href="~/Content/css/index-css.css" rel="stylesheet" />
+
+<body>
+    @using (Html.BeginForm())
+    {
+        <div class="container">
+            <div class="rectangle">
+                <div class="form-group">
+                    <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" id="username"/>
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="username" required />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" required />
+                </div>
+
+                <div class="form-group">
+                    @if (!String.IsNullOrEmpty(ViewBag.Error as String))
+                {
+                        <div style="color: red;">
+                            @ViewBag.Error
+                        </div>
+                    }
+                </div>
+                <div class="form-group" onclick="submit(this)">
+                    <input type="submit" class="btn btn-success" value="Login" />
+
+
+                </div>
+            </div>
+        </div>
+
+    }
+</body>

@@ -1,0 +1,72 @@
+﻿@model TropicTrail.Lists
+
+@{
+    ViewBag.Title = "ManageOffers";
+}
+
+<link href="~/Content/css/admin.css" rel="stylesheet" />
+
+<div class="container">
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Tour Type
+                </th>
+                <th>
+                    Max Guests
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+
+                    Date Created
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+
+            @foreach (var item in Model.listOffers)
+            {              
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @item.Tour_Type
+                    </td>
+                    <td>
+                        @item.Maximum_Guests
+                    </td>
+                    <td>
+                        <span class="badge badge-success">Php @item.Price.ToString("N2")</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date_Created)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        <a href="~/Admin/OffersDetails/@item.ID" class="btn btn-info" target="_blank"><i class="fa fa-info"></i> Details</a> |
+                        @*<a href="~/Admin/OffersDelete/@item.ID" class="btn btn-danger" target="_blank"><i class="fa fa-info"></i> Delete</a>*@
+                        <form id="deleteForm" action="~/Admin/OffersDelete/@item.ID" method="post">
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-info"></i> Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+        <a href="~/Admin/AddOffers" class="btn btn-success">Add Offers</a>
+    </div>
+</div>

@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TropicTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TropicTEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_UpdateUserInformation">
+      <Parameter Name="userId" Mode="In" Type="String" />
+      <Parameter Name="lName" Mode="In" Type="String" />
+      <Parameter Name="fName" Mode="In" Type="String" />
+      <Parameter Name="phone" Mode="In" Type="String" />
+      <Parameter Name="street" Mode="In" Type="String" />
+      <Parameter Name="city" Mode="In" Type="String" />
+      <Parameter Name="state" Mode="In" Type="String" />
+      <Parameter Name="zipCode" Mode="In" Type="String" />
+      <Parameter Name="profilePic" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ViewOffers" ReturnType="Collection(TropicTModel.sp_ViewOffers_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_City" ReturnType="Collection(TropicTModel.sp_City_Result)">
+      <Parameter Name="province" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Street" ReturnType="Collection(TropicTModel.sp_Street_Result)">
+      <Parameter Name="city" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Balance">
+      <Parameter Name="balance" Mode="In" Type="Decimal" />
+      <Parameter Name="cardNum" Mode="In" Type="String" />
+      <Parameter Name="expireDate" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="Card" EntityType="TropicTModel.Card" />
+    <EntitySet Name="City" EntityType="TropicTModel.City" />
+    <EntitySet Name="Offers" EntityType="TropicTModel.Offers" />
+    <EntitySet Name="Province" EntityType="TropicTModel.Province" />
+    <EntitySet Name="Reservation" EntityType="TropicTModel.Reservation" />
+    <EntitySet Name="Role" EntityType="TropicTModel.Role" />
+    <EntitySet Name="Street" EntityType="TropicTModel.Street" />
+    <EntitySet Name="TourType" EntityType="TropicTModel.TourType" />
+    <EntitySet Name="Transaction" EntityType="TropicTModel.Transaction" />
+    <EntitySet Name="UserAccount" EntityType="TropicTModel.UserAccount" />
+    <EntitySet Name="UserInformation" EntityType="TropicTModel.UserInformation" />
+    <EntitySet Name="vw_manageOffers" EntityType="TropicTModel.vw_manageOffers" />
+    <EntitySet Name="vw_manageReservations" EntityType="TropicTModel.vw_manageReservations" />
+    <EntitySet Name="vw_role" EntityType="TropicTModel.vw_role" />
+    <EntitySet Name="vw_Transactions" EntityType="TropicTModel.vw_Transactions" />
+    <EntitySet Name="vw_UserAcc" EntityType="TropicTModel.vw_UserAcc" />
+    <EntitySet Name="vw_ViewReservation" EntityType="TropicTModel.vw_ViewReservation" />
+    <AssociationSet Name="FK_Offers_TourType" Association="TropicTModel.FK_Offers_TourType">
+      <End Role="TourType" EntitySet="TourType" />
+      <End Role="Offers" EntitySet="Offers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAccount_Role" Association="TropicTModel.FK_UserAccount_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserAccount" EntitySet="UserAccount" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_ViewOffers_Result">
+    <Property Type="String" Name="Pax" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="Tour_Type" Nullable="false" MaxLength="255" />
+    <Property Type="Decimal" Name="Price" Nullable="false" Precision="10" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="sp_City_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Province" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="sp_Street_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="street" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="city" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <EntityType Name="Card">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cardNumber" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="expireDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="balance" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="City1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Province" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Offers">
+    <Key>
+      <PropertyRef Name="offersId" />
+    </Key>
+    <Property Name="offersId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="offersgUId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="offersName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="offersDesc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="maxGuest" Type="Int32" Nullable="false" />
+    <Property Name="tourId" Type="Int32" Nullable="false" />
+    <Property Name="listPrice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="dateCreated" Type="DateTime" Precision="0" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TourType" Relationship="TropicTModel.FK_Offers_TourType" FromRole="Offers" ToRole="TourType" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="provinceName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="offersName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="maxGuest" Type="Int32" Nullable="false" />
+    <Property Name="tourId" Type="Int32" Nullable="false" />
+    <Property Name="checkIn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="lastName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="firstName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="contactNum" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="payment" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="balance" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="roleId" />
+    </Key>
+    <Property Name="roleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserAccount" Relationship="TropicTModel.FK_UserAccount_Role" FromRole="Role" ToRole="UserAccount" />
+  </EntityType>
+  <EntityType Name="Street">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="street1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TourType">
+    <Key>
+      <PropertyRef Name="tourId" />
+    </Key>
+    <Property Name="tourId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tourName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="userId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Offers" Relationship="TropicTModel.FK_Offers_TourType" FromRole="TourType" ToRole="Offers" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reservationId" Type="Int32" />
+    <Property Name="transactionDate" Type="DateTime" Precision="3" />
+    <Property Name="amout" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="ratings" Type="Int32" />
+    <Property Name="status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="UserAccount">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="roleId" Type="Int32" />
+    <Property Name="date_created" Type="DateTime" Precision="3" />
+    <Property Name="date_modified" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Role" Relationship="TropicTModel.FK_UserAccount_Role" FromRole="UserAccount" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="UserInformation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="lastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="fistName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="street" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="state" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="zipCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="profilePic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vw_manageOffers">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Tour_Type" />
+      <PropertyRef Name="Maximum_Guests" />
+      <PropertyRef Name="Price" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Tour_Type" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Maximum_Guests" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Date_Created" Type="DateTime" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vw_manageReservations">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Maximum_Guests" />
+      <PropertyRef Name="Tour_Name" />
+      <PropertyRef Name="Check_In" />
+      <PropertyRef Name="Last_Name" />
+      <PropertyRef Name="First_Name" />
+      <PropertyRef Name="Contact__" />
+      <PropertyRef Name="Email_Address" />
+      <PropertyRef Name="Payment" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="User_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Offers" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Maximum_Guests" Type="Int32" Nullable="false" />
+    <Property Name="Tour_Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Check_In" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Last_Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="First_Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Contact__" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Email_Address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Payment" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Balance" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Status" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vw_role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vw_Transactions">
+    <Key>
+      <PropertyRef Name="Reservation_Id" />
+      <PropertyRef Name="Booked_By" />
+    </Key>
+    <Property Name="Reservation_Id" Type="Int32" Nullable="false" />
+    <Property Name="Booked_By" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Transaction_Date" Type="DateTime" Precision="3" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Payment" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Ratings" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vw_UserAcc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="User_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="Date_Created" Type="DateTime" Precision="3" />
+    <Property Name="Date_Modified" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="vw_ViewReservation">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Max_Guest" />
+      <PropertyRef Name="Tour_Type" />
+      <PropertyRef Name="Check_In" />
+      <PropertyRef Name="Last_Name" />
+      <PropertyRef Name="First_Name" />
+      <PropertyRef Name="Contact_Number" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Payment" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="User_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Offers" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Max_Guest" Type="Int32" Nullable="false" />
+    <Property Name="Tour_Type" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Check_In" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Last_Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="First_Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_Number" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Payment" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Balance" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Status" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_Offers_TourType">
+    <End Type="TropicTModel.TourType" Role="TourType" Multiplicity="1" />
+    <End Type="TropicTModel.Offers" Role="Offers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TourType">
+        <PropertyRef Name="tourId" />
+      </Principal>
+      <Dependent Role="Offers">
+        <PropertyRef Name="tourId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAccount_Role">
+    <End Type="TropicTModel.Role" Role="Role" Multiplicity="0..1" />
+    <End Type="TropicTModel.UserAccount" Role="UserAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="roleId" />
+      </Principal>
+      <Dependent Role="UserAccount">
+        <PropertyRef Name="roleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,22 @@
+﻿body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%; /* Set minimum height of the body to 100% of the viewport height */
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    position: center;
+}
+
+.form-horizontal {
+  flex: 1; /* Allow the form to expand and fill the remaining vertical space */
+}
+.table {
+    overflow: auto;
+}

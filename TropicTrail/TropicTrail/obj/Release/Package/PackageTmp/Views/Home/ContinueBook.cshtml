@@ -1,0 +1,79 @@
+﻿@*@model TropicTrail.Reservation*@
+@model TropicTrail.Lists
+@{
+    ViewBag.Title = "ContinueBook";
+}
+
+
+<div class="center-container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-md-2">Reservation Form</h2>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            Last Name
+                            @Html.EditorFor(model => model.getReserve.lastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.getReserve.lastName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            First Name
+                            @Html.EditorFor(model => model.getReserve.firstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.getReserve.firstName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            Contact Number
+                            @Html.EditorFor(model => model.getReserve.contactNum, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.getReserve.contactNum, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            Email
+                            @Html.EditorFor(model => model.getReserve.email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.getReserve.email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <h4 class="card-title">Card Payment</h4>
+                        <div class="form-group">
+                            <label for="CardNumber" class="control-label">Card Number</label>
+                            <input type="text" id="CardNumber" name="CardNumber" class="form-control" placeholder="0000 0000 0000 0000" required>
+                            @if (TempData["ErrorMessage"] != null)
+                            {
+                                <div class="text-danger">
+                                    @TempData["ErrorMessage"]
+                                </div>
+                            }
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ExpiryDate" class="control-label">Expiry Date</label>
+                            <input type="text" id="ExpiryDate" name="ExpiryDate" class="form-control" placeholder="MM/YYYY" required>
+                        </div>
+
+                        <div class="form-group">
+                            Payment
+                            @Html.EditorFor(model => model.getReserve.payment, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.getReserve.payment, "", new { @class = "text-danger" })
+                            @if (TempData["ErrorPayment"] != null)
+                            {
+                                <div class="text-danger">
+                                    @TempData["ErrorPayment"]
+                                </div>
+                            }
+                        </div>
+
+                        <div class="form-group active">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
