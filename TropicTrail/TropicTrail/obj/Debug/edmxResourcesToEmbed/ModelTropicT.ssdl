@@ -139,7 +139,7 @@ warning 6002: The table/view 'TropicT.dbo.vw_manageOffers' does not have a prima
     <Property Name="Maximum Guests" Type="int" Nullable="false" />
     <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
     <Property Name="Date Created" Type="date" />
-    <Property Name="Status" Type="varchar" MaxLength="8" />
+    <Property Name="Status" Type="varchar" MaxLength="10" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'TropicT.dbo.vw_manageReservations' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->

@@ -100,13 +100,33 @@ namespace TropicTrail.Controllers
 
             return View(indexModel);
         }
-        public JsonResult OffersDelete(int? id)
+        [HttpPost]
+        public ActionResult OffersDelete(int? id)
         {
+
             var res = new Response();
             res.code = (Int32)_offersManager.DeleteOffers(id, ref ErrorMessage);
             res.message = ErrorMessage;
 
-            return Json(res, JsonRequestBehavior.AllowGet);
+            return RedirectToAction("ManageOffers");
+        }
+        [HttpPost]
+        public ActionResult ReservationDelete(int? id)
+        {
+            var getRes = _reservationManager.GetReservationById(id);
+
+            if(getRes != null)
+            {
+                var res = new Response();
+                res.code = (Int32)_reservationManager.DeleteReservation(id, ref ErrorMessage);
+                res.message = ErrorMessage;
+
+                // Redirect to the ManageReservation action
+                return RedirectToAction("ManageReservations");
+            }
+            TempData["ErrorRes"] = "Reservation Id does not exist!";
+            return RedirectToAction("ManageReservations");
+            
         }
         #endregion
 
@@ -159,7 +179,7 @@ namespace TropicTrail.Controllers
         public ActionResult ManageReservation(int id)
         {
             var reservation = _reservationManager.GetReservationById(id);
-            reservation.status = 1; // Update status to 1 (confirmed)
+            reservation.status = 2; // Update status to 1 (confirmed)
             _reservationManager.UpdateReservation(reservation, ref ErrorMessage);
             return RedirectToAction("ManageReservations");
         }

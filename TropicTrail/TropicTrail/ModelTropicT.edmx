@@ -144,7 +144,7 @@ warning 6002: The table/view 'TropicT.dbo.vw_manageOffers' does not have a prima
           <Property Name="Maximum Guests" Type="int" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Date Created" Type="date" />
-          <Property Name="Status" Type="varchar" MaxLength="8" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TropicT.dbo.vw_manageReservations' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -418,6 +418,11 @@ FROM [dbo].[vw_ViewReservation] AS [vw_ViewReservation]</DefiningQuery>
           <FunctionImport Name="sp_Street" ReturnType="Collection(TropicTModel.sp_Street_Result)">
           <Parameter Name="city" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_Balance">
+            <Parameter Name="balance" Mode="In" Type="Decimal" />
+            <Parameter Name="cardNum" Mode="In" Type="String" />
+            <Parameter Name="expireDate" Mode="In" Type="String" />
+          </FunctionImport>
           <EntitySet Name="Card" EntityType="TropicTModel.Card" />
           <EntitySet Name="City" EntityType="TropicTModel.City" />
           <EntitySet Name="Offers" EntityType="TropicTModel.Offers" />
@@ -443,11 +448,6 @@ FROM [dbo].[vw_ViewReservation] AS [vw_ViewReservation]</DefiningQuery>
             <End Role="Role" EntitySet="Role" />
             <End Role="UserAccount" EntitySet="UserAccount" />
           </AssociationSet>
-          <FunctionImport Name="sp_Balance">
-            <Parameter Name="balance" Mode="In" Type="Decimal" />
-            <Parameter Name="cardNum" Mode="In" Type="String" />
-            <Parameter Name="expireDate" Mode="In" Type="String" />
-          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_ViewOffers_Result">
           <Property Type="String" Name="Pax" Nullable="false" MaxLength="255" />
@@ -605,7 +605,7 @@ FROM [dbo].[vw_ViewReservation] AS [vw_ViewReservation]</DefiningQuery>
           <Property Name="Maximum_Guests" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="Date_Created" Type="DateTime" Precision="0" />
-          <Property Name="Status" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="vw_manageReservations">
           <Key>
@@ -754,6 +754,7 @@ FROM [dbo].[vw_ViewReservation] AS [vw_ViewReservation]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Balance" FunctionName="TropicTModel.Store.sp_Balance" />
           <EntitySetMapping Name="Card">
             <EntityTypeMapping TypeName="TropicTModel.Card">
               <MappingFragment StoreEntitySet="Card">
@@ -978,7 +979,6 @@ FROM [dbo].[vw_ViewReservation] AS [vw_ViewReservation]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_Balance" FunctionName="TropicTModel.Store.sp_Balance" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

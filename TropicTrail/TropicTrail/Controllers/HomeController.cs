@@ -190,6 +190,11 @@ namespace TropicTrail.Controllers
 
         }
         [AllowAnonymous]
+        public ActionResult ProductCard()
+        {
+            return View();
+        }
+        [AllowAnonymous]
         public ActionResult Verify()
         {
             if (String.IsNullOrEmpty(TempData["username"] as String))
@@ -228,6 +233,7 @@ namespace TropicTrail.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
         }
+        [AllowAnonymous]
         public ActionResult Offers()
         {
             var activeOffer = _offersManager.ListActiveOffers();
@@ -448,11 +454,16 @@ namespace TropicTrail.Controllers
         public ActionResult EditProfile(TropicTrail.Lists userInf, HttpPostedFileBase profilePic)
         {
             var getUserInfo = _userManager.getAllUserInformation(UserId);
-
+            var getInfo = _userManager.GetUserInfoByUserId(UserId);
             var indexModel = new Lists()
             {
                 userInfo = getUserInfo,
             };
+            if (userInf.createRetrieve.profilePic == null && profilePic == null)
+            {
+                TempData["ErrorProfile"] = "Please Select a profile Pic";
+                return View(indexModel);
+            }
             if (!Regex.IsMatch(userInf.createRetrieve.phone, @"^09\d{9}$"))
             {
                 TempData["ErrorNumber"] = "Phone number must start with 09 and be 11 digits long.";
@@ -486,6 +497,13 @@ namespace TropicTrail.Controllers
                 userInf.createRetrieve.profilePic = inputFileName;
 
                 _db.sp_UpdateUserInformation(UserId, userInf.createRetrieve.lastName, userInf.createRetrieve.fistName, userInf.createRetrieve.phone, userInf.createRetrieve.street, userInf.createRetrieve.city, userInf.createRetrieve.state, userInf.createRetrieve.zipCode, userInf.createRetrieve.profilePic);
+
+                TempData["Message"] = "User Information updated!";
+                return RedirectToAction("MyProfile");
+            }
+            if (profilePic == null && getInfo.profilePic != null)
+            {
+                _db.sp_UpdateUserInformation(UserId, userInf.createRetrieve.lastName, userInf.createRetrieve.fistName, userInf.createRetrieve.phone, userInf.createRetrieve.street, userInf.createRetrieve.city, userInf.createRetrieve.state, userInf.createRetrieve.zipCode, getInfo.profilePic);
 
                 TempData["Message"] = "User Information updated!";
                 return RedirectToAction("MyProfile");

@@ -21,6 +21,11 @@
     <FunctionImport Name="sp_Street" ReturnType="Collection(TropicTModel.sp_Street_Result)">
       <Parameter Name="city" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="sp_Balance">
+      <Parameter Name="balance" Mode="In" Type="Decimal" />
+      <Parameter Name="cardNum" Mode="In" Type="String" />
+      <Parameter Name="expireDate" Mode="In" Type="String" />
+    </FunctionImport>
     <EntitySet Name="Card" EntityType="TropicTModel.Card" />
     <EntitySet Name="City" EntityType="TropicTModel.City" />
     <EntitySet Name="Offers" EntityType="TropicTModel.Offers" />
@@ -46,11 +51,6 @@
       <End Role="Role" EntitySet="Role" />
       <End Role="UserAccount" EntitySet="UserAccount" />
     </AssociationSet>
-    <FunctionImport Name="sp_Balance">
-      <Parameter Name="balance" Mode="In" Type="Decimal" />
-      <Parameter Name="cardNum" Mode="In" Type="String" />
-      <Parameter Name="expireDate" Mode="In" Type="String" />
-    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_ViewOffers_Result">
     <Property Type="String" Name="Pax" Nullable="false" MaxLength="255" />
@@ -208,7 +208,7 @@
     <Property Name="Maximum_Guests" Type="Int32" Nullable="false" />
     <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
     <Property Name="Date_Created" Type="DateTime" Precision="0" />
-    <Property Name="Status" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="vw_manageReservations">
     <Key>

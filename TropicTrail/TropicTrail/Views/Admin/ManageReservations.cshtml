@@ -7,6 +7,7 @@
 <link href="~/Content/css/style.css" rel="stylesheet" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <table class="table" style="background-color: white;">
         <thead class="thread-dark">
             <tr>
@@ -95,9 +96,12 @@
                         @Html.DisplayFor(modelItem => item.Status)
                     </td>
                     <td>
-                        <a href="#" class="btn-confirm" data-id="@item.ID">Confirm</a> |
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        <a href="#" class="btn btn-primary btn-success" data-id="@item.ID">Confirm</a> 
+                        @using (Html.BeginForm("ReservationDelete", "Admin", FormMethod.Post))
+                        {
+                            @Html.Hidden("id", item.ID)
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        }
                     </td>
                 </tr>
             }
@@ -125,5 +129,13 @@
             </div>
         </div>
     </div>
-
+<script>
+    $(document).ready(function () {
+        var errorRes = '@TempData["ErrorRes"]'; // Get the value of TempData["ErrorRes"]
+        if (errorRes) { // Check if TempData["ErrorRes"] is not empty
+            // Display an alert with the error message
+            alert(errorRes);
+        }
+    });
+</script>
     <script src="~/Content/js/pop.js"></script>  

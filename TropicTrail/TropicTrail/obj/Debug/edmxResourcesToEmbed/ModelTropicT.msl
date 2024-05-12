@@ -29,6 +29,7 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Balance" FunctionName="TropicTModel.Store.sp_Balance" />
     <EntitySetMapping Name="Card">
       <EntityTypeMapping TypeName="TropicTModel.Card">
         <MappingFragment StoreEntitySet="Card">
@@ -253,6 +254,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_Balance" FunctionName="TropicTModel.Store.sp_Balance" />
   </EntityContainerMapping>
 </Mapping>

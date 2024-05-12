@@ -57,8 +57,10 @@
                     </td>
                     <td>
                         <a href="~/Admin/OffersDetails/@item.ID" class="btn btn-info" target="_blank"><i class="fa fa-info"></i> Details</a> |
-
-                        <button class="btn btn-danger" onclick="onDelete(@item.ID)"><i class="fa fa-trash"></i> Delete</button>
+                        @*<a href="~/Admin/OffersDelete/@item.ID" class="btn btn-danger" target="_blank"><i class="fa fa-info"></i> Delete</a>*@
+                        <form id="deleteForm" action="~/Admin/OffersDelete/@item.ID" method="post">
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-info"></i> Delete</button>
+                        </form>
                     </td>
                 </tr>
             }

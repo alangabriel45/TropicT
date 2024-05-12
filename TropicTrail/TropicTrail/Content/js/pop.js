@@ -27,23 +27,23 @@
 $(document).ready(function () {
     $(".btn-confirm").click(function () {
         var reservationId = $(this).data("id");
-        $("#confirmReservationBtn").data("id", reservationId); // Set reservation ID to the Confirm button
-        $("#confirmModal").modal("show"); // Show the confirmation modal
+        $("#confirmReservationBtn").data("id", reservationId);
+        $("#confirmModal").modal("show");
     });
 
     $("#confirmReservationBtn").click(function () {
         var reservationId = $(this).data("id");
-        // AJAX call to confirm reservation
+        
         $.ajax({
-            url: "/Admin/ManageReservation", // Replace YourController with your actual controller name
+            url: "/Admin/ManageReservation", 
             type: "POST",
             data: { id: reservationId },
             success: function (response) {
-                // Reload page or update UI as needed
-                location.reload(); // Example: reload the page
+                
+                location.reload();
             },
             error: function (xhr, status, error) {
-                // Handle errors
+                
                 console.error(error);
             }
         });
