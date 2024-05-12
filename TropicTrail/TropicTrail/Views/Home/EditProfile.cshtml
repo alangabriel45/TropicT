@@ -47,6 +47,10 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.createRetrieve.phone, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.createRetrieve.phone, "", new { @class = "text-danger" })
+                    @if (TempData["ErrorNumber"] != null)
+                    {
+                        <div class="text-danger">@TempData["ErrorNumber"]</div>
+                    }
                 </div>
             </div>
 
@@ -55,6 +59,10 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.createRetrieve.email, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.createRetrieve.email, "", new { @class = "text-danger" })
+                    @if (TempData["ErrorEmail"] != null)
+                    {
+                        <div class="text-danger">@TempData["ErrorEmail"]</div>
+                    }
                 </div>
             </div>
 
@@ -87,6 +95,10 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.createRetrieve.zipCode, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.createRetrieve.zipCode, "", new { @class = "text-danger" })
+                    @if (TempData["ErrorZip"] != null)
+                    {
+                        <div class="text-danger">@TempData["ErrorZip"]</div>
+                    }
                 </div>
             </div>
 

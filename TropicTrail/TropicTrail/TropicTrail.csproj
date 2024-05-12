@@ -364,6 +364,9 @@
     <Compile Include="Card.cs">
       <DependentUpon>ModelTropicT.tt</DependentUpon>
     </Compile>
+    <Compile Include="City.cs">
+      <DependentUpon>ModelTropicT.tt</DependentUpon>
+    </Compile>
     <Compile Include="Contract\IBaseRepository.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -372,6 +375,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Lists.cs" />
+    <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\UserLogged.cs" />
     <Compile Include="ModelTropicT.Context.cs">
@@ -393,10 +397,14 @@
       <DependentUpon>ModelTropicT.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Province.cs">
+      <DependentUpon>ModelTropicT.tt</DependentUpon>
+    </Compile>
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\CardManager.cs" />
     <Compile Include="Repository\MailManager.cs" />
     <Compile Include="Repository\OffersManager.cs" />
+    <Compile Include="Repository\ProvinceManager.cs" />
     <Compile Include="Repository\ReservationManager.cs" />
     <Compile Include="Repository\TourTypeManager.cs" />
     <Compile Include="Repository\TransactionManager.cs" />
@@ -407,7 +415,16 @@
     <Compile Include="Role.cs">
       <DependentUpon>ModelTropicT.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_City_Result.cs">
+      <DependentUpon>ModelTropicT.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_Street_Result.cs">
+      <DependentUpon>ModelTropicT.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_ViewOffers_Result.cs">
+      <DependentUpon>ModelTropicT.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Street.cs">
       <DependentUpon>ModelTropicT.tt</DependentUpon>
     </Compile>
     <Compile Include="TourType.cs">
@@ -437,6 +454,9 @@
       <DependentUpon>ModelTropicT.tt</DependentUpon>
     </Compile>
     <Compile Include="vw_UserAcc.cs">
+      <DependentUpon>ModelTropicT.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_ViewReservation.cs">
       <DependentUpon>ModelTropicT.tt</DependentUpon>
     </Compile>
   </ItemGroup>

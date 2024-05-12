@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,6 +23,9 @@ namespace TropicTrail.Controllers
         public String Username { get { return User.Identity.Name; } }
         public String UserId { get { return _userManager.GetUserByUsername(Username).userId; } }
         public String UserEmail { get { return _userManager.GetUserByUsername(Username).email; } }
+        public DbSet <Province> province { get; set; }
+        public DbSet <City> city { get; set; }
+        public DbSet <Street> street { get; set; }
 
         public BaseController()
         {

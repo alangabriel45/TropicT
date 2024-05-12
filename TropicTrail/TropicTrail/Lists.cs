@@ -23,5 +23,7 @@ namespace TropicTrail
         public List<vw_UserAcc> listUsers { get; set; }
         public List<vw_manageOffers> listOffers { get; set; }
         public List<vw_manageReservations> manageReserve { get; set; }
+        public List<vw_ViewReservation> yourReservation { get; set; }
+        public vw_ViewReservation getReservation { get; set; }
     }
 }

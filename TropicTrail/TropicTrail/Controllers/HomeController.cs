@@ -10,6 +10,8 @@ using TropicTrail.Repository;
 using System.IO;
 using System.Drawing;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
+using System.ComponentModel.DataAnnotations;
 
 namespace TropicTrail.Controllers
 {
@@ -55,7 +57,7 @@ namespace TropicTrail.Controllers
                 if (user.status != (Int32)Status.Active)
                 {
                     TempData["username"] = username;
-                   return RedirectToAction("Verify");
+                    return RedirectToAction("Verify");
                 }
                 //
                 FormsAuthentication.SetAuthCookie(username, false);
@@ -185,7 +187,7 @@ namespace TropicTrail.Controllers
                 TempData["msg"] = $"Error! " + ex.Message;
                 return RedirectToAction("Register");
             }
-            
+
         }
         [AllowAnonymous]
         public ActionResult Verify()
@@ -209,7 +211,7 @@ namespace TropicTrail.Controllers
             {
                 String newAccId = (String)Session["NewAccountID"];
                 TempData["SuccessMessage"] = "Email has been verified!";
-                _userManager.UpdateUserStatus(user.id , (Int32)Status.Active, ref ErrorMessage);
+                _userManager.UpdateUserStatus(user.id, (Int32)Status.Active, ref ErrorMessage);
                 return RedirectToAction("Index");
             }
             else
@@ -217,7 +219,7 @@ namespace TropicTrail.Controllers
                 TempData["ErrorMessage"] = "Incorrect OTP. Please try again!";
                 return RedirectToAction("Verify");
             }
-            
+
         }
         [AllowAnonymous]
         public ActionResult Logout()
@@ -264,7 +266,7 @@ namespace TropicTrail.Controllers
         {
             if (id == null || id == 0)
                 return RedirectToAction("PageNotFound");
-            
+
 
             var offersInfo = _offersManager.GetOffersById(id);
             var getUserInfo = _userManager.getAllUserInformation(UserId);
@@ -322,7 +324,7 @@ namespace TropicTrail.Controllers
             r.getReserve.checkIn = DateTime.Parse(Session["checkInDate"].ToString());
             r.getReserve.maxGuest = Convert.ToInt32(Session["numGuests"]);
             r.getReserve.price = Convert.ToDecimal(Session["price"]);
-            r.getReserve.status = 0;
+            r.getReserve.status = 1;
             r.getReserve.userId = UserId;
 
             var card = _card.FindCardByCardNumber(CardNumber, ExpiryDate);
@@ -370,10 +372,12 @@ namespace TropicTrail.Controllers
                 ModelState.AddModelError(String.Empty, ErrorMessage);
                 return View(indexModel);
             }
+            var remaining = card.balance - r.getReserve.payment;
+            _db.sp_Balance(remaining, CardNumber, ExpiryDate);
             TempData["Message"] = $"Product {r.getReserve.lastName} added!";
             return RedirectToAction("Index");
         }
-        [AllowAnonymous]   
+        [AllowAnonymous]
         public ActionResult PageNotFound()
         {
             return View();
@@ -400,7 +404,7 @@ namespace TropicTrail.Controllers
             var indexModel = new Lists()
             {
                 userInfo = getUserInfo,
-                reserve = yourReserve
+                yourReservation = yourReserve
             };
 
             return View(indexModel);
@@ -417,7 +421,7 @@ namespace TropicTrail.Controllers
                 reservationId = id,
                 transactionDate = DateTime.Now,
                 amout = reservation.payment,
-                ratings = rating, 
+                ratings = rating,
                 status = 3
             };
 
@@ -443,7 +447,31 @@ namespace TropicTrail.Controllers
         [HttpPost]
         public ActionResult EditProfile(TropicTrail.Lists userInf, HttpPostedFileBase profilePic)
         {
+            var getUserInfo = _userManager.getAllUserInformation(UserId);
 
+            var indexModel = new Lists()
+            {
+                userInfo = getUserInfo,
+            };
+            if (!Regex.IsMatch(userInf.createRetrieve.phone, @"^09\d{9}$"))
+            {
+                TempData["ErrorNumber"] = "Phone number must start with 09 and be 11 digits long.";
+                return View(indexModel);
+            }
+
+            // Check if the provided email is valid
+            if (!string.IsNullOrEmpty(userInf.createRetrieve.email) && !new EmailAddressAttribute().IsValid(userInf.createRetrieve.email))
+            {
+                TempData["ErrorEmail"] = "Invalid email address.";
+                return View(indexModel);
+            }
+
+            // Check if the provided zip code is valid
+            if (!Regex.IsMatch(userInf.createRetrieve.zipCode, @"^\d+$"))
+            {
+                TempData["ErrorZip"] = "Zip code must be 5 digits long.";
+                return View(indexModel);
+            }
             // Save profile picture if provided
             if (profilePic != null && profilePic.ContentLength > 0)
             {
@@ -458,11 +486,11 @@ namespace TropicTrail.Controllers
                 userInf.createRetrieve.profilePic = inputFileName;
 
                 _db.sp_UpdateUserInformation(UserId, userInf.createRetrieve.lastName, userInf.createRetrieve.fistName, userInf.createRetrieve.phone, userInf.createRetrieve.street, userInf.createRetrieve.city, userInf.createRetrieve.state, userInf.createRetrieve.zipCode, userInf.createRetrieve.profilePic);
-            }
 
                 TempData["Message"] = "User Information updated!";
                 return RedirectToAction("MyProfile");
-
+            }
+            return View();
         }
 
         public ActionResult MyProfile()

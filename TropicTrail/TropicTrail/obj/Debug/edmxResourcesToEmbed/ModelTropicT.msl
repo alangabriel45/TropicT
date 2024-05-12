@@ -11,12 +11,39 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_City" FunctionName="TropicTModel.Store.sp_City">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TropicTModel.sp_City_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Street" FunctionName="TropicTModel.Store.sp_Street">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TropicTModel.sp_Street_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="street" ColumnName="street" />
+          <ScalarProperty Name="city" ColumnName="city" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <EntitySetMapping Name="Card">
       <EntityTypeMapping TypeName="TropicTModel.Card">
         <MappingFragment StoreEntitySet="Card">
           <ScalarProperty Name="balance" ColumnName="balance" />
           <ScalarProperty Name="expireDate" ColumnName="expireDate" />
           <ScalarProperty Name="cardNumber" ColumnName="cardNumber" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="City">
+      <EntityTypeMapping TypeName="TropicTModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="City1" ColumnName="City" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -34,6 +61,15 @@
           <ScalarProperty Name="offersName" ColumnName="offersName" />
           <ScalarProperty Name="offersgUId" ColumnName="offersgUId" />
           <ScalarProperty Name="offersId" ColumnName="offersId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Province">
+      <EntityTypeMapping TypeName="TropicTModel.Province">
+        <MappingFragment StoreEntitySet="Province">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="provinceName" ColumnName="provinceName" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -62,6 +98,15 @@
         <MappingFragment StoreEntitySet="Role">
           <ScalarProperty Name="roleName" ColumnName="roleName" />
           <ScalarProperty Name="roleId" ColumnName="roleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Street">
+      <EntityTypeMapping TypeName="TropicTModel.Street">
+        <MappingFragment StoreEntitySet="Street">
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="street1" ColumnName="street" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -188,5 +233,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="vw_ViewReservation">
+      <EntityTypeMapping TypeName="TropicTModel.vw_ViewReservation">
+        <MappingFragment StoreEntitySet="vw_ViewReservation">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Contact_Number" ColumnName="Contact Number" />
+          <ScalarProperty Name="First_Name" ColumnName="First Name" />
+          <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Check_In" ColumnName="Check In" />
+          <ScalarProperty Name="Tour_Type" ColumnName="Tour Type" />
+          <ScalarProperty Name="Max_Guest" ColumnName="Max Guest" />
+          <ScalarProperty Name="Offers" ColumnName="Offers" />
+          <ScalarProperty Name="User_ID" ColumnName="User ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_Balance" FunctionName="TropicTModel.Store.sp_Balance" />
   </EntityContainerMapping>
 </Mapping>

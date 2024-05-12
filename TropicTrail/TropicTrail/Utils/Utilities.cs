@@ -107,5 +107,20 @@ namespace TropicTrail.Utils
 
             return list;
         }
+        public static List<SelectListItem> SelectListProvinceByUser()
+        {
+            ProvinceManager _provinceMgr = new ProvinceManager();
+            var list = new List<SelectListItem>();
+            foreach (var item in _provinceMgr.ListProvince())
+            {
+                var r = new SelectListItem
+                {
+                    Text = item.provinceName,
+                    Value = item.id.ToString()
+                };
+                list.Add(r);
+            }
+            return list;
+        }
     }
 }

@@ -11,20 +11,22 @@ namespace TropicTrail.Repository
         UserManager _userMgr;
         BaseRepository<Reservation> _reservation;
         BaseRepository<vw_manageReservations> _manageReserve;
+        BaseRepository<vw_ViewReservation> _yourReserve;
 
         public ReservationManager()
         {
             _userMgr = new UserManager();
             _reservation = new BaseRepository<Reservation>();
             _manageReserve = new BaseRepository<vw_manageReservations>();
+            _yourReserve = new BaseRepository<vw_ViewReservation>();
         }
         public List<Reservation> ListActiveReservation()
         {
             return _reservation._table.Where(m => m.status == 1).ToList();
         }
-        public List<Reservation> GetReservationByUserId(String userId)
+        public List<vw_ViewReservation> GetReservationByUserId(String userId)
         {
-            return _reservation._table.Where(m => m.userId == userId).ToList();
+            return _yourReserve._table.Where(m => m.User_ID == userId).ToList();
         }
         public List<Reservation> ListReservation()
         {

@@ -29,9 +29,12 @@ namespace TropicTrail
         }
     
         public DbSet<Card> Card { get; set; }
+        public DbSet<City> City { get; set; }
         public DbSet<Offers> Offers { get; set; }
+        public DbSet<Province> Province { get; set; }
         public DbSet<Reservation> Reservation { get; set; }
         public DbSet<Role> Role { get; set; }
+        public DbSet<Street> Street { get; set; }
         public DbSet<TourType> TourType { get; set; }
         public DbSet<Transaction> Transaction { get; set; }
         public DbSet<UserAccount> UserAccount { get; set; }
@@ -41,6 +44,7 @@ namespace TropicTrail
         public DbSet<vw_role> vw_role { get; set; }
         public DbSet<vw_Transactions> vw_Transactions { get; set; }
         public DbSet<vw_UserAcc> vw_UserAcc { get; set; }
+        public DbSet<vw_ViewReservation> vw_ViewReservation { get; set; }
     
         public virtual int sp_UpdateUserInformation(string userId, string lName, string fName, string phone, string street, string city, string state, string zipCode, string profilePic)
         {
@@ -90,6 +94,41 @@ namespace TropicTrail
                 new ObjectParameter("id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ViewOffers_Result>("sp_ViewOffers", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_City_Result> sp_City(string province)
+        {
+            var provinceParameter = province != null ?
+                new ObjectParameter("province", province) :
+                new ObjectParameter("province", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_City_Result>("sp_City", provinceParameter);
+        }
+    
+        public virtual ObjectResult<sp_Street_Result> sp_Street(string city)
+        {
+            var cityParameter = city != null ?
+                new ObjectParameter("city", city) :
+                new ObjectParameter("city", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Street_Result>("sp_Street", cityParameter);
+        }
+    
+        public virtual int sp_Balance(Nullable<decimal> balance, string cardNum, string expireDate)
+        {
+            var balanceParameter = balance.HasValue ?
+                new ObjectParameter("balance", balance) :
+                new ObjectParameter("balance", typeof(decimal));
+    
+            var cardNumParameter = cardNum != null ?
+                new ObjectParameter("cardNum", cardNum) :
+                new ObjectParameter("cardNum", typeof(string));
+    
+            var expireDateParameter = expireDate != null ?
+                new ObjectParameter("expireDate", expireDate) :
+                new ObjectParameter("expireDate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Balance", balanceParameter, cardNumParameter, expireDateParameter);
         }
     }
 }
